@@ -1,9 +1,14 @@
 import { Container } from "react-bootstrap";
+import Navigation from "./Navigation";
 
 export default function Main() {
     return (
-        <Container>
-            <h1>Hallo Welt</h1>
-        </Container>
+        <>
+            <Navigation />
+
+            <Container className="content">
+                bla bla
+            </Container>
+        </>
     );
 };

@@ -1,4 +1,6 @@
 @import url("bootstrap/dist/css/bootstrap.min.css");
+@import url("./navigation.css");
+@import url("./main.css");
 
 body {
   margin: 0;
