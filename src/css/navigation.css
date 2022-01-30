@@ -6,10 +6,15 @@
     top: 0px;
 }
 
-.offcanvas-body{
+.offcanvas-body, .offcanvas-header{
     background-color: rgba(66, 66, 66, 1); 
+    color: #FFEBEE;
 }
 
 .offcanvas-body .nav-link{
     color: #FFEBEE;
+}
+
+.offcanvas-header .btn-close {
+    filter: invert(85%) sepia(25%) saturate(279%) hue-rotate(308deg) brightness(104%) contrast(110%);
 }
