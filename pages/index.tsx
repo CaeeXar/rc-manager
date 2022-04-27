@@ -1,11 +1,17 @@
 import { NextPage } from "next";
-import { Button, Card, Col, Container, FormControl, InputGroup, Modal, Row } from "react-bootstrap";
+import { Container, Figure, Image } from "react-bootstrap";
 
 
 const Home: NextPage = () => {
     return (
-        <Container>
-            <h1>Home</h1>
+        <Container className="text-center" style={{ marginTop: "56px" }}>
+            <Figure>
+                <Figure.Image alt="Drone logo" src="/drone.svg" />
+
+                <Figure.Caption>
+                    Welcome to your personal RC-Manager! 😊
+                </Figure.Caption>
+            </Figure>
         </Container>
     );
 };

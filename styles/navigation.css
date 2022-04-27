@@ -19,3 +19,12 @@
 .offcanvas-header .btn-close {
     filter: invert(85%) sepia(25%) saturate(279%) hue-rotate(308deg) brightness(104%) contrast(110%);
 }
+
+.nav-link span {
+    width: 36px;
+    float: left;
+}
+
+.nav-link:hover {
+    color: white;
+}
