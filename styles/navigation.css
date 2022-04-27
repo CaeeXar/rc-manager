@@ -1,6 +1,6 @@
 .sidebar {
     width: 82px;
-    background: rgba(66, 66, 66, 0.25);
+    background: #0d1117;
     height: 100vh;
     position: fixed;
     top: 0px;
@@ -8,12 +8,12 @@
 
 .offcanvas-body,
 .offcanvas-header {
-    background-color: rgba(66, 66, 66, 1);
-    color: #FFEBEE;
+    background-color: #0d1117;
+    color: #c6ced5;
 }
 
 .offcanvas-body .nav-link {
-    color: #FFEBEE;
+    color: #c6ced5;
 }
 
 .offcanvas-header .btn-close {

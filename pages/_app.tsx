@@ -1,13 +1,16 @@
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
-import Navigation from '../components/Navigation';
+import Navigation from '../lib/Navigation';
 
 function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <>
       <Navigation />
-      <Component {...pageProps} />
+
+      <div className='content'>
+        <Component {...pageProps} />
+      </div>
     </>
   );
 }

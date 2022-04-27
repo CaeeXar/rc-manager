@@ -1,3 +1,6 @@
+import { faAdd } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { NextPage } from "next";
 import { useState } from "react";
 import { Button, Card, Col, Container, FormControl, InputGroup, Modal, Row } from "react-bootstrap";
 import SimpleBar from 'simplebar-react';
@@ -34,7 +37,7 @@ const FAKE_BUILDS = [
 
 type Project = typeof FAKE_BUILDS[0];
 
-export default function Builds() {
+const Builds: NextPage = () => {
     const [filteredBuilds, setFilteredBuilds] = useState(FAKE_BUILDS);
     const [show, setShow] = useState(false);
     const [selected, setSelected] = useState<Project | null>(null);
@@ -69,11 +72,12 @@ export default function Builds() {
             <h1 className="title">Manage your own builds!</h1>
 
             <Container>
-                <InputGroup>
+                <InputGroup style={{ marginBottom: "25px" }}>
                     <FormControl type="text" placeholder="Search..." onChange={e => search(e.target.value)} />
-                    <Button>+</Button>
+                    <Button>
+                        <FontAwesomeIcon icon={faAdd} />
+                    </Button>
                 </InputGroup>
-                <br />
 
                 <SimpleBar forceVisible="y" autoHide={false}>
                     <Row className="g-2">
@@ -184,3 +188,5 @@ export default function Builds() {
         </div>
     );
 };
+
+export default Builds;
