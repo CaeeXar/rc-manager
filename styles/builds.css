@@ -14,3 +14,16 @@
 .simplebar-horizontal {
     visibility: hidden !important;
 }
+
+.modal-content {
+    background-color: #010409;
+    color: #c6ced5;
+}
+
+.modal-content a {
+    color: #c6ced5;
+}
+
+.modal-content a:hover {
+    color: white;
+}

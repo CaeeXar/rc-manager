@@ -11,15 +11,15 @@ const FAKE_BUILDS = [
         name: "5inch build",
         description: "My first 5 inch analog build.",
         specifications: {
-            esc: "Diatone Mamba F55 128K BL32 55A 4-in-1 ESC",
-            fc: "Diatone Mamba Basic MK4 H743 FC",
-            motor: "iFlight Xing2 2306 1755KV 6S Freestlye Motor",
+            esc: "Mamba F55 128K",
+            fc: "Mamba Basic F722 APP",
+            motor: "iFlight Xing2 2306 1755KV",
             frame: "ImpulseRC Apex 5\" Base Frame",
             vtx: "TBS Unify Pro 32",
-            camera: "RunCam Swift Mini 2 Mr Steele Edition",
-            antenna: "Lumenier AXII 2 Antennen Set SMA",
-            receiver: "TBS Crossfire Nano RX Pro Empfänger",
-            propeller: "HQProp ETHiX P3 5.1X3X3 Peanut Butter Jelly Prop",
+            camera: "RunCam Mr Steele Edition",
+            antenna: "Lumenier AXII 2",
+            receiver: "SpeedyBee TX800",
+            propeller: "HQProp ETHiX P3",
         },
         links: {
             esc: `https://www.rctech.de/diatone-mamba-f50pro-50a-4-in-1-esc.html`,
@@ -83,15 +83,13 @@ const Builds: NextPage = () => {
                     <Row className="g-2">
                         {filteredBuilds.map((build, idx) =>
                         (<Col sm="6" md="6" key={idx}>
-                            <Card>
+                            <Card onClick={e => onBuildSelection(build)}>
                                 <Card.Body>
                                     <Card.Title>{build.name}</Card.Title>
 
                                     <Card.Text>
                                         {build.description}
                                     </Card.Text>
-
-                                    <Button variant="primary" onClick={e => onBuildSelection(build)}>Show more!</Button>
                                 </Card.Body>
                             </Card>
                         </Col>)
@@ -108,12 +106,12 @@ const Builds: NextPage = () => {
 
                     <Modal.Body>
                         <div style={{ marginBottom: "10px" }}>
-                            <u>Description:</u> <br />
+                            <b>Description:</b>
                             {selected.description}
                         </div>
 
                         <div>
-                            <u>Specifications:</u>
+                            <b>Specifications:</b>
 
                             <ul>
                                 <li>
