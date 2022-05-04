@@ -1,6 +1,6 @@
 import { NextPage } from "next";
 import { useSession, signIn, signOut } from "next-auth/react";
-import { Button, Container, Figure } from "react-bootstrap";
+import { Button, Container, Figure, Image } from "react-bootstrap";
 
 
 const Home: NextPage = () => {
@@ -8,14 +8,12 @@ const Home: NextPage = () => {
     const loggedIn = status === 'authenticated';
 
     return (
-        <Container className="text-center" style={{ marginTop: "56px" }}>
-            <Figure style={{ width: "100%" }}>
-                <Figure.Image alt="Drone logo" src="/drone.svg" />
+        <Container>
+            <h1 className="title">Welcome to your personal RC-Manager! 😊</h1>
 
-                <Figure.Caption>
-                    Welcome to your personal RC-Manager! 😊
-                </Figure.Caption>
-            </Figure>
+            <div className="mb-5">
+                <Image alt="Drone logo" src="/drone.svg" fluid />
+            </div>
 
             {!loggedIn && <Button onClick={() => signIn()}>Login</Button>}
             {loggedIn && <Button onClick={() => signOut()}>Logout</Button>}

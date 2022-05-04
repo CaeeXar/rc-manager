@@ -2,7 +2,7 @@ import { faAdd } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { NextPage } from "next";
 import { useState } from "react";
-import { Button, Card, Col, Container, FormControl, InputGroup, Modal, Row } from "react-bootstrap";
+import { Button, Card, CloseButton, Col, Container, FormControl, InputGroup, Modal, Row } from "react-bootstrap";
 import SimpleBar from 'simplebar-react';
 
 const FAKE_BUILDS = [
@@ -68,10 +68,10 @@ const Builds: NextPage = () => {
     };
 
     return (
-        <div>
+        <Container>
             <h1 className="title">Manage your own builds!</h1>
 
-            <Container>
+            <div>
                 <InputGroup style={{ marginBottom: "25px" }}>
                     <FormControl type="text" placeholder="Search..." onChange={e => search(e.target.value)} />
                     <Button>
@@ -96,12 +96,13 @@ const Builds: NextPage = () => {
                         )}
                     </Row>
                 </SimpleBar>
-            </Container>
+            </div>
 
             {!!selected ?
                 <Modal show={show} onHide={handleClose} size="lg">
-                    <Modal.Header closeButton>
+                    <Modal.Header >
                         <Modal.Title>{selected.name}</Modal.Title>
+                        <CloseButton variant='white' onClick={handleClose} />
                     </Modal.Header>
 
                     <Modal.Body>
@@ -183,7 +184,7 @@ const Builds: NextPage = () => {
                         </div>
                     </Modal.Body>
                 </Modal> : null}
-        </div>
+        </Container>
     );
 };
 

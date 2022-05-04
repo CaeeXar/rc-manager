@@ -2,6 +2,15 @@
 @import url("simplebar/dist/simplebar.min.css");
 @import url("./navigation.css");
 @import url("./builds.css");
+@import url("./form.css");
+
+/*
+  primary background: #222831
+  secondary background: #393E46
+  font color: #EEEEEE
+  btn color: #00ADB5
+  btn shadow: #393E4680
+*/
 
 body {
   margin: 0;
@@ -10,60 +19,24 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #010409;
-  color: #c6ced5;
+  background-color: #222831;
+  color: #EEEEEE;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
-.btn-primary {
-  background-color: #0d1117;
-  border-color: #0d1117;
-  color: #c6ced5;
-}
-
-.btn-primary,
-.btn-primary:hover,
-.btn-check:active+.btn-primary,
-.btn-check:checked+.btn-primary,
-.btn-primary.active,
-.btn-primary:active,
-.show>.btn-primary.dropdown-toggle {
-  background-color: #0d1117;
-  border-color: #0d1117;
-  color: #c6ced5;
-}
-
-.btn-check:focus+.btn-primary,
-.btn-primary:focus,
-.btn-check:active+.btn-primary:focus,
-.btn-check:checked+.btn-primary:focus,
-.btn-primary.active:focus,
-.btn-primary:active:focus,
-.show>.btn-primary.dropdown-toggle:focus {
-  background-color: #0d1117;
-  border-color: #0d1117;
-  box-shadow: 0 0 0 0.25rem #a0a0a0;
-  color: #c6ced5;
-}
-
-.form-control {
-  color: #0d1117;
-}
-
-.form-control:focus {
-  box-shadow: 0 0 0 0.25rem #a0a0a0;
-  color: #0d1117;
-}
-
 .card {
-  background-color: #0d1117;
-  color: #c6ced5;
+  background-color: #393E46;
+  color: #EEEEEE;
 }
 
 .content {
-  width: calc(100vw - 82px);
-  margin-left: 82px;
+  text-align: center;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 25px;
 }
