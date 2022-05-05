@@ -28,7 +28,7 @@
 .show>.btn-primary.dropdown-toggle:focus {
     background-color: #00ADB5;
     border-color: #00ADB5;
-    box-shadow: 0 0 0 0.25rem #393E4680;
+    box-shadow: 0 0 0 0.25rem #00ADB580;
     color: #EEEEEE;
 }
 
@@ -55,4 +55,8 @@
     border-color: #393E46;
     box-shadow: 0 0 0 0.25rem #393E4680;
     color: #EEEEEE;
+}
+
+.alert .btn-close:focus {
+    box-shadow: 0 0 0 0.25rem #393E4680;
 }

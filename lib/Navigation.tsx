@@ -40,7 +40,7 @@ export default function Navigation() {
     // );
 
     return (
-        <Navbar expand="lg">
+        <Navbar expand="lg" variant="dark">
             <Container>
                 <Navbar.Brand href="/">
                     RC-Manager

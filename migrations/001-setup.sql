@@ -1,9 +1,11 @@
 -- Up
--- CREATE TABLE PROJECT_STATUS (
---     id TEXT PRIMARY KEY,
---     status TEXT,
---     colorCode TEXT 
--- );
+CREATE TABLE USER (
+    userId TEXT PRIMARY KEY,
+    password TEXT
+);
+
+INSERT INTO USER (userId, password) 
+    VALUES ('Caesar', 'superhash');
 
 -- Down
--- DROP TABLE PROJECT_STATUS;
+DROP TABLE USER;
