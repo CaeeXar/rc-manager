@@ -1,9 +1,9 @@
-import { GetStaticProps, InferGetStaticPropsType, NextPage } from 'next';
+import { GetStaticProps, NextPage } from 'next';
 import { signIn } from 'next-auth/react';
 import { FormEvent, useState } from 'react';
 import { Button, Container, Form, Toast, ToastContainer } from 'react-bootstrap';
 
-const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ callbackUrl }) => {
+const Home: NextPage = (props: { callbackUrl: string }) => {
     const [username, setUsername] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [error, setError] = useState<boolean>(false);
@@ -21,7 +21,7 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ callba
         const res = await signIn('credentials', {
             username,
             password,
-            callbackUrl,
+            callbackUrl: props.callbackUrl,
             redirect: true,
         });
     };
@@ -75,9 +75,10 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ callba
 };
 
 export const getStaticProps: GetStaticProps = () => {
+    let callbackUrl: string = process.env.NEXTAUTH_URL || '';
     return {
         props: {
-            callbackUrl: process.env.NEXTAUTH_URL,
+            callbackUrl,
         },
     };
 };
