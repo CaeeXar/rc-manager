@@ -1,71 +1,37 @@
-import { faAdd } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { NextPage } from "next";
-import { useState } from "react";
-import { Button, Card, CloseButton, Col, Container, FormControl, InputGroup, Modal, Row } from "react-bootstrap";
+import { faAdd } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { GetServerSideProps, NextPage } from 'next';
+import { useState } from 'react';
+import { Button, Card, CloseButton, Col, Container, FormControl, InputGroup, Modal, Row } from 'react-bootstrap';
 import SimpleBar from 'simplebar-react';
-import { getSession, useSession } from "next-auth/react";
-import Unauthenticated from "../lib/Unauthenticated";
+import { getSession, useSession } from 'next-auth/react';
+import Unauthenticated from '../lib/Unauthenticated';
+import { Build } from '../js/types';
 
-const FAKE_BUILDS = [
-    {
-        id: 1,
-        name: "5inch build",
-        description: "My first 5 inch analog build.",
-        specifications: {
-            esc: "Mamba F55 128K",
-            fc: "Mamba Basic F722 APP",
-            motor: "iFlight Xing2 2306 1755KV",
-            frame: "ImpulseRC Apex 5\" Base Frame",
-            vtx: "TBS Unify Pro 32",
-            camera: "RunCam Mr Steele Edition",
-            antenna: "Lumenier AXII 2",
-            receiver: "SpeedyBee TX800",
-            propeller: "HQProp ETHiX P3",
-        },
-        links: {
-            esc: `https://www.rctech.de/diatone-mamba-f50pro-50a-4-in-1-esc.html`,
-            fc: `https://www.rctech.de/diatone-mamba-basic-mk4-h743-fc-flugsteuerung.html`,
-            motor: `https://n-factory.de/iFlight-Xing2-2306-1755KV-6S-Freestlye-Motor_1`,
-            frame: `https://www.rctech.de/impulserc-apex-5-base-frame-kit-schwarz.html`,
-            vtx: `https://www.rctech.de/tbs-unify-pro32-nano-5g8.html`,
-            camera: `https://n-factory.de/RunCam-Swift-Mini-2-Mr-Steele-Edition_1`,
-            antenna: `https://n-factory.de/Lumenier-AXII-2-Antennen-Set-SMA_1`,
-            receiver: `https://www.rctech.de/tbs-crossfire-nano-rx-pro-empfaenger.html`,
-            propeller: `https://n-factory.de/HQProp-ETHiX-P3-51X3X3-Peanut-Butter-Jelly-Prop_1`,
-        }
-    },
-];
-
-type Project = typeof FAKE_BUILDS[0];
-
-const Builds: NextPage = () => {
+const Builds: NextPage<Build[]> = ({ builds }) => {
     const { data: session, status } = useSession();
     const authorized = status === 'authenticated';
 
-    const [filteredBuilds, setFilteredBuilds] = useState(FAKE_BUILDS);
+    const [filteredBuilds, setFilteredBuilds] = useState(builds);
     const [show, setShow] = useState(false);
-    const [selected, setSelected] = useState<Project | null>(null);
+    const [selected, setSelected] = useState<Build | null>(null);
 
     const handleClose = () => setShow(false);
 
-    const onBuildSelection = (project: Project) => {
-        setSelected(project);
+    const onBuildSelection = (build: Build) => {
+        setSelected(build);
         setShow(true);
     }
 
     const prepare = (s: string) => {
-        if (!s) return "";
-        return s.toLowerCase().replace(/[\/\\#,+()$~%.:*?<>{}-]/gm, "");
+        if (!s) return '';
+        return s.toLowerCase().replace(/[\/\\#,+()$~%.:*?<>{}-]/gm, '');
     }
 
     const search = (input: string) => {
         setFilteredBuilds(
-            FAKE_BUILDS.filter(build => {
-                let buildString = build.name + " " +
-                    build.description + " ";
-                Object.values(build.specifications).map(val => buildString += val + " ");
-
+            builds.filter((build: Build) => {
+                let buildString = Object.values(build).map(value => '' + value).join(' ');
                 return prepare(buildString).includes(prepare(input));
             })
         );
@@ -76,23 +42,23 @@ const Builds: NextPage = () => {
 
     return (
         <Container>
-            <h1 className="title">Manage your own builds!</h1>
+            <h1 className='title'>Manage your own builds!</h1>
 
             <div>
-                <InputGroup style={{ marginBottom: "25px" }}>
-                    <FormControl type="text" placeholder="Search..." onChange={e => search(e.target.value)} />
+                <InputGroup style={{ marginBottom: '25px' }}>
+                    <FormControl type='text' placeholder='Search...' onChange={e => search(e.target.value)} />
                     <Button>
                         <FontAwesomeIcon icon={faAdd} />
                     </Button>
                 </InputGroup>
 
-                <SimpleBar forceVisible="y" autoHide={false}>
-                    <Row className="g-2">
-                        {filteredBuilds.map((build, idx) =>
-                        (<Col sm="6" md="6" key={idx}>
+                <SimpleBar forceVisible='y' autoHide={false}>
+                    <Row className='g-2'>
+                        {filteredBuilds.map((build: Build) =>
+                        (<Col sm='6' md='6' key={build.id}>
                             <Card onClick={e => onBuildSelection(build)}>
                                 <Card.Body>
-                                    <Card.Title>{build.name}</Card.Title>
+                                    <Card.Title>{build.title}</Card.Title>
 
                                     <Card.Text>
                                         {build.description}
@@ -106,14 +72,14 @@ const Builds: NextPage = () => {
             </div>
 
             {!!selected ?
-                <Modal show={show} onHide={handleClose} size="lg">
+                <Modal show={show} onHide={handleClose} size='lg'>
                     <Modal.Header >
-                        <Modal.Title>{selected.name}</Modal.Title>
+                        <Modal.Title>{selected.title}</Modal.Title>
                         <CloseButton variant='white' onClick={handleClose} />
                     </Modal.Header>
 
                     <Modal.Body>
-                        <div style={{ marginBottom: "10px" }}>
+                        <div style={{ marginBottom: '10px' }}>
                             <b>Description:</b>
                             {selected.description}
                         </div>
@@ -123,68 +89,72 @@ const Builds: NextPage = () => {
 
                             <ul>
                                 <li>
-                                    <b>ESC: &nbsp;</b>
+                                    <b>ESC:{' '}</b>
 
-                                    <a target="_blank" rel="noopener noreferrer" href={selected.links.motor}>
-                                        {selected.specifications.esc}
+                                    <a target='_blank' rel='noopener noreferrer' href={selected.escLink}>
+                                        {selected.escName}
                                     </a>
                                 </li>
 
                                 <li>
-                                    <b>FC: &nbsp;</b>
+                                    <b>FC:{' '}</b>
 
-                                    <a target="_blank" rel="noopener noreferrer" href={selected.links.motor}>
-                                        {selected.specifications.fc}
+                                    <a target='_blank' rel='noopener noreferrer' href={selected.fcLink}>
+                                        {selected.fcName}
                                     </a>
                                 </li>
 
                                 <li>
-                                    <b>Motor: &nbsp;</b>
+                                    <b>Motor:{' '}</b>
 
-                                    <a target="_blank" rel="noopener noreferrer" href={selected.links.motor}>
-                                        {selected.specifications.motor}
+                                    <a target='_blank' rel='noopener noreferrer' href={selected.motorLink}>
+                                        {selected.motorName}
                                     </a>
                                 </li>
 
                                 <li>
-                                    <b>Frame: &nbsp;</b>
+                                    <b>Frame:{' '}</b>
 
-                                    <a target="_blank" rel="noopener noreferrer" href={selected.links.motor}>
-                                        {selected.specifications.frame}
+                                    <a target='_blank' rel='noopener noreferrer' href={selected.frameLink}>
+                                        {selected.frameName}
                                     </a></li>
                                 <li>
-                                    <b>VTX: &nbsp;</b>
-                                    <a target="_blank" rel="noopener noreferrer" href={selected.links.motor}>
-                                        {selected.specifications.vtx}
+                                    <b>VTX:{' '}</b>
+
+                                    <a target='_blank' rel='noopener noreferrer' href={selected.vtxLink}>
+                                        {selected.vtxName}
                                     </a>
                                 </li>
 
                                 <li>
-                                    <b>Camera: &nbsp;</b>
+                                    <b>Camera:{' '}</b>
 
-                                    <a target="_blank" rel="noopener noreferrer" href={selected.links.motor}>
-                                        {selected.specifications.camera}
+                                    <a target='_blank' rel='noopener noreferrer' href={selected.cameraLink}>
+                                        {selected.cameraName}
                                     </a>
                                 </li>
 
                                 <li>
-                                    <b>Antenna/s: &nbsp;</b>
-                                    <a target="_blank" rel="noopener noreferrer" href={selected.links.motor}>
-                                        {selected.specifications.antenna}
+                                    <b>Antenna/s:{' '}</b>
+
+                                    <a target='_blank' rel='noopener noreferrer' href={selected.antennaLink}>
+                                        {selected.antennaName}
                                     </a>
                                 </li>
 
                                 <li>
-                                    <b>Receiver: &nbsp;</b>
-                                    <a target="_blank" rel="noopener noreferrer" href={selected.links.motor}>
-                                        {selected.specifications.receiver}
+                                    <b>Receiver:{' '}</b>
+
+                                    <a target='_blank' rel='noopener noreferrer' href={selected.receiverLink}>
+                                        {selected.receiverName}
                                     </a>
                                 </li>
 
                                 <li>
-                                    <b>Propellers: &nbsp;</b>
-                                    <a target="_blank" rel="noopener noreferrer" href={selected.links.motor}>
-                                        {selected.specifications.propeller}
+                                    <b>Propellers:{' '}</b>
+
+                                    <a target='_blank' rel='noopener noreferrer' href={selected.propellerLink}>
+                                        {selected.propellerName}
                                     </a>
                                 </li>
                             </ul>
@@ -193,6 +163,26 @@ const Builds: NextPage = () => {
                 </Modal> : null}
         </Container>
     );
+};
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+    const session = await getSession(context);
+    if (!session) return { props: {} };
+    const username = session.user?.name;
+
+    const res = await fetch(process.env.NEXTAUTH_URL + '/api/builds', {
+        method: 'POST',
+        body: JSON.stringify({ username }),
+    });
+
+    const data = await res.json();
+    const builds: Build[] = data.builds;
+
+    return {
+        props: {
+            builds: builds,
+        },
+    }
 };
 
 export default Builds;

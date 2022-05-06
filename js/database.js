@@ -19,15 +19,26 @@ async function getUserLogin(username) {
     const db = await openDb();
     return db.get(`
         SELECT *
-        FROM USER 
+        FROM USERS 
         WHERE LOWER(username) = LOWER('${username}')
     `);
 }
+
+async function getUserBuilds(username) {
+    const db = await openDb();
+    return db.all(`
+        SELECT *
+        FROM BUILDS 
+        WHERE LOWER(username) = LOWER('${username}')
+    `);
+}
+
 
 const config = {
     openDb,
     migrate,
     getUserLogin,
+    getUserBuilds,
 }
 
 module.exports = config;

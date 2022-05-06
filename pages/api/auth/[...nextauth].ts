@@ -21,7 +21,7 @@ export default NextAuth({
                 const data = await res.json();
 
                 if (res.ok && data) {
-                    return { id: data.username, username: data.username };
+                    return { id: data.username, username: data.username, name: data.username };
                 } else if (data.error === ERROR_WRONG_USER) {
                     throw new Error(`Wrong username! There is no such user as "${credentials.username}".`);
                 } else if (data.error === ERROR_WRONG_PASSWORD) {
