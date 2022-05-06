@@ -5,7 +5,8 @@ import { Button, Container, Figure, Image } from "react-bootstrap";
 
 const Home: NextPage = () => {
     const { data: session, status } = useSession();
-    const loggedIn = status === 'authenticated';
+    const { data: token } = useSession();
+    const authenticated = status === 'authenticated';
 
     return (
         <Container>
@@ -15,8 +16,8 @@ const Home: NextPage = () => {
                 <Image alt="Drone logo" src="/drone.svg" fluid />
             </div>
 
-            {!loggedIn && <Button onClick={() => signIn()}>Login</Button>}
-            {loggedIn && <Button onClick={() => signOut()}>Logout</Button>}
+            {!authenticated && <Button onClick={() => signIn()}>Login</Button>}
+            {authenticated && <Button onClick={() => signOut()}>Logout</Button>}
         </Container>
     );
 };

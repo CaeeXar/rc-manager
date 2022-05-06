@@ -5,18 +5,18 @@ import { SessionProvider } from "next-auth/react"
 import { SSRProvider } from 'react-bootstrap';
 
 function MyApp({
-  Component, pageProps: { session, ...pageProps }
+  Component, pageProps
 }: AppProps) {
   return (
-    <SSRProvider>
-      <SessionProvider session={session}>
+    <SessionProvider session={pageProps.session}>
+      <SSRProvider>
         <Navigation />
 
         <div className='content'>
           <Component {...pageProps} />
         </div>
-      </SessionProvider>
-    </SSRProvider>
+      </SSRProvider>
+    </SessionProvider>
   );
 }
 

@@ -1,74 +1,85 @@
-import { NextPage } from "next";
-import { useSession } from "next-auth/react";
-import { useState } from "react";
-import { Alert, Button, Container, Form } from "react-bootstrap";
+import { GetStaticProps, InferGetStaticPropsType, NextPage } from 'next';
+import { signIn } from 'next-auth/react';
+import { FormEvent, useState } from 'react';
+import { Button, Container, Form, Toast, ToastContainer } from 'react-bootstrap';
 
-const wrongUsername: string = "Username can only contain characters and numbers!";
-const validateUserName = (userName: string) => !!userName.match(/^[a-z0-9]+$/);
+const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ callbackUrl }) => {
+    const [username, setUsername] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
+    const [error, setError] = useState<boolean>(false);
 
-const Home: NextPage = () => {
-    const { data: session, status } = useSession();
-    const loggedIn = status === 'authenticated';
+    const matchUsername = () => !!username.toLowerCase().match(/^[a-z0-9]+$/);
 
-    const [userName, setUserName] = useState<string>("");
-    const [password, setPassword] = useState<string>("");
-    const [showError, setShowError] = useState<boolean>(false);
-    const [errors, setErrors] = useState<string[]>([]);
+    const onSubmitHandler = async (event: FormEvent) => {
+        event.preventDefault();
 
-    const handleValidation = async () => {
-        if (!validateUserName(userName)) {
-            let newErrors = [...errors, wrongUsername];
-            setErrors(newErrors);
-            setShowError(true);
+        if (!matchUsername()) {
+            setError(true);
+            return;
         }
-        // TODO
-    };
 
-    const handleAlertClose = () => {
-        setErrors([]);
-        setShowError(false);
-    }
+        const res = await signIn('credentials', {
+            username,
+            password,
+            callbackUrl,
+            redirect: true,
+        });
+    };
 
     return (
         <Container>
-            <Form>
-                <Form.Group className="mb-3">
+            <Form onSubmit={e => onSubmitHandler(e)}>
+                <Form.Group className='mb-3'>
                     <Form.Label>Username</Form.Label>
 
                     <Form.Control
-                        placeholder="Enter username"
-                        value={userName}
-                        onChange={(e) => setUserName(e.target.value)}
+                        name='username'
+                        placeholder='Enter username'
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
                     />
                 </Form.Group>
 
-                <Form.Group className="mb-3" >
+                <Form.Group className='mb-3' >
                     <Form.Label>Password</Form.Label>
 
                     <Form.Control
-                        type="password"
-                        placeholder="Enter password"
+                        name='password'
+                        type='password'
+                        placeholder='Enter password'
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                     />
                 </Form.Group>
 
-                {/* <Form.Group style={{ textAlign: "right" }}> */}
                 <Form.Group>
-                    <Button onClick={handleValidation}>
+                    <Button type='submit'>
                         Login
                     </Button>
                 </Form.Group>
             </Form>
 
-            <br />
+            <ToastContainer position='middle-center'>
+                <Toast show={error} onClose={() => setError(false)} bg={'danger'}>
+                    <Toast.Header>
+                        <strong className="me-auto">Warning</strong>
+                    </Toast.Header>
 
-            <Alert show={showError} variant="danger" onClose={handleAlertClose} dismissible>
-                <Alert.Heading>Error!</Alert.Heading>
-                {errors.map((error, idx) => <p key={idx}>{error}</p>)}
-            </Alert>
+                    <Toast.Body>
+                        Username can only contain characters and numbers!
+                    </Toast.Body>
+                </Toast>
+            </ToastContainer>
         </Container>
     );
+};
+
+export const getStaticProps: GetStaticProps = () => {
+    return {
+        props: {
+            callbackUrl: process.env.NEXTAUTH_URL,
+        },
+    };
 };
 
 export default Home;

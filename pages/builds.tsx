@@ -4,6 +4,8 @@ import { NextPage } from "next";
 import { useState } from "react";
 import { Button, Card, CloseButton, Col, Container, FormControl, InputGroup, Modal, Row } from "react-bootstrap";
 import SimpleBar from 'simplebar-react';
+import { getSession, useSession } from "next-auth/react";
+import Unauthenticated from "../lib/Unauthenticated";
 
 const FAKE_BUILDS = [
     {
@@ -38,6 +40,9 @@ const FAKE_BUILDS = [
 type Project = typeof FAKE_BUILDS[0];
 
 const Builds: NextPage = () => {
+    const { data: session, status } = useSession();
+    const authorized = status === 'authenticated';
+
     const [filteredBuilds, setFilteredBuilds] = useState(FAKE_BUILDS);
     const [show, setShow] = useState(false);
     const [selected, setSelected] = useState<Project | null>(null);
@@ -66,6 +71,8 @@ const Builds: NextPage = () => {
         );
 
     };
+
+    if (!authorized) return <Unauthenticated />;
 
     return (
         <Container>

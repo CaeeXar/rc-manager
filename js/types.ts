@@ -1,3 +1,4 @@
-// export type Project = {
-//     id: string,
-// };
+export type User = {
+    username: string,
+    password: string,
+};
