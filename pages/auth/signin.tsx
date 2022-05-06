@@ -1,12 +1,17 @@
 import { GetStaticProps, NextPage } from 'next';
 import { signIn } from 'next-auth/react';
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { Button, Container, Form, Toast, ToastContainer } from 'react-bootstrap';
+import { useRouter } from 'next/router';
 
-const Home: NextPage = (props: { callbackUrl: string }) => {
+const usernameMismatch: string = `Username can only contain characters and numbers!`;
+
+const Home: NextPage<{ callbackUrl: string }> = ({ callbackUrl }) => {
+    const router = useRouter();
     const [username, setUsername] = useState<string>('');
     const [password, setPassword] = useState<string>('');
-    const [error, setError] = useState<boolean>(false);
+    const [showError, setShowError] = useState<boolean>(false);
+    const [errorMessage, setErrorMessage] = useState<string | string[]>('');
 
     const matchUsername = () => !!username.toLowerCase().match(/^[a-z0-9]+$/);
 
@@ -14,17 +19,27 @@ const Home: NextPage = (props: { callbackUrl: string }) => {
         event.preventDefault();
 
         if (!matchUsername()) {
-            setError(true);
+            setErrorMessage(usernameMismatch);
+            setShowError(true);
             return;
         }
 
-        const res = await signIn('credentials', {
+        await signIn('credentials', {
             username,
             password,
-            callbackUrl: props.callbackUrl,
+            callbackUrl,
             redirect: true,
         });
     };
+
+    // if the error-message from the query updates -> show it
+    useEffect(() => {
+        setErrorMessage(router.query.error || '');
+    }, [router]);
+
+    useEffect(() => {
+        setShowError(!!errorMessage);
+    }, [errorMessage]);
 
     return (
         <Container>
@@ -60,13 +75,13 @@ const Home: NextPage = (props: { callbackUrl: string }) => {
             </Form>
 
             <ToastContainer position='middle-center'>
-                <Toast show={error} onClose={() => setError(false)} bg={'danger'}>
+                <Toast show={!!showError} onClose={() => setShowError(false)} bg={'danger'}>
                     <Toast.Header>
-                        <strong className="me-auto">Warning</strong>
+                        <strong className='me-auto'>Warning</strong>
                     </Toast.Header>
 
                     <Toast.Body>
-                        Username can only contain characters and numbers!
+                        {errorMessage}
                     </Toast.Body>
                 </Toast>
             </ToastContainer>

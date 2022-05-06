@@ -1,11 +1,10 @@
 import { NextPage } from "next";
 import { useSession, signIn, signOut } from "next-auth/react";
-import { Button, Container, Figure, Image } from "react-bootstrap";
+import { Button, Container, Image } from "react-bootstrap";
 
 
 const Home: NextPage = () => {
     const { data: session, status } = useSession();
-    const { data: token } = useSession();
     const authenticated = status === 'authenticated';
 
     return (

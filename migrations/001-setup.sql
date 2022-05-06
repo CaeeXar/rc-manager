@@ -5,7 +5,7 @@ CREATE TABLE USER (
 );
 
 INSERT INTO USER (username, password) 
-    VALUES ('caesar', '$2b$10$eN7nHAYoR2k0goTOBg1KTOojRz.VK4FnMn6x1O6LK3xv1g48jQR.2');
+    VALUES ('caesar', '$2b$10$JeynWsPj5cJMm49.SoVi4O1ifReIRPrUkrW20TFuqKwAKXSPAYNbG');
     -- PW: test1234
 
 -- Down
