@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { getUserBuilds } from '../../js/database';
-import { Build } from '../../js/types';
+import { getUserBuilds } from '../../../js/database';
+import { Build } from '../../../js/types';
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
     const { username } = JSON.parse(req.body);

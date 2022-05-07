@@ -26,7 +26,8 @@ CREATE TABLE BUILDS (
     receiverName TEXT,
     receiverLink TEXT,
     propellerName TEXT,
-    propellerLink TEXT
+    propellerLink TEXT,
+    modified TEXT
 );
 
 INSERT INTO USERS (username, password) 
@@ -53,7 +54,8 @@ INSERT INTO BUILDS (
     receiverName,
     receiverLink,
     propellerName,
-    propellerLink
+    propellerLink,
+    modified
 ) 
 VALUES (
     'Caesar',
@@ -76,7 +78,8 @@ VALUES (
     'TBS Crossfire',
     'https://www.rctech.de/tbs-crossfire-nano-rx-pro-empfaenger.html',
     'HQProp ETHiX P3',
-    'https://n-factory.de/HQProp-ETHiX-P3-51X3X3-Peanut-Butter-Jelly-Prop_1'
+    'https://n-factory.de/HQProp-ETHiX-P3-51X3X3-Peanut-Butter-Jelly-Prop_1',
+    '2022-05-01T12:00:00.307Z'
 );
 
 -- Down

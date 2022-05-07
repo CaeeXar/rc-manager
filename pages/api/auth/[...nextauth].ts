@@ -1,6 +1,6 @@
 import NextAuth, { DefaultUser } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
-import { ERROR_WRONG_PASSWORD, ERROR_WRONG_USER } from '../../../js/const';
+import { ErrorCodes } from '../../../js/types';
 
 export default NextAuth({
     providers: [
@@ -22,9 +22,9 @@ export default NextAuth({
 
                 if (res.ok && data) {
                     return { id: data.username, username: data.username, name: data.username };
-                } else if (data.error === ERROR_WRONG_USER) {
+                } else if (data.error === ErrorCodes.ERROR_WRONG_USER) {
                     throw new Error(`Wrong username! There is no such user as "${credentials.username}".`);
-                } else if (data.error === ERROR_WRONG_PASSWORD) {
+                } else if (data.error === ErrorCodes.ERROR_WRONG_PASSWORD) {
                     throw new Error(`Wrong password given!`);
                 } else {
                     throw new Error(`Unexpexted error occurred!`);

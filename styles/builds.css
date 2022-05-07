@@ -22,3 +22,24 @@
 .modal-content a:hover {
     color: #00ADB5;
 }
+
+.table {
+    color: #EEEEEE;
+}
+
+.build-desc {
+    width: 100%;
+    float: left;
+}
+
+.build-title {
+    color: #00ADB5;
+}
+
+.modal-footer {
+    justify-content: space-between;
+}
+
+.toast-container {
+    z-index: 1056;
+}

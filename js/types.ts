@@ -25,5 +25,18 @@ export type Build = {
     receiverName: string,
     receiverLink: string,
     propellerName: string,
-    propellerLink: string
+    propellerLink: string,
+    modified: string,
+};
+
+export enum ErrorCodes {
+    ERROR_WRONG_USER,
+    ERROR_WRONG_PASSWORD,
+    ERROR_SERVER,
+};
+
+export type DroneSpecification = {
+    title: string,
+    name: string,
+    link: string,
 };

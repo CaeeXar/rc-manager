@@ -20,7 +20,7 @@ async function getUserLogin(username) {
     return db.get(`
         SELECT *
         FROM USERS 
-        WHERE LOWER(username) = LOWER('${username}')
+        WHERE LOWER(username) = LOWER('${username}');
     `);
 }
 
@@ -29,16 +29,103 @@ async function getUserBuilds(username) {
     return db.all(`
         SELECT *
         FROM BUILDS 
-        WHERE LOWER(username) = LOWER('${username}')
+        WHERE LOWER(username) = LOWER('${username}');
     `);
 }
 
+async function addUserBuild(build) {
+    const db = await openDb();
+    const {
+        username,
+        title,
+        description,
+        escName,
+        escLink,
+        fcName,
+        fcLink,
+        motorName,
+        motorLink,
+        frameName,
+        frameLink,
+        vtxName,
+        vtxLink,
+        antennaName,
+        antennaLink,
+        cameraName,
+        cameraLink,
+        receiverName,
+        receiverLink,
+        propellerName,
+        propellerLink,
+        modified
+    } = build;
+
+    return db.all(`
+        INSERT INTO BUILDS (
+            username,
+            title,
+            description,
+            escName,
+            escLink,
+            fcName,
+            fcLink,
+            motorName,
+            motorLink,
+            frameName,
+            frameLink,
+            vtxName,
+            vtxLink,
+            antennaName,
+            antennaLink,
+            cameraName,
+            cameraLink,
+            receiverName,
+            receiverLink,
+            propellerName,
+            propellerLink,
+            modified
+        ) VALUES (
+            '${username}',
+            '${title}',
+             ${!!description ? `'${description}',` : `NULL,`},
+            '${escName}',
+            '${escLink}',
+            '${fcName}',
+            '${fcLink}',
+            '${motorName}',
+            '${motorLink}',
+            '${frameName}',
+            '${frameLink}',
+            '${vtxName}',
+            '${vtxLink}',
+            '${antennaName}',
+            '${antennaLink}',
+            '${cameraName}',
+            '${cameraLink}',
+            '${receiverName}',
+            '${receiverLink}',
+            '${propellerName}',
+            '${propellerLink}',
+            '${modified}'
+        );
+    `);
+}
+
+async function removeUserBuild(id) {
+    const db = await openDb();
+    return db.run(`
+        DELETE FROM BUILDS 
+        WHERE id = '${id}';
+    `);
+}
 
 const config = {
     openDb,
     migrate,
     getUserLogin,
     getUserBuilds,
+    addUserBuild,
+    removeUserBuild,
 }
 
 module.exports = config;
