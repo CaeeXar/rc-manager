@@ -8,7 +8,7 @@ import { getSession, useSession } from 'next-auth/react';
 import Unauthenticated from '../lib/Unauthenticated';
 import { Build } from '../js/types';
 
-const Builds: NextPage<Build[]> = ({ builds }) => {
+const Builds: NextPage<{ builds: Build[] }> = ({ builds }) => {
     const { data: session, status } = useSession();
     const authorized = status === 'authenticated';
 
