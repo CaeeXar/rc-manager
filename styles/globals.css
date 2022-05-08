@@ -3,6 +3,7 @@
 @import url('./navigation.css');
 @import url('./builds.css');
 @import url('./form.css');
+@import url('./footer.css');
 
 /*
   primary background: #222831
@@ -35,9 +36,15 @@ code {
 .content {
     text-align: center;
     margin-top: 25px;
+    margin-bottom: 355px;
 }
 
 .title {
     text-align: center;
     margin-bottom: 25px;
+}
+
+.global-wrapper {
+    position: relative;
+    min-height: 100vh;
 }

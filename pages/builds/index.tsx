@@ -1,4 +1,3 @@
-import { faAdd, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { GetServerSideProps, NextPage } from 'next';
 import { useState } from 'react';
@@ -90,7 +89,7 @@ const Builds: NextPage<{ builds: Build[] }> = ({ builds }) => {
                         onChange={(e) => search(e.target.value)}
                     />
                     <Button>
-                        <FontAwesomeIcon icon={faAdd} />
+                        <FontAwesomeIcon icon={['fas', 'add']} />
                     </Button>
                 </InputGroup>
 
@@ -291,11 +290,11 @@ const Builds: NextPage<{ builds: Build[] }> = ({ builds }) => {
 
                         <div>
                             <Button className="me-2" onClick={onEditHandler}>
-                                <FontAwesomeIcon icon={faEdit} />
+                                <FontAwesomeIcon icon={['fas', 'edit']} />
                             </Button>
 
                             <Button variant="danger" onClick={onRemoveHandler}>
-                                <FontAwesomeIcon icon={faTrash} />
+                                <FontAwesomeIcon icon={['fas', 'trash']} />
                             </Button>
                         </div>
                     </Modal.Footer>

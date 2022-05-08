@@ -1,0 +1,46 @@
+.footer {
+    background-color: #393e46;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    /* height: 60px; */
+}
+
+.footer a {
+    color: #eeeeee;
+}
+
+@media (max-width: 875px) {
+    .footer a span {
+        display: none;
+    }
+
+    .footer a text {
+        text-align: left;
+    }
+}
+
+@media (max-width: 875px) {
+    .footer a span {
+        display: block;
+        width: 50%;
+        text-align: center;
+    }
+
+    .footer a text {
+        display: none;
+    }
+
+    .footer li {
+        height: 24px;
+    }
+
+    .footer .h5 {
+        font-size: 0.92rem;
+    }
+
+    .footer .footer-copyright {
+        font-size: 0.92rem;
+    }
+}
