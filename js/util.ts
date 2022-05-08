@@ -3,7 +3,7 @@ const convert = (datetime?: Date | string): Date => {
     else if (!(datetime instanceof Date)) datetime = new Date(datetime);
 
     return datetime;
-}
+};
 
 export const getDatetimeLocal = (datetime?: Date | string): string => {
     datetime = convert(datetime);
@@ -22,11 +22,16 @@ export const getDatetimeISO = (datetime?: Date | string): string => {
     return datetime.toISOString();
 };
 
-export const prepareTextSQLite = (desc: string): string => {
+export const prepareTextSQLite = (text: string): string => {
     let newDesc = ``;
-    desc.split('').forEach(char => {
+    text.split('').forEach((char) => {
         if (char === `'`) newDesc += `''`;
         else newDesc += char;
     });
     return newDesc;
-}
+};
+
+export const prepareTextSearch = (text: string) => {
+    if (!text) return '';
+    return text.toLowerCase().replace(/[\/\\#,+()$~%.:*?<>{}-]/gm, '');
+};

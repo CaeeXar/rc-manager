@@ -1,8 +1,8 @@
-@import url("bootstrap/dist/css/bootstrap.min.css");
-@import url("simplebar/dist/simplebar.min.css");
-@import url("./navigation.css");
-@import url("./builds.css");
-@import url("./form.css");
+@import url('bootstrap/dist/css/bootstrap.min.css');
+@import url('simplebar/dist/simplebar.min.css');
+@import url('./navigation.css');
+@import url('./builds.css');
+@import url('./form.css');
 
 /*
   primary background: #222831
@@ -13,31 +13,31 @@
 */
 
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: #222831;
-  color: #EEEEEE;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+        sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: #222831;
+    color: #eeeeee;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
 .card {
-  background-color: #393E46;
-  color: #EEEEEE;
+    background-color: #393e46;
+    color: #eeeeee;
 }
 
 .content {
-  text-align: center;
-  margin-top: 25px;
+    text-align: center;
+    margin-top: 25px;
 }
 
 .title {
-  text-align: center;
-  margin-bottom: 25px;
+    text-align: center;
+    margin-bottom: 25px;
 }

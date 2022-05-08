@@ -11,20 +11,20 @@
 }
 
 .modal-content {
-    background-color: #393E46;
-    color: #EEEEEE;
+    background-color: #393e46;
+    color: #eeeeee;
 }
 
 .modal-content a {
-    color: #EEEEEE;
+    color: #eeeeee;
 }
 
 .modal-content a:hover {
-    color: #00ADB5;
+    color: #00adb5;
 }
 
 .table {
-    color: #EEEEEE;
+    color: #eeeeee;
 }
 
 .build-desc {
@@ -33,7 +33,7 @@
 }
 
 .build-title {
-    color: #00ADB5;
+    color: #00adb5;
 }
 
 .modal-footer {

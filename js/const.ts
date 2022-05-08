@@ -1,4 +1,4 @@
-import { DroneSpecification } from "./types";
+import { DroneSpecification } from './types';
 
 export const DRONE_SPECIFICATIONS: DroneSpecification[] = [
     {
@@ -47,4 +47,3 @@ export const DRONE_SPECIFICATIONS: DroneSpecification[] = [
         link: 'propellerLink',
     },
 ];
-

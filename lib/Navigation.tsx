@@ -1,4 +1,11 @@
-import { Nav, Navbar, Offcanvas, Container, NavDropdown, Image } from "react-bootstrap";
+import {
+    Nav,
+    Navbar,
+    Offcanvas,
+    Container,
+    NavDropdown,
+    Image,
+} from 'react-bootstrap';
 
 export default function Navigation() {
     // return (
@@ -42,9 +49,7 @@ export default function Navigation() {
     return (
         <Navbar expand="lg" variant="dark">
             <Container>
-                <Navbar.Brand href="/">
-                    RC-Manager
-                </Navbar.Brand>
+                <Navbar.Brand href="/">RC-Manager</Navbar.Brand>
 
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
 
@@ -76,4 +81,4 @@ export default function Navigation() {
             </Container>
         </Navbar>
     );
-};
+}

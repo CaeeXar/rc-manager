@@ -9,4 +9,4 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         if (success) return res.status(200).json({ message: 'Build added.' });
         else return res.status(400).json({ message: 'Build could not be added!' });
     }
-}
+};

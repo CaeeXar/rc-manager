@@ -43,46 +43,46 @@ const Home: NextPage<{ callbackUrl: string }> = ({ callbackUrl }) => {
 
     return (
         <Container>
-            <Form onSubmit={e => onSubmitHandler(e)}>
-                <Form.Group className='mb-3'>
+            <Form onSubmit={(e) => onSubmitHandler(e)}>
+                <Form.Group className="mb-3">
                     <Form.Label>Username</Form.Label>
 
                     <Form.Control
-                        name='username'
-                        placeholder='Enter username'
+                        name="username"
+                        placeholder="Enter username"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
                     />
                 </Form.Group>
 
-                <Form.Group className='mb-3' >
+                <Form.Group className="mb-3">
                     <Form.Label>Password</Form.Label>
 
                     <Form.Control
-                        name='password'
-                        type='password'
-                        placeholder='Enter password'
+                        name="password"
+                        type="password"
+                        placeholder="Enter password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                     />
                 </Form.Group>
 
                 <Form.Group>
-                    <Button type='submit'>
-                        Login
-                    </Button>
+                    <Button type="submit">Login</Button>
                 </Form.Group>
             </Form>
 
-            <ToastContainer position='middle-center'>
-                <Toast show={!!showError} onClose={() => setShowError(false)} bg={'danger'}>
+            <ToastContainer position="middle-center">
+                <Toast
+                    show={!!showError}
+                    onClose={() => setShowError(false)}
+                    bg={'danger'}
+                >
                     <Toast.Header>
-                        <strong className='me-auto'>Warning</strong>
+                        <strong className="me-auto">Warning</strong>
                     </Toast.Header>
 
-                    <Toast.Body>
-                        {errorMessage}
-                    </Toast.Body>
+                    <Toast.Body>{errorMessage}</Toast.Body>
                 </Toast>
             </ToastContainer>
         </Container>

@@ -8,7 +8,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     if (req.method === 'POST') {
         let stmt: ISqlite.RunResult = await removeUserBuild(id);
 
-        if (!stmt || stmt.changes === 0) return res.status(400).json({ message: 'Build could not be deleted!' });
+        if (!stmt || stmt.changes === 0)
+            return res.status(400).json({ message: 'Build could not be deleted!' });
         return res.status(200).json({ message: 'Build deleted.' });
     }
-}
+};

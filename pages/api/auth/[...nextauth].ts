@@ -7,29 +7,35 @@ export default NextAuth({
         CredentialsProvider({
             credentials: {
                 username: { label: 'Username', type: 'text' },
-                password: { label: 'Password', type: 'password' }
+                password: { label: 'Password', type: 'password' },
             },
 
             async authorize(credentials, req) {
-                if (!credentials) throw new Error("No credentials!");
+                if (!credentials) throw new Error('No credentials!');
 
                 const res = await fetch(process.env.NEXTAUTH_URL + '/api/signin', {
                     method: 'POST',
                     body: JSON.stringify(credentials),
-                    headers: { 'Content-Type': 'application/json' }
+                    headers: { 'Content-Type': 'application/json' },
                 });
                 const data = await res.json();
 
                 if (res.ok && data) {
-                    return { id: data.username, username: data.username, name: data.username };
+                    return {
+                        id: data.username,
+                        username: data.username,
+                        name: data.username,
+                    };
                 } else if (data.error === ErrorCodes.ERROR_WRONG_USER) {
-                    throw new Error(`Wrong username! There is no such user as "${credentials.username}".`);
+                    throw new Error(
+                        `Wrong username! There is no such user as "${credentials.username}".`
+                    );
                 } else if (data.error === ErrorCodes.ERROR_WRONG_PASSWORD) {
                     throw new Error(`Wrong password given!`);
                 } else {
                     throw new Error(`Unexpexted error occurred!`);
                 }
-            }
+            },
         }),
     ],
 
@@ -74,8 +80,8 @@ export default NextAuth({
             }
 
             // Send properties to the client, like an access_token from a provider.
-            session.accessToken = token.accessToken
+            session.accessToken = token.accessToken;
             return session;
         },
     },
-})
+});

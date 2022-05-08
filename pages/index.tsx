@@ -1,7 +1,6 @@
-import { NextPage } from "next";
-import { useSession, signIn, signOut } from "next-auth/react";
-import { Button, Container, Image } from "react-bootstrap";
-
+import { NextPage } from 'next';
+import { useSession, signIn, signOut } from 'next-auth/react';
+import { Button, Container, Image } from 'react-bootstrap';
 
 const Home: NextPage = () => {
     const { data: session, status } = useSession();
