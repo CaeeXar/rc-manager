@@ -4,6 +4,7 @@
 @import url('./builds.css');
 @import url('./form.css');
 @import url('./footer.css');
+@import url('./contact.css');
 
 /*
   primary background: #222831
@@ -36,7 +37,8 @@ code {
 .content {
     text-align: center;
     margin-top: 25px;
-    margin-bottom: 355px;
+    margin-bottom: 25px;
+    min-height: calc(100vh - 250px - 2 * 25px - 56px);
 }
 
 .title {

@@ -9,7 +9,7 @@ export default function PageFooter() {
                     <Col>
                         <span className="text-uppercase h5">Fly safe!</span>
 
-                        <Image src="./drone.svg" fluid alt="RCM-Logo" />
+                        <Image src="/drone.svg" fluid alt="RCM-Logo" />
                     </Col>
 
                     <Col className="text-start">
@@ -45,7 +45,7 @@ export default function PageFooter() {
                             </li>
                             <li>
                                 <NavLink
-                                    href="http://192.168.178.33:3000/"
+                                    href="https://discord.gg/DTht8WpNEJ"
                                     target="_blank"
                                 >
                                     <span>
@@ -75,10 +75,7 @@ export default function PageFooter() {
                             </li>
 
                             <li>
-                                <NavLink
-                                    href="http://192.168.178.33:3000/"
-                                    target="_blank"
-                                >
+                                <NavLink href="/contact">
                                     <span>
                                         <FontAwesomeIcon
                                             icon={['fas', 'address-book']}

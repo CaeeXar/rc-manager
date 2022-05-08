@@ -1,17 +1,30 @@
 .footer {
     background-color: #393e46;
-    position: absolute;
+    position: relative;
     bottom: 0;
     left: 0;
     right: 0;
-    /* height: 60px; */
+    height: 250px;
 }
 
 .footer a {
     color: #eeeeee;
 }
 
+.nav-link:focus,
+.nav-link:hover {
+    color: #00adb5;
+}
+
 @media (max-width: 875px) {
+    .footer {
+        height: 160px;
+    }
+
+    .content {
+        min-height: calc(100vh - 160px - 2 * 25px - 56px) !important;
+    }
+
     .footer a span {
         display: none;
     }
@@ -21,7 +34,7 @@
     }
 }
 
-@media (max-width: 875px) {
+@media (max-width: 775px) {
     .footer a span {
         display: block;
         width: 50%;
