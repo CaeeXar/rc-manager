@@ -70,6 +70,8 @@ async function addUserBuild(build) {
         modified,
     } = build;
 
+    if (!username) return;
+
     return db.run(`
         INSERT INTO BUILDS (
             username,
@@ -129,6 +131,64 @@ async function removeUserBuild(id) {
     `);
 }
 
+async function updateUserBuild(build) {
+    const db = await openDb();
+    const {
+        id,
+        username,
+        title,
+        description,
+        escName,
+        escLink,
+        fcName,
+        fcLink,
+        motorName,
+        motorLink,
+        frameName,
+        frameLink,
+        vtxName,
+        vtxLink,
+        antennaName,
+        antennaLink,
+        cameraName,
+        cameraLink,
+        receiverName,
+        receiverLink,
+        propellerName,
+        propellerLink,
+        modified,
+    } = build;
+
+    if (!id || !username) return new sqlite.Statement();
+
+    return db.run(`
+        UPDATE BUILDS 
+        SET title = '${title}',
+            description = ${!!description ? `'${description}'` : `NULL`},
+            escName = '${escName}',
+            escLink = '${escLink}',
+            fcName = '${fcName}',
+            fcLink = '${fcLink}',
+            motorName = '${motorName}',
+            motorLink = '${motorLink}',
+            frameName = '${frameName}',
+            frameLink = '${frameLink}',
+            vtxName = '${vtxName}',
+            vtxLink = '${vtxLink}',
+            antennaName = '${antennaName}',
+            antennaLink = '${antennaLink}',
+            cameraName = '${cameraName}',
+            cameraLink = '${cameraLink}',
+            receiverName = '${receiverName}',
+            receiverLink = '${receiverLink}',
+            propellerName = '${propellerName}',
+            propellerLink = '${propellerLink}',
+            modified = '${modified}'
+        WHERE LOWER(username) = LOWER('${username}')
+        AND id = ${id};
+    `);
+}
+
 const config = {
     openDb,
     migrate,
@@ -137,6 +197,7 @@ const config = {
     addUserBuild,
     removeUserBuild,
     getUserBuildById,
+    updateUserBuild,
 };
 
 module.exports = config;

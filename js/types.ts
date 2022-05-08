@@ -7,7 +7,7 @@ export type Build = {
     id: number;
     username: string;
     title: string;
-    description: string;
+    description: string | null;
     escName: string;
     escLink: string;
     fcName: string;

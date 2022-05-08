@@ -1,37 +1,110 @@
 import { GetServerSideProps, NextPage } from 'next';
-import { Button, Col, Container, Form, Row, Table } from 'react-bootstrap';
+import {
+    Button,
+    Col,
+    Container,
+    Form,
+    Row,
+    Table,
+    Toast,
+    ToastContainer,
+} from 'react-bootstrap';
 import { getSession, useSession } from 'next-auth/react';
 import Unauthenticated from '../../lib/Unauthenticated';
 import { Build } from '../../js/types';
 import { useState } from 'react';
+import { getDatetimeISO, getDatetimeLocal } from '../../js/util';
+import { useRouter } from 'next/router';
 
 const Edit: NextPage<{
     build: Build;
 }> = ({ build }) => {
-    const [title, setTitle] = useState<string>(build.title);
+    const [title, setTitle] = useState<string>(build.title || '');
     const [description, setDescription] = useState<string | null>(build.description);
-    const [escName, setEscName] = useState<string>(build.escName);
-    const [escLink, setEscLink] = useState<string>(build.escLink);
-    const [fcName, setFcName] = useState<string>(build.fcName);
-    const [fcLink, setFcLink] = useState<string>(build.fcLink);
-    const [motorName, setMotorName] = useState<string>(build.motorName);
-    const [motorLink, setMotorLink] = useState<string>(build.motorLink);
-    const [frameName, setFrameName] = useState<string>(build.frameName);
-    const [frameLink, setFrameLink] = useState<string>(build.frameLink);
-    const [vtxName, setVtxName] = useState<string>(build.vtxName);
-    const [vtxLink, setVtxLink] = useState<string>(build.vtxLink);
-    const [antennaName, setAntennaName] = useState<string>(build.antennaName);
-    const [antennaLink, setAntennaLink] = useState<string>(build.antennaLink);
-    const [cameraName, setCameraName] = useState<string>(build.cameraName);
-    const [cameraLink, setCameraLink] = useState<string>(build.cameraLink);
-    const [receiverName, setReceiverName] = useState<string>(build.receiverName);
-    const [receiverLink, setReceiverLink] = useState<string>(build.receiverLink);
-    const [propellerName, setPropellerName] = useState<string>(build.propellerName);
-    const [propellerLink, setPropellerLink] = useState<string>(build.propellerLink);
+    const [escName, setEscName] = useState<string>(build.escName || '');
+    const [escLink, setEscLink] = useState<string>(build.escLink || '');
+    const [fcName, setFcName] = useState<string>(build.fcName || '');
+    const [fcLink, setFcLink] = useState<string>(build.fcLink || '');
+    const [motorName, setMotorName] = useState<string>(build.motorName || '');
+    const [motorLink, setMotorLink] = useState<string>(build.motorLink || '');
+    const [frameName, setFrameName] = useState<string>(build.frameName || '');
+    const [frameLink, setFrameLink] = useState<string>(build.frameLink || '');
+    const [vtxName, setVtxName] = useState<string>(build.vtxName || '');
+    const [vtxLink, setVtxLink] = useState<string>(build.vtxLink || '');
+    const [antennaName, setAntennaName] = useState<string>(build.antennaName || '');
+    const [antennaLink, setAntennaLink] = useState<string>(build.antennaLink || '');
+    const [cameraName, setCameraName] = useState<string>(build.cameraName || '');
+    const [cameraLink, setCameraLink] = useState<string>(build.cameraLink || '');
+    const [receiverName, setReceiverName] = useState<string>(
+        build.receiverName || ''
+    );
+    const [receiverLink, setReceiverLink] = useState<string>(
+        build.receiverLink || ''
+    );
+    const [propellerName, setPropellerName] = useState<string>(
+        build.propellerName || ''
+    );
+    const [propellerLink, setPropellerLink] = useState<string>(
+        build.propellerLink || ''
+    );
+    const [showError, setShowError] = useState<boolean>(false);
 
+    const router = useRouter();
     const { data: session, status } = useSession();
-    const authorized = status === 'authenticated';
-    if (!authorized) return <Unauthenticated />;
+    const authenticated = status === 'authenticated';
+    if (!authenticated) return <Unauthenticated />;
+
+    const onSaveHandler = async () => {
+        let modified = getDatetimeISO();
+        let newBuild: Build = {
+            id: build.id,
+            username: build.username,
+            title,
+            description,
+            escName,
+            escLink,
+            fcName,
+            fcLink,
+            motorName,
+            motorLink,
+            frameName,
+            frameLink,
+            vtxName,
+            vtxLink,
+            antennaName,
+            antennaLink,
+            cameraName,
+            cameraLink,
+            receiverName,
+            receiverLink,
+            propellerName,
+            propellerLink,
+            modified,
+        };
+
+        const res = await fetch('/api/builds/update', {
+            method: 'POST',
+            body: JSON.stringify(newBuild),
+            headers: { 'Content-Type': 'application/json' },
+        });
+
+        if (res.ok) router.push({ pathname: `/builds`, query: {} });
+        else setShowError(true);
+    };
+
+    const onCloseHandler = async () => {
+        router.push({ pathname: `/builds`, query: {} });
+    };
+
+    const onDeleteHandler = async () => {
+        const res = await fetch('/api/builds/remove', {
+            method: 'POST',
+            body: JSON.stringify({ id: build.id }),
+        });
+
+        if (res.ok) router.push({ pathname: `/builds`, query: {} });
+        else setShowError(true);
+    };
 
     return (
         <Container>
@@ -39,6 +112,10 @@ const Edit: NextPage<{
                 <span>Editing: </span>
                 <b className="build-title">{build.title}</b>
             </h1>
+
+            <small className="text-muted">
+                Last modified: <b>{getDatetimeLocal(build.modified)}</b>
+            </small>
 
             <hr className="title" />
 
@@ -52,6 +129,7 @@ const Edit: NextPage<{
                         <Form.Control
                             value={title}
                             onChange={(e) => setTitle(e.target.value)}
+                            required
                         />
                     </Col>
                 </Form.Group>
@@ -270,19 +348,45 @@ const Edit: NextPage<{
                 </Table>
 
                 <div className="text-end">
-                    <Button variant="success" className="me-2">
+                    <Button
+                        variant="success"
+                        className="me-2"
+                        onClick={onSaveHandler}
+                    >
                         Save
                     </Button>
 
-                    <Button variant="secondary" className="me-2">
+                    <Button
+                        variant="secondary"
+                        className="me-2"
+                        onClick={onCloseHandler}
+                    >
                         Cancel
                     </Button>
 
-                    <Button variant="danger" className="me-2">
+                    <Button
+                        variant="danger"
+                        className="me-2"
+                        onClick={onDeleteHandler}
+                    >
                         Delete
                     </Button>
                 </div>
             </Form>
+
+            <ToastContainer position="middle-center">
+                <Toast
+                    show={!!showError}
+                    onClose={() => setShowError(false)}
+                    bg={'danger'}
+                >
+                    <Toast.Header>
+                        <strong className="me-auto">Warning</strong>
+                    </Toast.Header>
+
+                    <Toast.Body>Something went wrong!</Toast.Body>
+                </Toast>
+            </ToastContainer>
         </Container>
     );
 };
@@ -297,7 +401,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         };
 
     const username = session.user?.name;
-    const res = await fetch(process.env.NEXTAUTH_URL + '/api/builds/getBuildById', {
+    const res = await fetch(process.env.NEXTAUTH_URL + '/api/builds/getById', {
         method: 'POST',
         body: JSON.stringify({
             username,

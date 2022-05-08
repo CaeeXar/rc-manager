@@ -5,7 +5,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 
 const secret = process.env.NEXTAUTH_SECRET;
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     const token = await getToken({ req, secret });
     if (token) {
         // Signed in
@@ -15,4 +15,4 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         res.status(401);
     }
     res.end();
-};
+}

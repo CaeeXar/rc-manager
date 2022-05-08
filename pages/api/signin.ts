@@ -3,7 +3,7 @@ import { ErrorCodes, User } from '../../js/types';
 import { getUserLogin } from '../../js/database';
 import { compareSync } from 'bcrypt';
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     const user: User = req.body;
     if (req.method === 'POST') {
         let userLogin: User = await getUserLogin(user.username);
@@ -15,4 +15,4 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             return res.status(200).json(userLogin);
         else return res.status(400).json({ error: ErrorCodes.ERROR_WRONG_PASSWORD });
     }
-};
+}

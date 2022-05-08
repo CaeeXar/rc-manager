@@ -25,7 +25,7 @@ import { useRouter } from 'next/router';
 const Builds: NextPage<{ builds: Build[] }> = ({ builds }) => {
     const router = useRouter();
     const { data: session, status } = useSession();
-    const authorized = status === 'authenticated';
+    const authenticated = status === 'authenticated';
 
     const [filteredBuilds, setFilteredBuilds] = useState(builds);
     const [show, setShow] = useState(false);
@@ -60,7 +60,8 @@ const Builds: NextPage<{ builds: Build[] }> = ({ builds }) => {
     };
 
     const onEditHandler = async () => {
-        // weiterleitung nach ID...
+        if (!selected) return;
+        router.push({ pathname: `/builds/[id]`, query: { id: selected.id } });
     };
 
     const onRemoveHandler = async () => {
@@ -75,7 +76,7 @@ const Builds: NextPage<{ builds: Build[] }> = ({ builds }) => {
         else setShowError(true);
     };
 
-    if (!authorized) return <Unauthenticated />;
+    if (!authenticated) return <Unauthenticated />;
 
     return (
         <Container>
@@ -323,7 +324,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     if (!session) return { props: {} };
     const username = session.user?.name;
 
-    const res = await fetch(process.env.NEXTAUTH_URL + '/api/builds/getBuilds', {
+    const res = await fetch(process.env.NEXTAUTH_URL + '/api/builds/get', {
         method: 'POST',
         body: JSON.stringify({ username }),
     });

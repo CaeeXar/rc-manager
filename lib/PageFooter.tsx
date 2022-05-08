@@ -28,7 +28,7 @@ export default function PageFooter() {
                                         />
                                     </span>
 
-                                    <text>Check out my Instagram</text>
+                                    <text>Visit my Instagram</text>
                                 </NavLink>
                             </li>
                             <li>

@@ -47,3 +47,7 @@
 td {
     line-height: 38px;
 }
+
+td a {
+    text-decoration: none;
+}

@@ -1,3 +1,5 @@
+import { signIn, signOut, useSession } from 'next-auth/react';
+import { Button } from 'react-bootstrap';
 import {
     Nav,
     Navbar,
@@ -5,6 +7,7 @@ import {
     Container,
     NavDropdown,
     Image,
+    Form,
 } from 'react-bootstrap';
 
 export default function Navigation() {
@@ -46,6 +49,9 @@ export default function Navigation() {
     //     </div >
     // );
 
+    const { data: session, status } = useSession();
+    const authenticated = status === 'authenticated';
+
     return (
         <Navbar expand="lg" variant="dark">
             <Container>
@@ -55,8 +61,6 @@ export default function Navigation() {
 
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
-                        <Nav.Link href="#link">Link</Nav.Link>
-
                         <NavDropdown title="Manage" id="basic-nav-dropdown">
                             <NavDropdown.Item href="/">
                                 <span>(🏠)</span> - Home
@@ -76,7 +80,18 @@ export default function Navigation() {
 
                             {/* <NavDropdown.Divider /> */}
                         </NavDropdown>
+
+                        {/* <Nav.Link href="#link">Link</Nav.Link> */}
                     </Nav>
+
+                    <Form className="d-flex">
+                        {!authenticated && (
+                            <Button onClick={() => signIn()}>Login</Button>
+                        )}
+                        {authenticated && (
+                            <Button onClick={() => signOut()}>Logout</Button>
+                        )}
+                    </Form>
                 </Navbar.Collapse>
             </Container>
         </Navbar>
