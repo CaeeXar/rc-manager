@@ -1,11 +1,11 @@
-const convert = (datetime?: Date | string): Date => {
+const convert = (datetime?: Date | string | null): Date => {
     if (!datetime) datetime = new Date();
     else if (!(datetime instanceof Date)) datetime = new Date(datetime);
 
     return datetime;
 };
 
-export const getDatetimeLocal = (datetime?: Date | string): string => {
+export const getDatetimeLocal = (datetime?: Date | string | null): string => {
     datetime = convert(datetime);
     return datetime.toLocaleString('de-AT', {
         year: 'numeric',
@@ -16,7 +16,7 @@ export const getDatetimeLocal = (datetime?: Date | string): string => {
     });
 };
 
-export const getDatetimeISO = (datetime?: Date | string): string => {
+export const getDatetimeISO = (datetime?: Date | string | null): string => {
     // YYYY-MM-DD HH:MM:SS.SSS
     datetime = convert(datetime);
     return datetime.toISOString();

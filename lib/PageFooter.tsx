@@ -62,10 +62,7 @@ export default function PageFooter() {
                         <span className="text-uppercase h5">Other</span>
                         <ul className="list-unstyled">
                             <li>
-                                <NavLink
-                                    href="https://www.instagram.com/erdosamuel/"
-                                    target="_blank"
-                                >
+                                <NavLink href="/contact">
                                     <span>
                                         <FontAwesomeIcon icon={['fas', 'info']} />
                                     </span>

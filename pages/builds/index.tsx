@@ -67,13 +67,17 @@ const Builds: NextPage<{ builds: Build[] }> = ({ builds }) => {
     const onRemoveHandler = async () => {
         if (!selected) return;
 
-        const res = await fetch('/api/builds/removeBuild', {
+        const res = await fetch('/api/builds/remove', {
             method: 'POST',
             body: JSON.stringify({ id: selected.id }),
         });
 
         if (res.ok) refreshPage();
         else setShowError(true);
+    };
+
+    const onAddHandler = async () => {
+        router.push({ pathname: `/builds/new`, query: {} });
     };
 
     if (!authenticated) return <Unauthenticated />;
@@ -89,7 +93,7 @@ const Builds: NextPage<{ builds: Build[] }> = ({ builds }) => {
                         placeholder="Search..."
                         onChange={(e) => search(e.target.value)}
                     />
-                    <Button>
+                    <Button onClick={onAddHandler}>
                         <FontAwesomeIcon icon={['fas', 'add']} />
                     </Button>
                 </InputGroup>
@@ -143,7 +147,7 @@ const Builds: NextPage<{ builds: Build[] }> = ({ builds }) => {
                                             <a
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                href={selected.escLink}
+                                                href={selected.escLink || ''}
                                             >
                                                 {selected.escName}
                                             </a>
@@ -159,7 +163,7 @@ const Builds: NextPage<{ builds: Build[] }> = ({ builds }) => {
                                             <a
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                href={selected.fcLink}
+                                                href={selected.fcLink || ''}
                                             >
                                                 {selected.fcName}
                                             </a>
@@ -175,7 +179,7 @@ const Builds: NextPage<{ builds: Build[] }> = ({ builds }) => {
                                             <a
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                href={selected.motorLink}
+                                                href={selected.motorLink || ''}
                                             >
                                                 {selected.motorName}
                                             </a>
@@ -191,7 +195,7 @@ const Builds: NextPage<{ builds: Build[] }> = ({ builds }) => {
                                             <a
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                href={selected.frameLink}
+                                                href={selected.frameLink || ''}
                                             >
                                                 {selected.frameName}
                                             </a>
@@ -207,7 +211,7 @@ const Builds: NextPage<{ builds: Build[] }> = ({ builds }) => {
                                             <a
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                href={selected.vtxLink}
+                                                href={selected.vtxLink || ''}
                                             >
                                                 {selected.vtxName}
                                             </a>
@@ -223,7 +227,7 @@ const Builds: NextPage<{ builds: Build[] }> = ({ builds }) => {
                                             <a
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                href={selected.cameraLink}
+                                                href={selected.cameraLink || ''}
                                             >
                                                 {selected.cameraName}
                                             </a>
@@ -239,7 +243,7 @@ const Builds: NextPage<{ builds: Build[] }> = ({ builds }) => {
                                             <a
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                href={selected.antennaLink}
+                                                href={selected.antennaLink || ''}
                                             >
                                                 {selected.antennaName}
                                             </a>
@@ -255,7 +259,7 @@ const Builds: NextPage<{ builds: Build[] }> = ({ builds }) => {
                                             <a
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                href={selected.receiverLink}
+                                                href={selected.receiverLink || ''}
                                             >
                                                 {selected.receiverName}
                                             </a>
@@ -271,7 +275,7 @@ const Builds: NextPage<{ builds: Build[] }> = ({ builds }) => {
                                             <a
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                href={selected.propellerLink}
+                                                href={selected.propellerLink || ''}
                                             >
                                                 {selected.propellerName}
                                             </a>

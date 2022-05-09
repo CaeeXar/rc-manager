@@ -4,29 +4,29 @@ export type User = {
 };
 
 export type Build = {
-    id: number;
+    id: number | null;
     username: string;
     title: string;
     description: string | null;
     escName: string;
-    escLink: string;
+    escLink: string | null;
     fcName: string;
-    fcLink: string;
+    fcLink: string | null;
     motorName: string;
-    motorLink: string;
+    motorLink: string | null;
     frameName: string;
-    frameLink: string;
+    frameLink: string | null;
     vtxName: string;
-    vtxLink: string;
+    vtxLink: string | null;
     antennaName: string;
-    antennaLink: string;
+    antennaLink: string | null;
     cameraName: string;
-    cameraLink: string;
+    cameraLink: string | null;
     receiverName: string;
-    receiverLink: string;
+    receiverLink: string | null;
     propellerName: string;
-    propellerLink: string;
-    modified: string;
+    propellerLink: string | null;
+    modified: string | null;
 };
 
 export enum ErrorCodes {
@@ -34,9 +34,3 @@ export enum ErrorCodes {
     ERROR_WRONG_PASSWORD,
     ERROR_SERVER,
 }
-
-export type DroneSpecification = {
-    title: string;
-    name: string;
-    link: string;
-};

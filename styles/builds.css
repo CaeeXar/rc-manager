@@ -51,3 +51,8 @@ td {
 td a {
     text-decoration: none;
 }
+
+.required {
+    color: #dc3545;
+    font-weight: normal;
+}
