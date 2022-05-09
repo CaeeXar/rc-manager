@@ -21,7 +21,7 @@
         contrast(110%);
 }
 
-.nav-link span {
+.my-navigation .nav-link span {
     width: 36px;
     float: left;
 }

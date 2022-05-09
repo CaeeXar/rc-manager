@@ -16,16 +16,13 @@ import {
     ToastContainer,
 } from 'react-bootstrap';
 import SimpleBar from 'simplebar-react';
-import { getSession, useSession } from 'next-auth/react';
-import Unauthenticated from '../../lib/Unauthenticated';
+import { getSession } from 'next-auth/react';
 import { Build } from '../../js/types';
 import { getDatetimeLocal } from '../../js/util';
 import { useRouter } from 'next/router';
 
 const Builds: NextPage<{ builds: Build[] }> = ({ builds }) => {
     const router = useRouter();
-    const { data: session, status } = useSession();
-    const authenticated = status === 'authenticated';
 
     const [filteredBuilds, setFilteredBuilds] = useState(builds);
     const [show, setShow] = useState(false);
@@ -79,8 +76,6 @@ const Builds: NextPage<{ builds: Build[] }> = ({ builds }) => {
     const onAddHandler = async () => {
         router.push({ pathname: `/builds/new`, query: {} });
     };
-
-    if (!authenticated) return <Unauthenticated />;
 
     return (
         <Container>

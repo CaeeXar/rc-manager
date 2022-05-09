@@ -12,3 +12,5 @@ export const RequiredFieldsBuild: Array<keyof Build> = [
     'receiverName',
     'propellerName',
 ];
+
+export const RestrictedPages: string[] = [];

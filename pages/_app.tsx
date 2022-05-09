@@ -4,7 +4,6 @@ import Navigation from '../lib/Navigation';
 import { SessionProvider } from 'next-auth/react';
 import { SSRProvider } from 'react-bootstrap';
 import PageFooter from '../lib/PageFooter';
-import { ReactElement } from 'react';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fab } from '@fortawesome/free-brands-svg-icons';
 import {
@@ -15,6 +14,7 @@ import {
     faTableColumns,
     faTrash,
 } from '@fortawesome/free-solid-svg-icons';
+import Layout from '../components/Layout';
 
 library.add(fab, faAdd, faEdit, faTrash, faTableColumns, faAddressBook, faInfo);
 
@@ -22,7 +22,8 @@ function MyApp({ Component, pageProps }: AppProps) {
     return (
         <SessionProvider session={pageProps.session}>
             <SSRProvider>
-                <div className="global-wrapper">
+                <Layout>
+                    {/* <div className="global-wrapper"> */}
                     <Navigation />
 
                     <div className="content">
@@ -30,7 +31,8 @@ function MyApp({ Component, pageProps }: AppProps) {
                     </div>
 
                     <PageFooter />
-                </div>
+                    {/* </div> */}
+                </Layout>
             </SSRProvider>
         </SessionProvider>
     );

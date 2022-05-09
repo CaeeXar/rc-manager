@@ -16,6 +16,11 @@
     color: #00adb5;
 }
 
+.footer .icon-spacer {
+    width: 36px;
+    float: left;
+}
+
 @media (max-width: 875px) {
     .footer {
         height: 160px;
@@ -25,23 +30,23 @@
         min-height: calc(100vh - 160px - 2 * 25px - 56px) !important;
     }
 
-    .footer a span {
+    .footer a .icon-spacer {
         display: none;
     }
 
-    .footer a text {
+    .footer a span {
         text-align: left;
     }
 }
 
 @media (max-width: 775px) {
-    .footer a span {
+    .footer a .icon-spacer {
         display: block;
         width: 50%;
         text-align: center;
     }
 
-    .footer a text {
+    .footer a span {
         display: none;
     }
 

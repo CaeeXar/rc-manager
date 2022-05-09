@@ -5,11 +5,8 @@ import BuildEdit from '../../lib/BuildEdit';
 
 const Edit: NextPage = () => {
     const { data: session, status } = useSession();
-    const loading = status === 'loading';
-
-    if (loading) return <small>Loading...</small>;
-
     let username = '';
+
     if (session && session.user && session?.user.name)
         username = session?.user?.name;
     else return <small>Error</small>;

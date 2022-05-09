@@ -9,13 +9,10 @@ import {
     Toast,
     ToastContainer,
 } from 'react-bootstrap';
-import { useSession } from 'next-auth/react';
 import { FormEvent, useState } from 'react';
 import { useRouter } from 'next/router';
 import { Build } from '../js/types';
-import Unauthenticated from './Unauthenticated';
 import { getDatetimeISO, getDatetimeLocal } from '../js/util';
-import { RequiredFieldsBuild } from '../js/const';
 
 const BuildEdit: NextPage<{
     build: Build;
@@ -48,9 +45,6 @@ const BuildEdit: NextPage<{
     const [showError, setShowError] = useState<boolean>(false);
 
     const router = useRouter();
-    const { data: session, status } = useSession();
-    const authenticated = status === 'authenticated';
-    if (!authenticated) return <Unauthenticated />;
 
     const onSaveHandler = async (event: FormEvent) => {
         event.preventDefault();

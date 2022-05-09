@@ -8,7 +8,7 @@ export default function PageFooter() {
                 <Row>
                     <Col>
                         <span className="text-uppercase h5">Fly safe!</span>
-
+                        
                         <Image src="/drone.svg" fluid alt="RCM-Logo" />
                     </Col>
 
@@ -22,13 +22,13 @@ export default function PageFooter() {
                                     target="_blank"
                                     rel="noreferrer"
                                 >
-                                    <span>
+                                    <span className="icon-spacer">
                                         <FontAwesomeIcon
                                             icon={['fab', 'instagram']}
                                         />
                                     </span>
 
-                                    <text>Visit my Instagram</text>
+                                    <span>Visit my Instagram</span>
                                 </NavLink>
                             </li>
                             <li>
@@ -36,11 +36,11 @@ export default function PageFooter() {
                                     href="https://github.com/CaeeXar?tab=repositories"
                                     target="_blank"
                                 >
-                                    <span>
+                                    <span className="icon-spacer">
                                         <FontAwesomeIcon icon={['fab', 'github']} />
                                     </span>
 
-                                    <text>Check out my other projects</text>
+                                    <span>Check out my other projects</span>
                                 </NavLink>
                             </li>
                             <li>
@@ -48,11 +48,11 @@ export default function PageFooter() {
                                     href="https://discord.gg/DTht8WpNEJ"
                                     target="_blank"
                                 >
-                                    <span>
+                                    <span className="icon-spacer">
                                         <FontAwesomeIcon icon={['fab', 'discord']} />
                                     </span>
 
-                                    <text>Join my discord-server</text>
+                                    <span>Join my discord-server</span>
                                 </NavLink>
                             </li>
                         </ul>
@@ -63,23 +63,23 @@ export default function PageFooter() {
                         <ul className="list-unstyled">
                             <li>
                                 <NavLink href="/contact">
-                                    <span>
+                                    <span className="icon-spacer">
                                         <FontAwesomeIcon icon={['fas', 'info']} />
                                     </span>
 
-                                    <text>Legal notice</text>
+                                    <span>Legal notice</span>
                                 </NavLink>
                             </li>
 
                             <li>
                                 <NavLink href="/contact">
-                                    <span>
+                                    <span className="icon-spacer">
                                         <FontAwesomeIcon
                                             icon={['fas', 'address-book']}
                                         />
                                     </span>
 
-                                    <text>Contact me</text>
+                                    <span>Contact me</span>
                                 </NavLink>
                             </li>
 
@@ -88,13 +88,13 @@ export default function PageFooter() {
                                     href="http://192.168.178.33:3000/"
                                     target="_blank"
                                 >
-                                    <span>
+                                    <span className="icon-spacer">
                                         <FontAwesomeIcon
                                             icon={['fas', 'table-columns']}
                                         />
                                     </span>
 
-                                    <text>Goto project-dashboard</text>
+                                    <span>Goto project-dashboard</span>
                                 </NavLink>
                             </li>
                         </ul>
