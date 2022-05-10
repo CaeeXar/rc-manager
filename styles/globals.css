@@ -39,7 +39,7 @@ code {
     text-align: center;
     margin-top: 25px;
     margin-bottom: 25px;
-    min-height: calc(100vh - 250px - 2 * 25px - 56px);
+    /* min-height: calc(100vh - 250px - 2 * 25px - 56px); */
 }
 
 .title {
@@ -50,4 +50,6 @@ code {
 .global-wrapper {
     position: relative;
     min-height: 100vh;
+    display: flex !important;
+    flex-direction: column;
 }

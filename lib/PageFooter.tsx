@@ -6,13 +6,7 @@ export default function PageFooter() {
         <footer className="pt-3 footer text-center">
             <Container fluid>
                 <Row>
-                    <Col>
-                        <span className="text-uppercase h5">Fly safe!</span>
-                        
-                        <Image src="/drone.svg" fluid alt="RCM-Logo" />
-                    </Col>
-
-                    <Col className="text-start">
+                    <Col className="text-center" xs="12" sm="6" md="6" lg="4">
                         <span className="text-uppercase h5">Social media</span>
 
                         <ul className="list-unstyled">
@@ -28,7 +22,7 @@ export default function PageFooter() {
                                         />
                                     </span>
 
-                                    <span>Visit my Instagram</span>
+                                    <span> Visit my Instagram</span>
                                 </NavLink>
                             </li>
                             <li>
@@ -40,7 +34,7 @@ export default function PageFooter() {
                                         <FontAwesomeIcon icon={['fab', 'github']} />
                                     </span>
 
-                                    <span>Check out my other projects</span>
+                                    <span> Check out my other projects</span>
                                 </NavLink>
                             </li>
                             <li>
@@ -52,14 +46,17 @@ export default function PageFooter() {
                                         <FontAwesomeIcon icon={['fab', 'discord']} />
                                     </span>
 
-                                    <span>Join my discord-server</span>
+                                    <span> Join my discord-server</span>
                                 </NavLink>
                             </li>
                         </ul>
+
+                        {/* <hr /> */}
                     </Col>
 
-                    <Col className="text-start">
+                    <Col className="text-center" xs="12" sm="6" md="6" lg="4">
                         <span className="text-uppercase h5">Other</span>
+
                         <ul className="list-unstyled">
                             <li>
                                 <NavLink href="/contact">
@@ -67,7 +64,7 @@ export default function PageFooter() {
                                         <FontAwesomeIcon icon={['fas', 'info']} />
                                     </span>
 
-                                    <span>Legal notice</span>
+                                    <span> Legal notice</span>
                                 </NavLink>
                             </li>
 
@@ -79,7 +76,7 @@ export default function PageFooter() {
                                         />
                                     </span>
 
-                                    <span>Contact me</span>
+                                    <span> Contact me</span>
                                 </NavLink>
                             </li>
 
@@ -94,15 +91,33 @@ export default function PageFooter() {
                                         />
                                     </span>
 
-                                    <span>Goto project-dashboard</span>
+                                    <span> Goto project-dashboard</span>
                                 </NavLink>
                             </li>
                         </ul>
+
+                        {/* <hr /> */}
+                    </Col>
+
+                    <Col xs="12" sm="12" md="12" lg="3">
+                        <span
+                            className="text-uppercase h5 w-100"
+                            style={{ float: 'left' }}
+                        >
+                            Fly safe!
+                        </span>
+
+                        <Image
+                            src="/drone.svg"
+                            alt="RCM-Logo"
+                            className="footer-logo"
+                            fluid
+                        />
                     </Col>
                 </Row>
 
-                <p className="footer-copyright">
-                    ©2022 <b>CaeeXar</b>
+                <p className="footer-copyright mt-3">
+                    ©2022 - All rights reserved by <b>Caesar</b>
                 </p>
             </Container>
         </footer>
