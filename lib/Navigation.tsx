@@ -36,7 +36,7 @@ export default function Navigation() {
                                 <span>(🎮)</span> - Configure your rates
                             </NavDropdown.Item>
 
-                            <NavDropdown.Item href="">
+                            <NavDropdown.Item href="/battery">
                                 <span>(🔋)</span> - Review your LiPo-batteries
                             </NavDropdown.Item>
 

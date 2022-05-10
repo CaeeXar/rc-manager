@@ -189,6 +189,33 @@ async function updateUserBuild(build) {
     `);
 }
 
+async function getUserBatteries(username) {
+    const db = await openDb();
+    return db.all(`
+        SELECT *
+        FROM BATTERIES 
+        WHERE LOWER(username) = LOWER('${username}');
+    `);
+}
+
+async function removeUserBattery(id) {
+    const db = await openDb();
+    return db.run(`
+        DELETE FROM BATTERIES 
+        WHERE id = '${id}';
+    `);
+}
+
+async function getUserBatteryById(username, id) {
+    const db = await openDb();
+    return db.get(`
+        SELECT *
+        FROM BATTERIES 
+        WHERE LOWER(username) = LOWER('${username}')
+        AND id = ${id};
+    `);
+}
+
 const config = {
     openDb,
     migrate,
@@ -198,6 +225,9 @@ const config = {
     removeUserBuild,
     getUserBuildById,
     updateUserBuild,
+    getUserBatteries,
+    removeUserBattery,
+    getUserBatteryById,
 };
 
 module.exports = config;

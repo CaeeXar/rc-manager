@@ -1,3 +1,5 @@
+import { BatteryType } from './types';
+
 const convert = (datetime?: Date | string | null): Date => {
     if (!datetime) datetime = new Date();
     else if (!(datetime instanceof Date)) datetime = new Date(datetime);
@@ -34,4 +36,15 @@ export const prepareTextSQLite = (text: string): string => {
 export const prepareTextSearch = (text: string) => {
     if (!text) return '';
     return text.toLowerCase().replace(/[\/\\#,+()$~%.:*?<>{}-]/gm, '');
+};
+
+export const getBatteryTypeText = (batteryType: BatteryType): string => {
+    if (batteryType === BatteryType.LION) return 'Lithium-Ion';
+    else if (batteryType === BatteryType.LIPO) return 'Lithium-Polymer';
+    else return 'Lithium-Polymer High Voltage';
+};
+
+export const getDateDiff = (date: Date, type?: number): number => {
+    const diffInMilli = new Date().getTime() - date.getTime();
+    return diffInMilli / (1000 * 3600 * 24 * (type || 1));
 };

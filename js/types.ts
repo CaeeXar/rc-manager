@@ -29,8 +29,27 @@ export type Build = {
     modified: string | null;
 };
 
+export enum BatteryType {
+    LIPO = 'LIPO',
+    LIPO_HV = 'LIPO_HV',
+    LION = 'LIION',
+}
+
 export enum ErrorCodes {
     ERROR_WRONG_USER,
     ERROR_WRONG_PASSWORD,
     ERROR_SERVER,
 }
+
+export type Battery = {
+    id: number | null;
+    username: string;
+    brand: string;
+    description: string | null;
+    capacity: number;
+    cells: number;
+    link: string | null;
+    batteryType: BatteryType;
+    created: string | null;
+    modified: string | null;
+};

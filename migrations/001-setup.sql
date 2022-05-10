@@ -30,6 +30,19 @@ CREATE TABLE BUILDS (
     modified TEXT
 );
 
+CREATE TABLE BATTERIES (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    username TEXT REFERENCES USERS,
+    brand TEXT,
+    description TEXT NULL,
+    capacity NUMBER,
+    cells NUMBER,
+    link TEXT NULL,
+    batteryType TEXT,
+    created TEXT,
+    modified TEXT
+);
+
 INSERT INTO USERS (username, password) 
 VALUES ('Caesar', '$2b$10$JeynWsPj5cJMm49.SoVi4O1ifReIRPrUkrW20TFuqKwAKXSPAYNbG');
 
@@ -82,6 +95,70 @@ VALUES (
     '2022-05-01T12:00:00.307Z'
 );
 
+INSERT INTO BATTERIES (
+    username,
+    brand,
+    description,
+    capacity,
+    cells,
+    link,
+    batteryType,
+    created,
+    modified
+) 
+VALUES (
+    'Caesar',
+    'TATTU',
+    'Tattu R-Line LiPo Akku 6S 1050 mAh 130C V4',
+    1050,
+    6,
+    'https://www.rctech.de/tattu-r-line-lipo-akku-6s-1050-mah-130c-v4.html',
+    'LIPO',
+    '2022-02-20T11:00:00.307Z',
+    '2022-05-10T11:00:00.307Z'
+), (
+    'Caesar',
+    'TATTU',
+    'Tattu R-Line LiPo Akku 6S 1050 mAh 130C V4',
+    1050,
+    6,
+    'https://www.rctech.de/tattu-r-line-lipo-akku-6s-1050-mah-130c-v4.html',
+    'LIPO',
+    '2022-02-20T11:00:00.307Z',
+    '2022-05-10T11:00:00.307Z'
+), (
+    'Caesar',
+    'TATTU',
+    'Tattu R-Line LiPo Akku 6S 1050 mAh 130C V4',
+    1050,
+    6,
+    'https://www.rctech.de/tattu-r-line-lipo-akku-6s-1050-mah-130c-v4.html',
+    'LIPO',
+    '2022-02-20T11:00:00.307Z',
+    '2022-05-10T11:00:00.307Z'
+), (
+    'Caesar',
+    'TATTU',
+    'Tattu R-Line LiPo Akku 6S 1050 mAh 130C V4',
+    1050,
+    6,
+    'https://www.rctech.de/tattu-r-line-lipo-akku-6s-1050-mah-130c-v4.html',
+    'LIPO',
+    '2022-04-10T10:00:00.307Z',
+    '2022-05-10T11:00:00.307Z'
+), (
+    'Caesar',
+    'TATTU',
+    'Tattu R-Line LiPo Akku 6S 1050 mAh 130C V4',
+    1050,
+    6,
+    'https://www.rctech.de/tattu-r-line-lipo-akku-6s-1050-mah-130c-v4.html',
+    'LIPO',
+    '2022-04-10T10:00:00.307Z',
+    '2022-05-10T11:00:00.307Z'
+);
+
 -- Down
 DROP TABLE USERS;
 DROP TABLE BUILDS;
+DROP TABLE BATTERIES;

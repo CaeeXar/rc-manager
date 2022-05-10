@@ -18,7 +18,7 @@ import {
 import SimpleBar from 'simplebar-react';
 import { getSession } from 'next-auth/react';
 import { Build } from '../../js/types';
-import { getDatetimeLocal } from '../../js/util';
+import { getDatetimeLocal, prepareTextSearch } from '../../js/util';
 import { useRouter } from 'next/router';
 
 const Builds: NextPage<{ builds: Build[] }> = ({ builds }) => {
@@ -36,18 +36,15 @@ const Builds: NextPage<{ builds: Build[] }> = ({ builds }) => {
         setShow(true);
     };
 
-    const prepare = (s: string) => {
-        if (!s) return '';
-        return s.toLowerCase().replace(/[\/\\#,+()$~%.:*?<>{}-]/gm, '');
-    };
-
     const search = (input: string) => {
         setFilteredBuilds(
             builds.filter((build: Build) => {
                 let buildString = Object.values(build)
                     .map((value) => '' + value)
                     .join(' ');
-                return prepare(buildString).includes(prepare(input));
+                return prepareTextSearch(buildString).includes(
+                    prepareTextSearch(input)
+                );
             })
         );
     };
