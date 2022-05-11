@@ -115,7 +115,7 @@ VALUES (
     'https://www.rctech.de/tattu-r-line-lipo-akku-6s-1050-mah-130c-v4.html',
     'LIPO',
     '2022-02-20T11:00:00.307Z',
-    '2022-05-10T11:00:00.307Z'
+    '2022-05-10T10:00:00.307Z'
 ), (
     'Caesar',
     'TATTU',
@@ -125,7 +125,7 @@ VALUES (
     'https://www.rctech.de/tattu-r-line-lipo-akku-6s-1050-mah-130c-v4.html',
     'LIPO',
     '2022-02-20T11:00:00.307Z',
-    '2022-05-10T11:00:00.307Z'
+    '2022-05-10T10:00:00.307Z'
 ), (
     'Caesar',
     'TATTU',
@@ -135,7 +135,7 @@ VALUES (
     'https://www.rctech.de/tattu-r-line-lipo-akku-6s-1050-mah-130c-v4.html',
     'LIPO',
     '2022-02-20T11:00:00.307Z',
-    '2022-05-10T11:00:00.307Z'
+    '2022-05-10T10:00:00.307Z'
 ), (
     'Caesar',
     'TATTU',
@@ -145,7 +145,7 @@ VALUES (
     'https://www.rctech.de/tattu-r-line-lipo-akku-6s-1050-mah-130c-v4.html',
     'LIPO',
     '2022-04-10T10:00:00.307Z',
-    '2022-05-10T11:00:00.307Z'
+    '2022-05-10T10:00:00.307Z'
 ), (
     'Caesar',
     'TATTU',
@@ -155,7 +155,7 @@ VALUES (
     'https://www.rctech.de/tattu-r-line-lipo-akku-6s-1050-mah-130c-v4.html',
     'LIPO',
     '2022-04-10T10:00:00.307Z',
-    '2022-05-10T11:00:00.307Z'
+    '2022-05-10T10:00:00.307Z'
 );
 
 -- Down

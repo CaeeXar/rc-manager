@@ -88,7 +88,7 @@ const BuildEdit: NextPage<{
         else setShowError(true);
     };
 
-    const onCloseHandler = async () => {
+    const onCancelHandler = async () => {
         router.push({ pathname: `/builds`, query: {} });
     };
 
@@ -379,7 +379,7 @@ const BuildEdit: NextPage<{
                     <Button
                         variant="secondary"
                         className="me-2"
-                        onClick={onCloseHandler}
+                        onClick={onCancelHandler}
                     >
                         Cancel
                     </Button>

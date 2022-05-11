@@ -30,9 +30,9 @@ export type Build = {
 };
 
 export enum BatteryType {
-    LIPO = 'LIPO',
-    LIPO_HV = 'LIPO_HV',
-    LION = 'LIION',
+    LIPO = 'LI_PO_NORMAL',
+    LPHV = 'LI_PO_HV',
+    LION = 'LI_ION',
 }
 
 export enum ErrorCodes {

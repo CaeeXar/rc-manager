@@ -1,11 +1,12 @@
 import { GetServerSideProps, NextPage } from 'next';
 import { getSession } from 'next-auth/react';
 import { Battery } from '../../js/types';
+import BatteryEdit from '../../lib/BatteryEdit';
 
 const Edit: NextPage<{
     battery: Battery;
 }> = ({ battery }) => {
-    return <>hallo</>;
+    return <BatteryEdit edit={true} battery={battery} />;
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {

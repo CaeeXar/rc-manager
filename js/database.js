@@ -216,6 +216,79 @@ async function getUserBatteryById(username, id) {
     `);
 }
 
+async function updateUserBattery(battery) {
+    const db = await openDb();
+    const {
+        id,
+        username,
+        brand,
+        description,
+        capacity,
+        cells,
+        link,
+        batteryType,
+        created,
+        modified,
+    } = battery;
+
+    if (!id || !username) return new sqlite.Statement();
+
+    return db.run(`
+        UPDATE BATTERIES 
+        SET brand = '${brand}',
+            description = ${!!description ? `'${description}'` : `NULL`},
+            capacity = '${capacity}',
+            cells = '${cells}',
+            link = ${!!link ? `'${link}'` : `NULL`},
+            batteryType = '${batteryType}',
+            created = '${created}',
+            modified = '${modified}'
+        WHERE LOWER(username) = LOWER('${username}')
+        AND id = ${id};
+    `);
+}
+
+async function addUserBattery(battery) {
+    const db = await openDb();
+    const {
+        username,
+        brand,
+        description,
+        capacity,
+        cells,
+        link,
+        batteryType,
+        created,
+        modified,
+    } = battery;
+
+    if (!username) return;
+
+    return db.run(`
+        INSERT INTO BATTERIES (
+            username,
+            brand,
+            description,
+            capacity,
+            cells,
+            link,
+            batteryType,
+            created,
+            modified
+        ) VALUES (
+            '${username}',
+            '${brand}',
+             ${!!description ? `'${description}'` : `NULL`},
+            '${capacity}',
+            '${cells}',
+             ${!!link ? `'${link}'` : `NULL`},
+            '${batteryType}',
+            '${created}',
+            '${modified}'
+        );
+    `);
+}
+
 const config = {
     openDb,
     migrate,
@@ -228,6 +301,8 @@ const config = {
     getUserBatteries,
     removeUserBattery,
     getUserBatteryById,
+    updateUserBattery,
+    addUserBattery,
 };
 
 module.exports = config;

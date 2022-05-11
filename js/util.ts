@@ -46,5 +46,6 @@ export const getBatteryTypeText = (batteryType: BatteryType): string => {
 
 export const getDateDiff = (date: Date, type?: number): number => {
     const diffInMilli = new Date().getTime() - date.getTime();
+    // defualt is in days
     return diffInMilli / (1000 * 3600 * 24 * (type || 1));
 };

@@ -78,12 +78,16 @@ const Builds: NextPage<{ batteries: Battery[] }> = ({ batteries }) => {
         router.push({ pathname: `/batteries/[id]`, query: { id: selected.id } });
     };
 
+    const onAddHandler = async () => {
+        router.push({ pathname: `/batteries/new`, query: {} });
+    };
+
     useEffect(() => {
         const calcAge = (): Age => {
             if (!selected || !selected.created) return {};
             const days = getDateDiff(new Date(selected.created));
 
-            // if battery is >= than one month - display only months
+            // if age is >= than one month - display only months
             if (days >= 30) return { months: days / 30 };
             return { days };
         };
@@ -101,7 +105,7 @@ const Builds: NextPage<{ batteries: Battery[] }> = ({ batteries }) => {
                     placeholder="Search..."
                     onChange={(e) => search(e.target.value)}
                 />
-                <Button>
+                <Button onClick={onAddHandler}>
                     <FontAwesomeIcon icon={['fas', 'add']} />
                 </Button>
             </InputGroup>
@@ -281,11 +285,8 @@ const Builds: NextPage<{ batteries: Battery[] }> = ({ batteries }) => {
                         </div>
 
                         <div>
-                            <Button className="me-2">
-                                <FontAwesomeIcon
-                                    icon={['fas', 'edit']}
-                                    onClick={onEditHandler}
-                                />
+                            <Button className="me-2" onClick={onEditHandler}>
+                                <FontAwesomeIcon icon={['fas', 'edit']} />
                             </Button>
 
                             <Button variant="danger" onClick={onRemoveHandler}>
