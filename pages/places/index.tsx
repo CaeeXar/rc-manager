@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { GetServerSideProps, NextPage } from 'next';
 import { getSession } from 'next-auth/react';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 import {
     Card,
@@ -12,7 +13,8 @@ import {
     Button,
     Modal,
     CloseButton,
-    Image,
+    ToastContainer,
+    Toast,
 } from 'react-bootstrap';
 import SimpleBar from 'simplebar-react';
 import { Place } from '../../js/types';
@@ -22,6 +24,9 @@ const Places: NextPage<{ places: Place[] }> = ({ places }) => {
     const [filteredPlaces, setFilteredPlaces] = useState(places);
     const [selected, setSelected] = useState<Place | null>(null);
     const [show, setShow] = useState(false);
+    const [showError, setShowError] = useState<boolean>(false);
+
+    const router = useRouter();
 
     const search = (input: string) => {
         setFilteredPlaces(
@@ -36,16 +41,41 @@ const Places: NextPage<{ places: Place[] }> = ({ places }) => {
         );
     };
 
-    const onSelectHandler = (palce: Place) => {
-        setSelected(palce);
+    const refreshPage = () => {
+        router.reload();
+    };
+
+    const onSelectHandler = (place: Place) => {
+        setSelected(place);
         setShow(true);
     };
 
     const onCloseHandler = () => setShow(false);
 
+    const onEditHandler = async () => {
+        if (!selected) return;
+        router.push({ pathname: `/places/[id]`, query: { id: selected.id } });
+    };
+
+    const onRemoveHandler = async () => {
+        if (!selected) return;
+
+        const res = await fetch('/api/places/remove', {
+            method: 'POST',
+            body: JSON.stringify({ id: selected.id }),
+        });
+
+        if (res.ok) refreshPage();
+        else setShowError(true);
+    };
+
+    const onAddHandler = async () => {
+        router.push({ pathname: `/places/new`, query: {} });
+    };
+
     return (
         <Container className="places">
-            <h1 className="title">Places to rip.</h1>
+            <h1 className="title">Places to rip</h1>
 
             <div>
                 <InputGroup style={{ marginBottom: '25px' }}>
@@ -54,7 +84,7 @@ const Places: NextPage<{ places: Place[] }> = ({ places }) => {
                         placeholder="Search..."
                         onChange={(e) => search(e.target.value)}
                     />
-                    <Button>
+                    <Button onClick={onAddHandler}>
                         <FontAwesomeIcon icon={['fas', 'add']} />
                     </Button>
                 </InputGroup>
@@ -147,17 +177,31 @@ const Places: NextPage<{ places: Place[] }> = ({ places }) => {
                         </div>
 
                         <div>
-                            <Button className="me-2">
+                            <Button className="me-2" onClick={onEditHandler}>
                                 <FontAwesomeIcon icon={['fas', 'edit']} />
                             </Button>
 
-                            <Button variant="danger">
+                            <Button variant="danger" onClick={onRemoveHandler}>
                                 <FontAwesomeIcon icon={['fas', 'trash']} />
                             </Button>
                         </div>
                     </Modal.Footer>
                 </Modal>
             ) : null}
+
+            <ToastContainer position="middle-center">
+                <Toast
+                    show={!!showError}
+                    onClose={() => setShowError(false)}
+                    bg={'danger'}
+                >
+                    <Toast.Header>
+                        <strong className="me-auto">Warning</strong>
+                    </Toast.Header>
+
+                    <Toast.Body>Something went wrong!</Toast.Body>
+                </Toast>
+            </ToastContainer>
         </Container>
     );
 };

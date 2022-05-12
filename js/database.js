@@ -298,6 +298,69 @@ async function getUserPlaces(username) {
     `);
 }
 
+async function getUserPlaceById(username, id) {
+    const db = await openDb();
+    return db.get(`
+        SELECT *
+        FROM PLACES 
+        WHERE LOWER(username) = LOWER('${username}')
+        AND id = ${id};
+    `);
+}
+
+async function removeUserPlace(id) {
+    const db = await openDb();
+    return db.run(`
+        DELETE FROM PLACES 
+        WHERE id = '${id}';
+    `);
+}
+
+async function updateUserPlace(place) {
+    const db = await openDb();
+    const { id, username, title, description, googleMapsLink, imgPath, modified } =
+        place;
+
+    if (!username) return;
+
+    return db.run(`
+        UPDATE PLACES 
+        SET title = '${title}',
+            description = ${!!description ? `'${description}'` : `NULL`},
+            googleMapsLink = '${googleMapsLink}',
+            imgPath = ${!!imgPath ? `'${imgPath}'` : `NULL`},
+            modified = '${modified}'
+        WHERE LOWER(username) = LOWER('${username}')
+        AND id = ${id};
+    `);
+}
+
+async function addUserPlace(place) {
+    const db = await openDb();
+    const { username, title, description, googleMapsLink, imgPath, modified } =
+        place;
+
+    if (!username) return;
+
+    return db.run(`
+        INSERT INTO PLACES (
+            username,
+            title,
+            description,
+            googleMapsLink,
+            imgPath,
+            modified
+        ) VALUES (
+            '${username}',
+            '${title}',
+             ${!!description ? `'${description}'` : `NULL`},
+            '${googleMapsLink}',
+             ${!!imgPath ? `'${imgPath}'` : `NULL`},
+            '${modified}'
+        );
+    `);
+}
+
 const config = {
     openDb,
     migrate,
@@ -307,20 +370,24 @@ const config = {
 
     // builds
     getUserBuilds,
+    getUserBuildById,
     addUserBuild,
     removeUserBuild,
-    getUserBuildById,
     updateUserBuild,
 
     // batteries
     getUserBatteries,
-    removeUserBattery,
     getUserBatteryById,
-    updateUserBattery,
     addUserBattery,
+    removeUserBattery,
+    updateUserBattery,
 
     // places
     getUserPlaces,
+    getUserPlaceById,
+    addUserPlace,
+    removeUserPlace,
+    updateUserPlace,
 };
 
 module.exports = config;
