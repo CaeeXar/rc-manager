@@ -6,7 +6,7 @@ export default function Unauthenticated() {
         <Container>
             <h1>Ups...!</h1>
 
-            <p>Look's like you are not logged in. Login to view this page!</p>
+            <p>Look&apos;s like you are not logged in. Login to view this page!</p>
 
             <Button onClick={() => signIn()}>Login</Button>
         </Container>
