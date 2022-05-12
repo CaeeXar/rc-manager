@@ -2,3 +2,7 @@
     cursor: pointer;
     color: #00adb5;
 }
+
+.battery th:hover {
+    cursor: pointer;
+}

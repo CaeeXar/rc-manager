@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { GetServerSideProps, NextPage } from 'next';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import {
     Button,
     CloseButton,
@@ -25,6 +25,7 @@ import {
     prepareTextSearch,
 } from '../../js/util';
 import { useRouter } from 'next/router';
+var _ = require('lodash');
 
 type Age = {
     days?: number;
@@ -37,6 +38,7 @@ const Builds: NextPage<{ batteries: Battery[] }> = ({ batteries }) => {
     const [selected, setSelected] = useState<Battery | null>(null);
     const [filteredBatteries, setFilteredBatteries] = useState<Battery[]>(batteries);
     const [age, setAge] = useState<Age | null>(null);
+    const [sortBy, setSortBy] = useState<string>('created');
     const [showError, setShowError] = useState<boolean>(false);
 
     const search = (input: string) => {
@@ -99,8 +101,11 @@ const Builds: NextPage<{ batteries: Battery[] }> = ({ batteries }) => {
         setAge(calcAge());
     }, [selected]);
 
-    // sort by age
-    filteredBatteries.sort((a, b) => getDateDiff(a.created || '', b.created || ''));
+    // sort by column
+    const preparedBatteries = useMemo(
+        () => _.sortBy(filteredBatteries, [sortBy, 'created']),
+        [filteredBatteries, sortBy]
+    );
 
     return (
         <Container>
@@ -122,15 +127,43 @@ const Builds: NextPage<{ batteries: Battery[] }> = ({ batteries }) => {
                     <Table responsive>
                         <thead>
                             <tr>
-                                <th>Brand</th>
-                                <th>Cells</th>
-                                <th>Capacity</th>
-                                <th>Date</th>
+                                <th onClick={() => setSortBy('brand')}>
+                                    Brand{' '}
+                                    {sortBy === 'brand' && (
+                                        <FontAwesomeIcon
+                                            icon={['fas', 'arrow-up']}
+                                        />
+                                    )}
+                                </th>
+                                <th onClick={() => setSortBy('cells')}>
+                                    Cells{' '}
+                                    {sortBy === 'cells' && (
+                                        <FontAwesomeIcon
+                                            icon={['fas', 'arrow-up']}
+                                        />
+                                    )}
+                                </th>
+                                <th onClick={() => setSortBy('capacity')}>
+                                    Capacity{' '}
+                                    {sortBy === 'capacity' && (
+                                        <FontAwesomeIcon
+                                            icon={['fas', 'arrow-up']}
+                                        />
+                                    )}
+                                </th>
+                                <th onClick={() => setSortBy('created')}>
+                                    Date{' '}
+                                    {sortBy === 'created' && (
+                                        <FontAwesomeIcon
+                                            icon={['fas', 'arrow-up']}
+                                        />
+                                    )}
+                                </th>
                             </tr>
                         </thead>
 
                         <tbody>
-                            {filteredBatteries.map((battery: Battery) => {
+                            {preparedBatteries.map((battery: Battery) => {
                                 return (
                                     <tr
                                         key={battery.id}

@@ -9,6 +9,7 @@ import { fab } from '@fortawesome/free-brands-svg-icons';
 import {
     faAdd,
     faAddressBook,
+    faArrowUp,
     faEdit,
     faInfo,
     faMapLocationDot,
@@ -25,7 +26,8 @@ library.add(
     faTableColumns,
     faAddressBook,
     faInfo,
-    faMapLocationDot
+    faMapLocationDot,
+    faArrowUp
 );
 
 function MyApp({ Component, pageProps }: AppProps) {
