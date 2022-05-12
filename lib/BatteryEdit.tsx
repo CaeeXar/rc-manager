@@ -22,6 +22,7 @@ const BatteryEdit: NextPage<{
     const [description, setDescription] = useState(battery.description);
     const [capacity, setCapacity] = useState(battery.capacity);
     const [cells, setCells] = useState(battery.cells);
+    const [created, setCreated] = useState(battery.created);
     const [link, setLink] = useState(battery.link);
     const [batteryType, setBatteryType] = useState(battery.batteryType);
     const [showError, setShowError] = useState<boolean>(false);
@@ -42,7 +43,7 @@ const BatteryEdit: NextPage<{
             cells,
             link,
             batteryType,
-            created: !edit ? modified : battery.created,
+            created: getDatetimeISO(created),
             modified,
         };
 
@@ -73,6 +74,18 @@ const BatteryEdit: NextPage<{
         });
         if (res.ok) router.push({ pathname: `/batteries`, query: {} });
         else setShowError(true);
+    };
+
+    const formatDatepicker = (dt: string | null) => {
+        let date = !!dt ? new Date(dt) : new Date(),
+            year = '' + date.getFullYear(),
+            month = '' + (date.getMonth() + 1),
+            day = '' + date.getDate();
+
+        if (parseInt(month) < 10) month = '0' + month;
+        if (parseInt(day) < 10) day = '0' + day;
+
+        return year + '-' + month + '-' + day;
     };
 
     return (
@@ -187,6 +200,22 @@ const BatteryEdit: NextPage<{
                                 );
                             })}
                         </Form.Select>
+                    </Col>
+                </Form.Group>
+
+                <Form.Group as={Row} className="mb-3">
+                    <Form.Label column sm="2">
+                        First bought <span className="required">(*)</span>
+                    </Form.Label>
+
+                    <Col sm="10">
+                        <Form.Control
+                            type="date"
+                            value={formatDatepicker(created)}
+                            onChange={(e) =>
+                                setCreated(getDatetimeISO(e.target.value))
+                            }
+                        />
                     </Col>
                 </Form.Group>
 
