@@ -20,6 +20,7 @@ import { Battery } from '../../js/types';
 import {
     getBatteryTypeText,
     getDateDiff,
+    getDateDiffNow,
     getDatetimeLocal,
     prepareTextSearch,
 } from '../../js/util';
@@ -85,15 +86,21 @@ const Builds: NextPage<{ batteries: Battery[] }> = ({ batteries }) => {
     useEffect(() => {
         const calcAge = (): Age => {
             if (!selected || !selected.created) return {};
-            const days = getDateDiff(new Date(selected.created));
+            const days = getDateDiffNow(
+                new Date(selected.created),
+                1000 * 60 * 60 * 24
+            );
 
             // if age is >= than one month - display only months
             if (days >= 30) return { months: days / 30 };
-            return { days };
+            return { days: Math.floor(days) };
         };
 
         setAge(calcAge());
     }, [selected]);
+
+    // sort by age
+    filteredBatteries.sort((a, b) => getDateDiff(a.created || '', b.created || ''));
 
     return (
         <Container>

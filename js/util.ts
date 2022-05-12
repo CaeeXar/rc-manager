@@ -44,8 +44,17 @@ export const getBatteryTypeText = (batteryType: BatteryType): string => {
     else return 'Lithium-Polymer High Voltage';
 };
 
-export const getDateDiff = (date: Date, type?: number): number => {
+export const getDateDiffNow = (date: Date, type?: number): number => {
     const diffInMilli = new Date().getTime() - date.getTime();
-    // defualt is in days
-    return diffInMilli / (1000 * 3600 * 24 * (type || 1));
+    // default is in days
+    return diffInMilli / (type || 1);
+};
+
+export const getDateDiff = (d1: Date | string, d2: Date | string): number => {
+    if (!d1 || !d2) throw Error('No dates provided!');
+
+    if (!(d1 instanceof Date)) d1 = new Date(d1);
+    if (!(d2 instanceof Date)) d2 = new Date(d2);
+
+    return d1.getTime() - d2.getTime();
 };
