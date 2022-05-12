@@ -289,20 +289,38 @@ async function addUserBattery(battery) {
     `);
 }
 
+async function getUserPlaces(username) {
+    const db = await openDb();
+    return db.all(`
+        SELECT *
+        FROM PLACES 
+        WHERE LOWER(username) = LOWER('${username}');
+    `);
+}
+
 const config = {
     openDb,
     migrate,
+
+    // auth
     getUserLogin,
+
+    // builds
     getUserBuilds,
     addUserBuild,
     removeUserBuild,
     getUserBuildById,
     updateUserBuild,
+
+    // batteries
     getUserBatteries,
     removeUserBattery,
     getUserBatteryById,
     updateUserBattery,
     addUserBattery,
+
+    // places
+    getUserPlaces,
 };
 
 module.exports = config;

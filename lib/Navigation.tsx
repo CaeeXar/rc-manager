@@ -32,8 +32,8 @@ export default function Navigation() {
                                 <span>(🛠️)</span> - Manage your own builds
                             </NavDropdown.Item>
 
-                            <NavDropdown.Item href="">
-                                <span>(🎮)</span> - Configure your rates
+                            <NavDropdown.Item href="/places">
+                                <span>(🗺️)</span> - Look up your places
                             </NavDropdown.Item>
 
                             <NavDropdown.Item href="/batteries">

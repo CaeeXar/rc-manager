@@ -53,3 +53,13 @@ export type Battery = {
     created: string | null;
     modified: string | null;
 };
+
+export type Place = {
+    id: number | null;
+    username: string;
+    title: string;
+    description: string | null;
+    googleMapsLink: string;
+    imgPath: string | null;
+    modified: string | null;
+};

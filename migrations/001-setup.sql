@@ -43,6 +43,16 @@ CREATE TABLE BATTERIES (
     modified TEXT
 );
 
+CREATE TABLE PLACES (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    username TEXT REFERENCES USERS,
+    title TEXT,
+    description TEXT NULL,
+    googleMapsLink TEXT,
+    imgPath TEXT NULL,
+    modified TEXT
+);
+
 INSERT INTO USERS (username, password) 
 VALUES ('Caesar', '$2b$10$JeynWsPj5cJMm49.SoVi4O1ifReIRPrUkrW20TFuqKwAKXSPAYNbG');
 
@@ -158,7 +168,46 @@ VALUES (
     '2022-05-10T10:00:00.307Z'
 );
 
+INSERT INTO PLACES (
+    username,
+    title,
+    description,
+    googleMapsLink,
+    imgPath,
+    modified
+) 
+VALUES (
+    'Caesar',
+    'Gumpoldskirchen - Blechfabrik',
+    'Abandoned building near Traiskirchen.',
+    'https://www.google.com/maps/place/Wr.+Str.+201,+2514+Gumpoldskirchen/@48.0433426,16.2999097,52m/data=!3m1!1e3!4m8!1m2!2m1!1sThermenradweg,+Gumpoldskirchen!3m4!1s0x476dae2437a77a7d:0x8b78da82bf12fb53!8m2!3d48.0433863!4d16.3000075!5m1!1e4',
+    'Blech_und_Bleiwarenfabrik_Gumpoldskirchen.webp',
+    '2022-05-12T10:00:00.307Z'
+), (
+    'Caesar',
+    'Blumau-Neurißhof - Pulverfabrik',
+    'Ruins and open fields near Sollenau.',
+    'https://www.google.com/maps/place/MBC-Guenselsdorf/@47.9232134,16.2843204,1781a,35y,249.21h/data=!3m1!1e3!4m13!1m7!3m6!1s0x476db44a01a14e65:0x3e8e348fa4e87bc4!2sBlumau-Neuri%C3%9Fhof!3b1!8m2!3d47.9223927!4d16.300537!3m4!1s0x476db42fc8a83f15:0x2d47cb50013996b2!8m2!3d47.926062!4d16.28251!5m1!1e4',
+    'Blumau_Pulverfabrik.jpg',
+    '2022-05-12T10:00:00.307Z'
+), (
+    'Caesar',
+    'Wöllersdorf - Kaserne',
+    'Abandoned building near Wöllersdorf.',
+    'https://www.google.com/maps/place/Ehemalige+Babenberger-Kaserne/@47.8650032,16.1858622,387m/data=!3m1!1e3!4m9!1m2!2m1!1skaserne+near+W%C3%B6llersdorfer+Stra%C3%9Fe,+Markt+Piesting!3m5!1s0x476dc9a11dc222fb:0x53888f93afc97dc5!8m2!3d47.8656687!4d16.1878766!15sCjNrYXNlcm5lIG5lYXIgV8O2bGxlcnNkb3JmZXIgU3RyYcOfZSwgTWFya3QgUGllc3RpbmeSAQ1taWxpdGFyeV9iYXNl!5m1!1e4',
+    NULL,
+    '2022-05-12T10:00:00.307Z'
+), (
+    'Caesar',
+    'Bruck an der Leitha - Schloss Prugg',
+    'Abandoned castle in ''Bruck an der Leitha''.',
+    'https://www.google.com/maps/place/Schloss+Prugg/@48.0290551,16.7756954,3995m/data=!3m1!1e3!4m5!3m4!1s0x476c5b8b6a3f97a9:0x8fe5bf9275480666!8m2!3d48.0257724!4d16.7827474!5m1!1e4',
+    'Leitha_Prugg.jpg',
+    '2022-05-12T10:00:00.307Z'
+);
+
 -- Down
 DROP TABLE USERS;
 DROP TABLE BUILDS;
 DROP TABLE BATTERIES;
+DROP TABLE PLACES;

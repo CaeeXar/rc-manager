@@ -11,12 +11,22 @@ import {
     faAddressBook,
     faEdit,
     faInfo,
+    faMapLocationDot,
     faTableColumns,
     faTrash,
 } from '@fortawesome/free-solid-svg-icons';
 import Layout from '../components/Layout';
 
-library.add(fab, faAdd, faEdit, faTrash, faTableColumns, faAddressBook, faInfo);
+library.add(
+    fab,
+    faAdd,
+    faEdit,
+    faTrash,
+    faTableColumns,
+    faAddressBook,
+    faInfo,
+    faMapLocationDot
+);
 
 function MyApp({ Component, pageProps }: AppProps) {
     return (

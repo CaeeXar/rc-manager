@@ -13,4 +13,4 @@ export const RequiredFieldsBuild: Array<keyof Build> = [
     'propellerName',
 ];
 
-export const RestrictedPages: string[] = [];
+export const RestrictedPages: string[] = ['/batteries', '/builds', '/places'];
