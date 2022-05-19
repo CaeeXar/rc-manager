@@ -176,7 +176,12 @@ const PlaceEdit: NextPage<{
                     </Col>
 
                     <Col sm="2" xs="12">
-                        <Image rounded width={100} src={'/' + imgPath} alt="" />
+                        <Image
+                            rounded
+                            width={100}
+                            src={'/api/places/images/' + imgPath}
+                            alt=""
+                        />
                     </Col>
                 </Form.Group>
 
