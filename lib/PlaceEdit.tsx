@@ -78,7 +78,7 @@ const PlaceEdit: NextPage<{
         const body = new FormData();
         body.append('file', file);
 
-        const res = await fetch('/api/places/image', {
+        const res = await fetch('/api/places/images', {
             method: 'POST',
             body,
         });

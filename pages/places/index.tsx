@@ -128,7 +128,7 @@ const Places: NextPage<{ places: Place[] }> = ({ places }) => {
                                 !!selected.imgPath
                                     ? {
                                           backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), 
-                                              url('/${selected.imgPath}')`,
+                                              url('/api/places/images/${selected.imgPath}')`,
                                       }
                                     : {}
                             }
