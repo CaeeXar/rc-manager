@@ -4,14 +4,11 @@ import { Container } from 'react-bootstrap';
 const Builds: NextPage = () => {
     return (
         <Container className="contact">
-            <p className="h5 text-start">Address:</p>
+            <p className="h5 text-start">Contact:</p>
 
             <ul className="list-unstyled text-start">
-                <li>Max Mustermann</li>
-                <li>Musterstrasse 1</li>
-                <li>1234 Musterhausen, Österreich</li>
-                <li>Mobile-number: +123456789</li>
-                <li>E-Mail: max@muster.at</li>
+                <li>Samuel Erdö</li>
+                <li>2604 Theresienfeld, Österreich</li>
             </ul>
 
             <hr />
