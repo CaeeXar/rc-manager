@@ -3,9 +3,9 @@ const sqlite = require('sqlite');
 
 async function openDb() {
     return sqlite.open({
-        filename: process.env.DB_PATH,
+        // filename: process.env.DB_PATH,
         // filename: "/home/remote/production/rc-manager.db",
-        // filename: 'D:\\sqlite\\DB\\rc-manager.db',
+        filename: 'D:\\sqlite\\DB\\rc-manager.db',
         driver: sqlite3.Database,
     });
 }
@@ -361,6 +361,33 @@ async function addUserPlace(place) {
     `);
 }
 
+async function getRateTypes() {
+    const db = await openDb();
+    return db.all(`
+        SELECT *
+        FROM RATETYPES;
+    `);
+}
+
+async function getUserRates(username) {
+    const db = await openDb();
+    return db.all(`
+        SELECT *
+        FROM RATES 
+        WHERE LOWER(username) = LOWER('${username}');
+    `);
+}
+
+async function getUserRateById(username, id) {
+    const db = await openDb();
+    return db.get(`
+        SELECT *
+        FROM RATES 
+        WHERE LOWER(username) = LOWER('${username}')
+        AND id = ${id};
+    `);
+}
+
 const config = {
     openDb,
     migrate,
@@ -388,6 +415,11 @@ const config = {
     addUserPlace,
     removeUserPlace,
     updateUserPlace,
+
+    //rates
+    getRateTypes,
+    getUserRates,
+    getUserRateById,
 };
 
 module.exports = config;

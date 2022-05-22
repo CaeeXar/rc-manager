@@ -63,3 +63,50 @@ export type Place = {
     imgPath: string | null;
     modified: string | null;
 };
+
+export type RateType = {
+    rateType: string;
+    rateTitle: string;
+    rateFieldName1: string;
+    rateFieldName2: string;
+    rateFieldName3: string;
+    rateFieldValue1: string;
+    rateFieldValue2: string;
+    rateFieldValue3: string;
+};
+
+export type Rate = {
+    id: number | null;
+    username: string;
+    title: string;
+    description: string | null;
+    modified: string | null;
+    rateType: string;
+
+    // roll
+    rollRcRate: number | null;
+    rollRate: number | null;
+    rollExpo: number | null;
+    rollAcroPlus: number | null;
+    rollCurve: number | null;
+    rollCenterSens: number | null;
+    rollMaxRate: number | null;
+
+    // pitch
+    pitchRcRate: number | null;
+    pitchRate: number | null;
+    pitchExpo: number | null;
+    pitchAcroPlus: number | null;
+    pitchCurve: number | null;
+    pitchCenterSens: number | null;
+    pitchMaxRate: number | null;
+
+    // yaw
+    yawRcRate: number | null;
+    yawRate: number | null;
+    yawExpo: number | null;
+    yawAcroPlus: number | null;
+    yawCurve: number | null;
+    yawCenterSens: number | null;
+    yawMaxRate: number | null;
+};

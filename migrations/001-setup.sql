@@ -53,6 +53,51 @@ CREATE TABLE PLACES (
     modified TEXT
 );
 
+CREATE TABLE RATETYPES (
+    rateType TEXT PRIMARY KEY,
+    rateTitle TEXT,
+    rateFieldName1 TEXT,
+    rateFieldName2 TEXT,
+    rateFieldName3 TEXT,
+    rateFieldValue1 TEXT,
+    rateFieldValue2 TEXT,
+    rateFieldValue3 TEXT
+);
+
+CREATE TABLE RATES (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    username TEXT REFERENCES USERS,
+    title TEXT,
+    description TEXT NULL,
+    rateType TEXT REFERENCES RATETYPES,
+
+    rollRcRate REAL NULL,
+    rollRate REAL NULL,
+    rollExpo REAL NULL,
+    rollAcroPlus REAL NULL,
+    rollCurve REAL NULL,
+    rollCenterSens REAL NULL,
+    rollMaxRate REAL NULL,
+
+    pitchRcRate REAL NULL,
+    pitchRate REAL NULL,
+    pitchExpo REAL NULL,
+    pitchAcroPlus REAL NULL,
+    pitchCurve REAL NULL,
+    pitchCenterSens REAL NULL,
+    pitchMaxRate REAL NULL,
+
+    yawRcRate REAL NULL,
+    yawRate REAL NULL,
+    yawExpo REAL NULL,
+    yawAcroPlus REAL NULL,
+    yawCurve REAL NULL,
+    yawCenterSens REAL NULL,
+    yawMaxRate REAL NULL,
+    
+    modified TEXT
+);
+
 INSERT INTO USERS (username, password) 
 VALUES ('Caesar', '$2b$10$JeynWsPj5cJMm49.SoVi4O1ifReIRPrUkrW20TFuqKwAKXSPAYNbG');
 
@@ -181,7 +226,7 @@ VALUES (
     'Wöllersdorf - Biotop',
     'Small biotope with an open field in Wöllersdorf.',
     'https://www.google.com/maps/place/Biotop/@47.8690291,16.1627163,905m/data=!3m1!1e3!4m5!3m4!1s0x476dc84420b3f2e7:0xc9031d1e2acacdae!8m2!3d47.8694726!4d16.1603921',
-    NULL,
+    '1653226553263_Woellersdorf_Biotop.png',
     '2022-05-12T10:00:00.307Z'
 ), (
     'Caesar',
@@ -206,8 +251,131 @@ VALUES (
     '2022-05-12T10:00:00.307Z'
 );
 
+INSERT INTO RATETYPES (
+    rateType, 
+    rateTitle,
+    rateFieldName1,
+    rateFieldName2,
+    rateFieldName3,
+    rateFieldValue1,
+    rateFieldValue2,
+    rateFieldValue3
+) 
+VALUES (
+    'BETAFLIGHT', 
+    'Betaflight', 
+    'RC Rate', 
+    'Rate',
+    'RC Expo',
+    'RcRate',
+    'Rate',
+    'Expo'
+),(
+    'RACEFLIGHT', 
+    'Raceflight',
+    'Rate',
+    'Acro+',
+    'Expo',
+    'Rate',
+    'AcroPlus',
+    'Expo'
+), (   
+    'KISS', 
+    'KISS',
+    'RC Rate',
+    'Rate',
+    'RC Curve',
+    'RcRate',
+    'Rate',
+    'Curve'
+), (
+    'ACTUAL', 
+    'Actual',
+    'Center Sensitivity',
+    'Max Rate',
+    'Expo',
+    'CenterSens',
+    'MaxRate',
+    'Expo'
+),(  
+    'QUICKRATES', 
+    'Quickrates',
+    'RC Rate',
+    'Max Rate',
+    'Expo',
+    'RcRate',
+    'MaxRate',
+    'Expo'
+);
+
+INSERT INTO RATES (
+    username,
+    title,
+    description,
+    rateType,
+
+    rollRcRate,
+    rollRate,
+    rollExpo,
+    rollAcroPlus,
+    rollCurve,
+    rollCenterSens,
+    rollMaxRate,
+
+    pitchRcRate,
+    pitchRate,
+    pitchExpo,
+    pitchAcroPlus,
+    pitchCurve,
+    pitchCenterSens,
+    pitchMaxRate,
+
+    yawRcRate,
+    yawRate,
+    yawExpo,
+    yawAcroPlus,
+    yawCurve,
+    yawCenterSens,
+    yawMaxRate,
+
+    modified
+) VALUES (
+    'Caesar',
+    '5" freestyle',
+    'My default fast rates for freestyle on 5inch.',
+    'BETAFLIGHT',
+
+    2.00,
+    0.64,
+    0.25,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+
+    2.00,
+    0.64,
+    0.25,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+
+    1.68,
+    0.64,
+    0.25,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+
+    '2022-05-12T10:00:00.307Z'
+);
+
 -- Down
 DROP TABLE USERS;
 DROP TABLE BUILDS;
 DROP TABLE BATTERIES;
 DROP TABLE PLACES;
+DROP TABLE RATETYPES;
+DROP TABLE RATES;

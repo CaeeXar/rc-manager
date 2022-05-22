@@ -8,6 +8,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     if (req.method === 'POST') {
         let place: Place = await getUserPlaceById(username, id);
         if (!!place) return res.status(200).json({ ...place });
-        else return res.status(400).json({ message: 'No place found' });
+        else
+            return res
+                .status(400)
+                .json({ message: 'No place found with given id.' });
     }
 }

@@ -8,6 +8,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     if (req.method === 'POST') {
         let build: Build = await getUserBuildById(username, id);
         if (!!build) return res.status(200).json({ ...build });
-        else return res.status(400).json({ message: 'No builds found' });
+        else
+            return res
+                .status(400)
+                .json({ message: 'No build found with given id.' });
     }
 }

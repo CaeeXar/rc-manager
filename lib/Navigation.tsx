@@ -28,6 +28,12 @@ export default function Navigation() {
                                 <span>(🏠)</span> - Home
                             </NavDropdown.Item>
 
+                            <NavDropdown.Divider />
+
+                            <NavDropdown.Item href="/batteries">
+                                <span>(🔋)</span> - Review your LiPo-batteries
+                            </NavDropdown.Item>
+
                             <NavDropdown.Item href="/builds">
                                 <span>(🛠️)</span> - Manage your own builds
                             </NavDropdown.Item>
@@ -36,17 +42,15 @@ export default function Navigation() {
                                 <span>(🗺️)</span> - Look up your places
                             </NavDropdown.Item>
 
-                            <NavDropdown.Item href="/batteries">
-                                <span>(🔋)</span> - Review your LiPo-batteries
+                            <NavDropdown.Item href="/rates">
+                                <span>(📊)</span> - Administer your rates
                             </NavDropdown.Item>
-
-                            {/* <NavDropdown.Divider /> */}
                         </NavDropdown>
 
                         {/* <Nav.Link href="#link">Link</Nav.Link> */}
                     </Nav>
 
-                    <Form className="d-flex">
+                    <Form className="d-flex log-in-out">
                         {!authenticated && (
                             <Button onClick={() => signIn()}>Login</Button>
                         )}

@@ -73,3 +73,9 @@
 .dropdown-item:hover {
     color: #00adb5;
 }
+
+@media (max-width: 991px) {
+    .log-in-out {
+        margin-top: 25px;
+    }
+}

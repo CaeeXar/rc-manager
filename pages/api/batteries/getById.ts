@@ -8,6 +8,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     if (req.method === 'POST') {
         let battery: Battery = await getUserBatteryById(username, id);
         if (!!battery) return res.status(200).json({ ...battery });
-        else return res.status(400).json({ message: 'No battery found' });
+        else
+            return res
+                .status(400)
+                .json({ message: 'No battery found with given id.' });
     }
 }
