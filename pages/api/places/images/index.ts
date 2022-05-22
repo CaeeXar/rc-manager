@@ -5,6 +5,7 @@ import fs from 'fs';
 export const config = {
     api: {
         bodyParser: false,
+        responseLimit: '8mb',
     },
 };
 

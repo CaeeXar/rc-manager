@@ -388,6 +388,181 @@ async function getUserRateById(username, id) {
     `);
 }
 
+async function removeUserRate(id) {
+    const db = await openDb();
+    return db.run(`
+        DELETE FROM RATES 
+        WHERE id = '${id}';
+    `);
+}
+
+async function addUserRate(rate) {
+    const db = await openDb();
+    const {
+        username,
+        title,
+        description,
+        rateType,
+        rollRcRate,
+        rollRate,
+        rollExpo,
+        rollAcroPlus,
+        rollCurve,
+        rollCenterSens,
+        rollMaxRate,
+        pitchRcRate,
+        pitchRate,
+        pitchExpo,
+        pitchAcroPlus,
+        pitchCurve,
+        pitchCenterSens,
+        pitchMaxRate,
+        yawRcRate,
+        yawRate,
+        yawExpo,
+        yawAcroPlus,
+        yawCurve,
+        yawCenterSens,
+        yawMaxRate,
+        modified,
+    } = rate;
+
+    if (!username) return;
+
+    return db.run(`
+        INSERT INTO RATES (
+            username,
+            title,
+            description,
+            rateType,
+        
+            rollRcRate,
+            rollRate,
+            rollExpo,
+            rollAcroPlus,
+            rollCurve,
+            rollCenterSens,
+            rollMaxRate,
+        
+            pitchRcRate,
+            pitchRate,
+            pitchExpo,
+            pitchAcroPlus,
+            pitchCurve,
+            pitchCenterSens,
+            pitchMaxRate,
+        
+            yawRcRate,
+            yawRate,
+            yawExpo,
+            yawAcroPlus,
+            yawCurve,
+            yawCenterSens,
+            yawMaxRate,
+        
+            modified
+        ) VALUES (
+            '${username}',
+            '${title}',
+             ${!!description ? `'${description}'` : `NULL`},
+             '${rateType}',
+             
+             ${!!rollRcRate ? `${rollRcRate}` : `NULL`},
+             ${!!rollRate ? `${rollRate}` : `NULL`},
+             ${!!rollExpo ? `${rollExpo}` : `NULL`},
+             ${!!rollAcroPlus ? `${rollAcroPlus}` : `NULL`},
+             ${!!rollCurve ? `${rollCurve}` : `NULL`},
+             ${!!rollCenterSens ? `${rollCenterSens}` : `NULL`},
+             ${!!rollMaxRate ? `${rollMaxRate}` : `NULL`},
+             
+             ${!!pitchRcRate ? `${pitchRcRate}` : `NULL`},
+             ${!!pitchRate ? `${pitchRate}` : `NULL`},
+             ${!!pitchExpo ? `${pitchExpo}` : `NULL`},
+             ${!!pitchAcroPlus ? `${pitchAcroPlus}` : `NULL`},
+             ${!!pitchCurve ? `${pitchCurve}` : `NULL`},
+             ${!!pitchCenterSens ? `${pitchCenterSens}` : `NULL`},
+             ${!!pitchMaxRate ? `${pitchMaxRate}` : `NULL`},
+
+             ${!!yawRcRate ? `${yawRcRate}` : `NULL`},
+             ${!!yawRate ? `${yawRate}` : `NULL`},
+             ${!!yawExpo ? `${yawExpo}` : `NULL`},
+             ${!!yawAcroPlus ? `${yawAcroPlus}` : `NULL`},
+             ${!!yawCurve ? `${yawCurve}` : `NULL`},
+             ${!!yawCenterSens ? `${yawCenterSens}` : `NULL`},
+             ${!!yawMaxRate ? `${yawMaxRate}` : `NULL`},
+
+            '${modified}'
+        );
+    `);
+}
+
+async function updateUserRate(rate) {
+    const db = await openDb();
+    const {
+        id,
+        username,
+        title,
+        description,
+        rateType,
+        rollRcRate,
+        rollRate,
+        rollExpo,
+        rollAcroPlus,
+        rollCurve,
+        rollCenterSens,
+        rollMaxRate,
+        pitchRcRate,
+        pitchRate,
+        pitchExpo,
+        pitchAcroPlus,
+        pitchCurve,
+        pitchCenterSens,
+        pitchMaxRate,
+        yawRcRate,
+        yawRate,
+        yawExpo,
+        yawAcroPlus,
+        yawCurve,
+        yawCenterSens,
+        yawMaxRate,
+        modified,
+    } = rate;
+
+    if (!username) return;
+
+    return db.run(`
+        UPDATE RATES 
+        SET title = '${title}',
+            description = ${!!description ? `'${description}'` : `NULL`},
+            rateType = '${rateType}',
+
+            rollRcRate = ${!!rollRcRate ? `${rollRcRate}` : `NULL`},
+            rollRate = ${!!rollRate ? `${rollRate}` : `NULL`},
+            rollExpo = ${!!rollExpo ? `${rollExpo}` : `NULL`},
+            rollAcroPlus = ${!!rollAcroPlus ? `${rollAcroPlus}` : `NULL`},
+            rollCurve = ${!!rollCurve ? `${rollCurve}` : `NULL`},
+            rollCenterSens = ${!!rollCenterSens ? `${rollCenterSens}` : `NULL`},
+            rollMaxRate = ${!!rollMaxRate ? `${rollMaxRate}` : `NULL`},
+            pitchRcRate = ${!!pitchRcRate ? `${pitchRcRate}` : `NULL`},
+            pitchRate = ${!!pitchRate ? `${pitchRate}` : `NULL`},
+            pitchExpo = ${!!pitchExpo ? `${pitchExpo}` : `NULL`},
+            pitchAcroPlus = ${!!pitchAcroPlus ? `${pitchAcroPlus}` : `NULL`},
+            pitchCurve = ${!!pitchCurve ? `${pitchCurve}` : `NULL`},
+            pitchCenterSens = ${!!pitchCenterSens ? `${pitchCenterSens}` : `NULL`},
+            pitchMaxRate = ${!!pitchMaxRate ? `${pitchMaxRate}` : `NULL`},
+            yawRcRate = ${!!yawRcRate ? `${yawRcRate}` : `NULL`},
+            yawRate = ${!!yawRate ? `${yawRate}` : `NULL`},
+            yawExpo = ${!!yawExpo ? `${yawExpo}` : `NULL`},
+            yawAcroPlus = ${!!yawAcroPlus ? `${yawAcroPlus}` : `NULL`},
+            yawCurve = ${!!yawCurve ? `${yawCurve}` : `NULL`},
+            yawCenterSens = ${!!yawCenterSens ? `${yawCenterSens}` : `NULL`},
+            yawMaxRate = ${!!yawMaxRate ? `${yawMaxRate}` : `NULL`},
+            modified = '${modified}'
+        WHERE LOWER(username) = LOWER('${username}')
+        AND id = ${id};
+    `);
+}
+
 const config = {
     openDb,
     migrate,
@@ -420,6 +595,9 @@ const config = {
     getRateTypes,
     getUserRates,
     getUserRateById,
+    addUserRate,
+    removeUserRate,
+    updateUserRate,
 };
 
 module.exports = config;

@@ -5,6 +5,7 @@ import mime from 'mime';
 export const config = {
     api: {
         bodyParser: false,
+        responseLimit: '8mb',
     },
 };
 

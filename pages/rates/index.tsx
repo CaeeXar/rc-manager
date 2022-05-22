@@ -17,15 +17,13 @@ import {
 } from 'react-bootstrap';
 import SimpleBar from 'simplebar-react';
 import { getSession } from 'next-auth/react';
-import { Rate, RateType } from '../../js/types';
+import { Rate } from '../../js/types';
 import { getDatetimeLocal, prepareTextSearch } from '../../js/util';
 import { useRouter } from 'next/router';
+import { RatePropsByType } from '../../js/const';
 var _ = require('lodash');
 
-const Rates: NextPage<{ rates: Rate[]; rateTypes: RateType[] }> = ({
-    rates,
-    rateTypes,
-}) => {
+const Rates: NextPage<{ rates: Rate[] }> = ({ rates }) => {
     const router = useRouter();
     const [show, setShow] = useState(false);
     const [selected, setSelected] = useState<Rate | null>(null);
@@ -74,12 +72,6 @@ const Rates: NextPage<{ rates: Rate[]; rateTypes: RateType[] }> = ({
 
     const onAddHandler = async () => {
         router.push({ pathname: `/rates/new`, query: {} });
-    };
-
-    const getColumnProp = (prop: keyof RateType) => {
-        if (!selected) return null;
-        let rt = rateTypes.find((rt) => rt.rateType === selected.rateType);
-        return rt?.[prop];
     };
 
     return (
@@ -141,8 +133,7 @@ const Rates: NextPage<{ rates: Rate[]; rateTypes: RateType[] }> = ({
                             <Row>
                                 <Col>
                                     <p>
-                                        Rate-Type is{' '}
-                                        <b>{getColumnProp('rateTitle')}.</b>
+                                        Rate-Type is <b>{selected.rateType}.</b>
                                     </p>
                                 </Col>
                             </Row>
@@ -152,16 +143,25 @@ const Rates: NextPage<{ rates: Rate[]; rateTypes: RateType[] }> = ({
                                     <tr>
                                         <th />
 
-                                        <th className="number">
-                                            {getColumnProp('rateFieldName1')}
+                                        <th>
+                                            {
+                                                RatePropsByType[selected.rateType]
+                                                    .colName1
+                                            }
                                         </th>
 
-                                        <th className="number">
-                                            {getColumnProp('rateFieldName2')}
+                                        <th>
+                                            {
+                                                RatePropsByType[selected.rateType]
+                                                    .colName2
+                                            }
                                         </th>
 
-                                        <th className="number">
-                                            {getColumnProp('rateFieldName3')}
+                                        <th>
+                                            {
+                                                RatePropsByType[selected.rateType]
+                                                    .colName3
+                                            }
                                         </th>
                                     </tr>
                                 </thead>
@@ -172,38 +172,18 @@ const Rates: NextPage<{ rates: Rate[]; rateTypes: RateType[] }> = ({
                                             <b>ROLL</b>
                                         </td>
 
-                                        <td className="number">
-                                            {parseFloat(
-                                                (selected[
-                                                    ('roll' +
-                                                        getColumnProp(
-                                                            'rateFieldValue1'
-                                                        )) as keyof Rate
-                                                ] || '0') as string
-                                            ).toFixed(2)}
-                                        </td>
-
-                                        <td className="number">
-                                            {parseFloat(
-                                                (selected[
-                                                    ('roll' +
-                                                        getColumnProp(
-                                                            'rateFieldValue2'
-                                                        )) as keyof Rate
-                                                ] || '0') as string
-                                            ).toFixed(2)}
-                                        </td>
-
-                                        <td className="number">
-                                            {parseFloat(
-                                                (selected[
-                                                    ('roll' +
-                                                        getColumnProp(
-                                                            'rateFieldValue3'
-                                                        )) as keyof Rate
-                                                ] || '0') as string
-                                            ).toFixed(2)}
-                                        </td>
+                                        {(
+                                            RatePropsByType[selected.rateType]
+                                                .roll as Array<keyof Rate>
+                                        ).map((prop: keyof Rate) => {
+                                            return (
+                                                <td key={prop}>
+                                                    {parseFloat(
+                                                        '' + selected[prop]
+                                                    ).toFixed(2)}
+                                                </td>
+                                            );
+                                        })}
                                     </tr>
 
                                     <tr>
@@ -211,38 +191,18 @@ const Rates: NextPage<{ rates: Rate[]; rateTypes: RateType[] }> = ({
                                             <b>PITCH</b>
                                         </td>
 
-                                        <td className="number">
-                                            {parseFloat(
-                                                (selected[
-                                                    ('pitch' +
-                                                        getColumnProp(
-                                                            'rateFieldValue1'
-                                                        )) as keyof Rate
-                                                ] || '0') as string
-                                            ).toFixed(2)}
-                                        </td>
-
-                                        <td className="number">
-                                            {parseFloat(
-                                                (selected[
-                                                    ('pitch' +
-                                                        getColumnProp(
-                                                            'rateFieldValue2'
-                                                        )) as keyof Rate
-                                                ] || '0') as string
-                                            ).toFixed(2)}
-                                        </td>
-
-                                        <td className="number">
-                                            {parseFloat(
-                                                (selected[
-                                                    ('pitch' +
-                                                        getColumnProp(
-                                                            'rateFieldValue3'
-                                                        )) as keyof Rate
-                                                ] || '0') as string
-                                            ).toFixed(2)}
-                                        </td>
+                                        {(
+                                            RatePropsByType[selected.rateType]
+                                                .pitch as Array<keyof Rate>
+                                        ).map((prop: keyof Rate) => {
+                                            return (
+                                                <td key={prop}>
+                                                    {parseFloat(
+                                                        '' + selected[prop]
+                                                    ).toFixed(2)}
+                                                </td>
+                                            );
+                                        })}
                                     </tr>
 
                                     <tr>
@@ -250,38 +210,18 @@ const Rates: NextPage<{ rates: Rate[]; rateTypes: RateType[] }> = ({
                                             <b>YAW</b>
                                         </td>
 
-                                        <td className="number">
-                                            {parseFloat(
-                                                (selected[
-                                                    ('yaw' +
-                                                        getColumnProp(
-                                                            'rateFieldValue1'
-                                                        )) as keyof Rate
-                                                ] || '0') as string
-                                            ).toFixed(2)}
-                                        </td>
-
-                                        <td className="number">
-                                            {parseFloat(
-                                                (selected[
-                                                    ('yaw' +
-                                                        getColumnProp(
-                                                            'rateFieldValue2'
-                                                        )) as keyof Rate
-                                                ] || '0') as string
-                                            ).toFixed(2)}
-                                        </td>
-
-                                        <td className="number">
-                                            {parseFloat(
-                                                (selected[
-                                                    ('yaw' +
-                                                        getColumnProp(
-                                                            'rateFieldValue3'
-                                                        )) as keyof Rate
-                                                ] || '0') as string
-                                            ).toFixed(2)}
-                                        </td>
+                                        {(
+                                            RatePropsByType[selected.rateType]
+                                                .yaw as Array<keyof Rate>
+                                        ).map((prop: keyof Rate) => {
+                                            return (
+                                                <td key={prop}>
+                                                    {parseFloat(
+                                                        '' + selected[prop]
+                                                    ).toFixed(2)}
+                                                </td>
+                                            );
+                                        })}
                                     </tr>
                                 </tbody>
                             </Table>
@@ -330,23 +270,17 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     if (!session) return { props: {} };
     const username = session.user?.name;
 
-    const res1 = await fetch(process.env.NEXTAUTH_URL + '/api/rates/getTypes', {
-        method: 'GET',
-    });
-    const res2 = await fetch(process.env.NEXTAUTH_URL + '/api/rates/get', {
+    const res = await fetch(process.env.NEXTAUTH_URL + '/api/rates/get', {
         method: 'POST',
         body: JSON.stringify({ username }),
     });
 
-    const typesData = await res1.json();
-    const ratesData = await res2.json();
-    const rateTypes: RateType[] = typesData.rateTypes;
-    const rates: Rate[] = ratesData.rates;
+    const data = await res.json();
+    const rates: Rate[] = data.rates;
 
     return {
         props: {
             rates: rates,
-            rateTypes: rateTypes,
         },
     };
 };

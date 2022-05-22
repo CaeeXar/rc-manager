@@ -64,16 +64,13 @@ export type Place = {
     modified: string | null;
 };
 
-export type RateType = {
-    rateType: string;
-    rateTitle: string;
-    rateFieldName1: string;
-    rateFieldName2: string;
-    rateFieldName3: string;
-    rateFieldValue1: string;
-    rateFieldValue2: string;
-    rateFieldValue3: string;
-};
+export enum RateType {
+    'BETAFLIGHT' = 'BETAFLIGHT',
+    'RACEFLIGHT' = 'RACEFLIGHT',
+    'KISS' = 'KISS',
+    'QUICKRATES' = 'QUICKRATES',
+    'ACTUAL' = 'ACTUAL',
+}
 
 export type Rate = {
     id: number | null;
@@ -81,7 +78,7 @@ export type Rate = {
     title: string;
     description: string | null;
     modified: string | null;
-    rateType: string;
+    rateType: RateType;
 
     // roll
     rollRcRate: number | null;
