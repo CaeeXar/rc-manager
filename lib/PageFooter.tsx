@@ -82,7 +82,7 @@ export default function PageFooter() {
 
                             <li>
                                 <NavLink
-                                    href="http://192.168.178.33:3000/"
+                                    href="https://project-dashboard-samuelerd.pitunnel.com/"
                                     target="_blank"
                                 >
                                     <span className="icon-spacer">
