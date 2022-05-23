@@ -72,7 +72,8 @@ export enum RateType {
     'ACTUAL' = 'ACTUAL',
 }
 
-export type Rate = {
+// baserate
+export type BaseRate = {
     id: number | null;
     username: string;
     title: string;
@@ -81,29 +82,105 @@ export type Rate = {
     rateType: RateType;
 
     // roll
-    rollRcRate: number | null;
-    rollRate: number | null;
-    rollExpo: number | null;
-    rollAcroPlus: number | null;
-    rollCurve: number | null;
-    rollCenterSens: number | null;
-    rollMaxRate: number | null;
+    rollRcRate?: number;
+    rollRate?: number;
+    rollExpo?: number;
+    rollAcroPlus?: number;
+    rollCurve?: number;
+    rollCenterSens?: number;
+    rollMaxRate?: number;
 
     // pitch
-    pitchRcRate: number | null;
-    pitchRate: number | null;
-    pitchExpo: number | null;
-    pitchAcroPlus: number | null;
-    pitchCurve: number | null;
-    pitchCenterSens: number | null;
-    pitchMaxRate: number | null;
+    pitchRcRate?: number;
+    pitchRate?: number;
+    pitchExpo?: number;
+    pitchAcroPlus?: number;
+    pitchCurve?: number;
+    pitchCenterSens?: number;
+    pitchMaxRate?: number;
 
     // yaw
-    yawRcRate: number | null;
-    yawRate: number | null;
-    yawExpo: number | null;
-    yawAcroPlus: number | null;
-    yawCurve: number | null;
-    yawCenterSens: number | null;
-    yawMaxRate: number | null;
+    yawRcRate?: number;
+    yawRate?: number;
+    yawExpo?: number;
+    yawAcroPlus?: number;
+    yawCurve?: number;
+    yawCenterSens?: number;
+    yawMaxRate?: number;
 };
+
+// specific rates
+export type RateBetaflight = {
+    rateType: RateType.BETAFLIGHT;
+    rollRcRate: number;
+    rollRate: number;
+    rollExpo: number;
+    pitchRcRate: number;
+    pitchRate: number;
+    pitchExpo: number;
+    yawRcRate: number;
+    yawRate: number;
+    yawExpo: number;
+};
+export type RateKISS = {
+    rateType: RateType.KISS;
+    rollRcRate: number;
+    rollRate: number;
+    rollCurve: number;
+    pitchRcRate: number;
+    pitchRate: number;
+    pitchCurve: number;
+    yawRcRate: number;
+    yawRate: number;
+    yawCurve: number;
+};
+export type RateActual = {
+    rateType: RateType.ACTUAL;
+    rollCenterSens: number;
+    rollMaxRate: number;
+    rollExpo: number;
+    pitchCenterSens: number;
+    pitchMaxRate: number;
+    pitchExpo: number;
+    yawCenterSens: number;
+    yawMaxRate: number;
+    yawExpo: number;
+};
+export type RateRaceflight = {
+    rateType: RateType.RACEFLIGHT;
+    rollRate: number;
+    rollAcroPlus: number;
+    rollExpo: number;
+    pitchRate: number;
+    pitchAcroPlus: number;
+    pitchExpo: number;
+    yawRate: number;
+    yawAcroPlus: number;
+    yawExpo: number;
+};
+export type RateQickrates = {
+    rateType: RateType.QUICKRATES;
+    rollRcRate: number;
+    rollMaxRate: number;
+    rollExpo: number;
+    pitchRcRate: number;
+    pitchMaxRate: number;
+    pitchExpo: number;
+    yawRcRate: number;
+    yawMaxRate: number;
+    yawExpo: number;
+};
+
+// typed Rate where specified props cannot be null 🖕
+export type Rate = BaseRate &
+    (RateBetaflight | RateKISS | RateActual | RateQickrates | RateRaceflight);
+
+// keys of typed Rate-fields for const
+export type DynamicKeys = Exclude<
+    | keyof RateBetaflight
+    | keyof RateKISS
+    | keyof RateActual
+    | keyof RateQickrates
+    | keyof RateRaceflight,
+    'rateType'
+>;

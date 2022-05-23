@@ -133,7 +133,14 @@ const Rates: NextPage<{ rates: Rate[] }> = ({ rates }) => {
                             <Row>
                                 <Col>
                                     <p>
-                                        Rate-Type is <b>{selected.rateType}.</b>
+                                        Rate-Type is{' '}
+                                        <b>
+                                            {
+                                                RatePropsByType[selected.rateType]
+                                                    .title
+                                            }
+                                            .
+                                        </b>
                                     </p>
                                 </Col>
                             </Row>
@@ -172,18 +179,13 @@ const Rates: NextPage<{ rates: Rate[] }> = ({ rates }) => {
                                             <b>ROLL</b>
                                         </td>
 
-                                        {(
-                                            RatePropsByType[selected.rateType]
-                                                .roll as Array<keyof Rate>
-                                        ).map((prop: keyof Rate) => {
-                                            return (
+                                        {RatePropsByType[selected.rateType].roll.map(
+                                            (prop) => (
                                                 <td key={prop}>
-                                                    {parseFloat(
-                                                        '' + selected[prop]
-                                                    ).toFixed(2)}
+                                                    {selected[prop]!.toFixed(2)}
                                                 </td>
-                                            );
-                                        })}
+                                            )
+                                        )}
                                     </tr>
 
                                     <tr>
@@ -191,18 +193,13 @@ const Rates: NextPage<{ rates: Rate[] }> = ({ rates }) => {
                                             <b>PITCH</b>
                                         </td>
 
-                                        {(
-                                            RatePropsByType[selected.rateType]
-                                                .pitch as Array<keyof Rate>
-                                        ).map((prop: keyof Rate) => {
-                                            return (
-                                                <td key={prop}>
-                                                    {parseFloat(
-                                                        '' + selected[prop]
-                                                    ).toFixed(2)}
-                                                </td>
-                                            );
-                                        })}
+                                        {RatePropsByType[
+                                            selected.rateType
+                                        ].pitch.map((prop) => (
+                                            <td key={prop}>
+                                                {selected[prop]!.toFixed(2)}
+                                            </td>
+                                        ))}
                                     </tr>
 
                                     <tr>
@@ -210,18 +207,13 @@ const Rates: NextPage<{ rates: Rate[] }> = ({ rates }) => {
                                             <b>YAW</b>
                                         </td>
 
-                                        {(
-                                            RatePropsByType[selected.rateType]
-                                                .yaw as Array<keyof Rate>
-                                        ).map((prop: keyof Rate) => {
-                                            return (
+                                        {RatePropsByType[selected.rateType].yaw.map(
+                                            (prop) => (
                                                 <td key={prop}>
-                                                    {parseFloat(
-                                                        '' + selected[prop]
-                                                    ).toFixed(2)}
+                                                    {selected[prop]!.toFixed(2)}
                                                 </td>
-                                            );
-                                        })}
+                                            )
+                                        )}
                                     </tr>
                                 </tbody>
                             </Table>

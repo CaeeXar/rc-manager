@@ -26,52 +26,34 @@ const RateEdit: NextPage<{
     );
     const [showError, setShowError] = useState<boolean>(false);
 
-    const [rollValue1, setRollValue1] = useState<number>(
-        parseFloat(
-            rate[(RatePropsByType[rateType].roll as Array<keyof Rate>)[0]] as string
-        ) || 0
+    const [rollValue1, setRollValue1] = useState(
+        rate[RatePropsByType[rateType].roll[0]] || 0
     );
-    const [rollValue2, setRollValue2] = useState<number | null>(
-        parseFloat(
-            rate[(RatePropsByType[rateType].roll as Array<keyof Rate>)[1]] as string
-        ) || 0
+    const [rollValue2, setRollValue2] = useState(
+        rate[RatePropsByType[rateType].roll[1]] || 0
     );
-    const [rollValue3, setRollValue3] = useState<number | null>(
-        parseFloat(
-            rate[(RatePropsByType[rateType].roll as Array<keyof Rate>)[2]] as string
-        ) || 0
+    const [rollValue3, setRollValue3] = useState(
+        rate[RatePropsByType[rateType].roll[2]] || 0
     );
 
-    const [pitchValue1, setPitchValue1] = useState<number | null>(
-        parseFloat(
-            rate[(RatePropsByType[rateType].pitch as Array<keyof Rate>)[0]] as string
-        ) || 0
+    const [pitchValue1, setPitchValue1] = useState(
+        rate[RatePropsByType[rateType].pitch[0]] || 0
     );
-    const [pitchValue2, setPitchValue2] = useState<number | null>(
-        parseFloat(
-            rate[(RatePropsByType[rateType].pitch as Array<keyof Rate>)[1]] as string
-        ) || 0
+    const [pitchValue2, setPitchValue2] = useState(
+        rate[RatePropsByType[rateType].pitch[1]] || 0
     );
-    const [pitchValue3, setPitchValue3] = useState<number | null>(
-        parseFloat(
-            rate[(RatePropsByType[rateType].pitch as Array<keyof Rate>)[2]] as string
-        ) || 0
+    const [pitchValue3, setPitchValue3] = useState(
+        rate[RatePropsByType[rateType].pitch[2]] || 0
     );
 
-    const [yawValue1, setYawValue1] = useState<number | null>(
-        parseFloat(
-            rate[(RatePropsByType[rateType].yaw as Array<keyof Rate>)[0]] as string
-        ) || 0
+    const [yawValue1, setYawValue1] = useState(
+        rate[RatePropsByType[rateType].yaw[0]] || 0
     );
-    const [yawValue2, setYawValue2] = useState<number | null>(
-        parseFloat(
-            rate[(RatePropsByType[rateType].yaw as Array<keyof Rate>)[1]] as string
-        ) || 0
+    const [yawValue2, setYawValue2] = useState(
+        rate[RatePropsByType[rateType].yaw[1]] || 0
     );
-    const [yawValue3, setYawValue3] = useState<number | null>(
-        parseFloat(
-            rate[(RatePropsByType[rateType].yaw as Array<keyof Rate>)[2]] as string
-        ) || 0
+    const [yawValue3, setYawValue3] = useState(
+        rate[RatePropsByType[rateType].yaw[2]] || 0
     );
 
     const router = useRouter();
@@ -81,68 +63,23 @@ const RateEdit: NextPage<{
         event.stopPropagation();
 
         let modified = getDatetimeISO();
-        let rates: object = {};
-
-        Object.assign(rates, {
-            [(RatePropsByType[rateType].roll as Array<keyof Rate>)[0]]: rollValue1,
-        });
-        Object.assign(rates, {
-            [(RatePropsByType[rateType].roll as Array<keyof Rate>)[1]]: rollValue2,
-        });
-        Object.assign(rates, {
-            [(RatePropsByType[rateType].roll as Array<keyof Rate>)[2]]: rollValue3,
-        });
-
-        Object.assign(rates, {
-            [(RatePropsByType[rateType].pitch as Array<keyof Rate>)[0]]: pitchValue1,
-        });
-        Object.assign(rates, {
-            [(RatePropsByType[rateType].pitch as Array<keyof Rate>)[1]]: pitchValue2,
-        });
-        Object.assign(rates, {
-            [(RatePropsByType[rateType].pitch as Array<keyof Rate>)[2]]: pitchValue3,
-        });
-
-        Object.assign(rates, {
-            [(RatePropsByType[rateType].yaw as Array<keyof Rate>)[0]]: yawValue1,
-        });
-        Object.assign(rates, {
-            [(RatePropsByType[rateType].yaw as Array<keyof Rate>)[1]]: yawValue2,
-        });
-        Object.assign(rates, {
-            [(RatePropsByType[rateType].yaw as Array<keyof Rate>)[2]]: yawValue3,
-        });
-
-        let newRate: Rate = {
+        let newRate = {
             id: rate.id,
             username: rate.username,
             title,
             description,
             modified,
             rateType,
-            rollRcRate: null,
-            rollRate: null,
-            rollExpo: null,
-            rollAcroPlus: null,
-            rollCurve: null,
-            rollCenterSens: null,
-            rollMaxRate: null,
-            pitchRcRate: null,
-            pitchRate: null,
-            pitchExpo: null,
-            pitchAcroPlus: null,
-            pitchCurve: null,
-            pitchCenterSens: null,
-            pitchMaxRate: null,
-            yawRcRate: null,
-            yawRate: null,
-            yawExpo: null,
-            yawAcroPlus: null,
-            yawCurve: null,
-            yawCenterSens: null,
-            yawMaxRate: null,
-            ...rates,
-        };
+            [RatePropsByType[rateType].roll[0]]: rollValue1,
+            [RatePropsByType[rateType].roll[1]]: rollValue2,
+            [RatePropsByType[rateType].roll[2]]: rollValue3,
+            [RatePropsByType[rateType].pitch[0]]: pitchValue1,
+            [RatePropsByType[rateType].pitch[1]]: pitchValue2,
+            [RatePropsByType[rateType].pitch[2]]: pitchValue3,
+            [RatePropsByType[rateType].yaw[0]]: yawValue1,
+            [RatePropsByType[rateType].yaw[1]]: yawValue2,
+            [RatePropsByType[rateType].yaw[2]]: yawValue3,
+        } as Rate;
 
         let apiUrl = edit ? '/api/rates/update' : '/api/rates/add';
         const res = await fetch(apiUrl, {
@@ -256,7 +193,7 @@ const RateEdit: NextPage<{
                             required
                         >
                             <option value={''} disabled hidden>
-                                Choose battery-type
+                                Choose rate-type
                             </option>
                             {Object.values(RateType).map((value) => {
                                 return (
@@ -290,9 +227,10 @@ const RateEdit: NextPage<{
 
                             <td>
                                 <Form.Control
+                                    step={0.01}
                                     type="number"
                                     required
-                                    value={rollValue1 || 0}
+                                    value={rollValue1}
                                     onChange={(e) =>
                                         setRollValue1(parseFloat(e.target.value))
                                     }
@@ -301,9 +239,10 @@ const RateEdit: NextPage<{
 
                             <td>
                                 <Form.Control
+                                    step={0.01}
                                     type="number"
                                     required
-                                    value={rollValue2 || 0}
+                                    value={rollValue2}
                                     onChange={(e) =>
                                         setRollValue2(parseFloat(e.target.value))
                                     }
@@ -312,9 +251,10 @@ const RateEdit: NextPage<{
 
                             <td>
                                 <Form.Control
+                                    step={0.01}
                                     type="number"
                                     required
-                                    value={rollValue3 || 0}
+                                    value={rollValue3}
                                     onChange={(e) =>
                                         setRollValue3(parseFloat(e.target.value))
                                     }
@@ -329,9 +269,10 @@ const RateEdit: NextPage<{
 
                             <td>
                                 <Form.Control
+                                    step={0.01}
                                     type="number"
                                     required
-                                    value={pitchValue1 || 0}
+                                    value={pitchValue1}
                                     onChange={(e) =>
                                         setPitchValue1(parseFloat(e.target.value))
                                     }
@@ -340,9 +281,10 @@ const RateEdit: NextPage<{
 
                             <td>
                                 <Form.Control
+                                    step={0.01}
                                     type="number"
                                     required
-                                    value={pitchValue2 || 0}
+                                    value={pitchValue2}
                                     onChange={(e) =>
                                         setPitchValue2(parseFloat(e.target.value))
                                     }
@@ -351,9 +293,10 @@ const RateEdit: NextPage<{
 
                             <td>
                                 <Form.Control
+                                    step={0.01}
                                     type="number"
                                     required
-                                    value={pitchValue3 || 0}
+                                    value={pitchValue3}
                                     onChange={(e) =>
                                         setPitchValue3(parseFloat(e.target.value))
                                     }
@@ -368,9 +311,10 @@ const RateEdit: NextPage<{
 
                             <td>
                                 <Form.Control
+                                    step={0.01}
                                     type="number"
                                     required
-                                    value={yawValue1 || 0}
+                                    value={yawValue1}
                                     onChange={(e) =>
                                         setYawValue1(parseFloat(e.target.value))
                                     }
@@ -379,9 +323,10 @@ const RateEdit: NextPage<{
 
                             <td>
                                 <Form.Control
+                                    step={0.01}
                                     type="number"
                                     required
-                                    value={yawValue2 || 0}
+                                    value={yawValue2}
                                     onChange={(e) =>
                                         setYawValue2(parseFloat(e.target.value))
                                     }
@@ -390,9 +335,10 @@ const RateEdit: NextPage<{
 
                             <td>
                                 <Form.Control
+                                    step={0.01}
                                     type="number"
                                     required
-                                    value={yawValue3 || 0}
+                                    value={yawValue3}
                                     onChange={(e) =>
                                         setYawValue3(parseFloat(e.target.value))
                                     }

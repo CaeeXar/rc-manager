@@ -1,10 +1,12 @@
-import { Rate, RateType } from './types';
+import { DynamicKeys, Rate, RateType } from './types';
 
 export const RestrictedPages: string[] = ['/batteries', '/builds', '/places'];
 
-export const RatePropsByType: {
-    [key in RateType]: { [key: string]: Array<keyof Rate> | string };
-} = {
+export const RatePropsByType: Record<
+    RateType,
+    Record<'roll' | 'pitch' | 'yaw', Array<DynamicKeys>> &
+        Record<'colName1' | 'colName2' | 'colName3' | 'title', string>
+> = {
     [RateType.ACTUAL]: {
         roll: ['rollCenterSens', 'rollMaxRate', 'rollExpo'],
         pitch: ['pitchCenterSens', 'pitchMaxRate', 'pitchExpo'],
@@ -22,7 +24,7 @@ export const RatePropsByType: {
         colName1: 'RC Rate',
         colName2: 'Rate',
         colName3: 'RC Expo',
-        title: 'Betaflight',
+        title: 'Betaflight 4.3',
     },
 
     [RateType.KISS]: {
