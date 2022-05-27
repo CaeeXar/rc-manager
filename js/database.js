@@ -3,9 +3,9 @@ const sqlite = require('sqlite');
 
 async function openDb() {
     return sqlite.open({
-        // filename: process.env.DB_PATH,
+        filename: process.env.DB_PATH,
         // filename: "/home/remote/production/rc-manager.db",
-        filename: 'D:\\sqlite\\DB\\rc-manager.db',
+        // filename: 'D:\\sqlite\\DB\\rc-manager.db',
         driver: sqlite3.Database,
     });
 }
