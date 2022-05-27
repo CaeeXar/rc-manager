@@ -88,7 +88,8 @@ CREATE TABLE IF NOT EXISTS RATES (
 );
 
 INSERT INTO USERS (username, password) 
-VALUES ('Caesar', '$2b$10$JeynWsPj5cJMm49.SoVi4O1ifReIRPrUkrW20TFuqKwAKXSPAYNbG');
+VALUES ('Caesar', '$2b$10$JeynWsPj5cJMm49.SoVi4O1ifReIRPrUkrW20TFuqKwAKXSPAYNbG'),
+       ('Johnny', '$2a$10$0Ip30OoJhFY2fqCN4zq8S.YGULYQpxI4ik4zJBm8JpH5TurRTg90m');
 
 INSERT INTO BUILDS (
     username,
