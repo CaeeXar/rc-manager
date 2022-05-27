@@ -17,6 +17,11 @@
     text-align: center;
 }
 
+.footer .footer-app-info {
+    /* display: flex;
+    justify-content: space-around; */
+}
+
 @media (max-width: 992px) {
     .footer .footer-logo {
         max-width: 50%;

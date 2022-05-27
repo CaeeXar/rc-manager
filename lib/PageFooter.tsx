@@ -116,9 +116,15 @@ export default function PageFooter() {
                     </Col>
                 </Row>
 
-                <p className="footer-copyright mt-3">
-                    ©2022 - All rights reserved by <b>Caesar</b>
-                </p>
+                <Row className="footer-app-info mt-3 mb-3">
+                    <Col xs={12} sm={7} md={6}>
+                        ©2022 - All rights reserved by <b>Caesar</b>
+                    </Col>
+
+                    <Col xs={12} sm={5} md={6}>
+                        Version: <b>v{process.env.NEXT_PUBLIC_APP_VERSION}</b>
+                    </Col>
+                </Row>
             </Container>
         </footer>
     );

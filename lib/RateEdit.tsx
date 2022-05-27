@@ -14,6 +14,7 @@ import { useRouter } from 'next/router';
 import { Rate, RateType } from '../js/types';
 import { getDatetimeISO, getDatetimeLocal } from '../js/util';
 import { RatePropsByType } from '../js/const';
+import NumberFormat, { NumberFormatValues, SourceInfo } from 'react-number-format';
 
 const RateEdit: NextPage<{
     rate: Rate;
@@ -226,38 +227,41 @@ const RateEdit: NextPage<{
                             </td>
 
                             <td>
-                                <Form.Control
-                                    step={0.01}
-                                    type="number"
-                                    required
+                                <NumberFormat
+                                    customInput={Form.Control}
+                                    decimalScale={2}
+                                    fixedDecimalScale
+                                    decimalSeparator=","
                                     value={rollValue1}
-                                    onChange={(e) =>
-                                        setRollValue1(parseFloat(e.target.value))
-                                    }
+                                    onValueChange={(values: NumberFormatValues) => {
+                                        setRollValue1(values.floatValue || 0.0);
+                                    }}
                                 />
                             </td>
 
                             <td>
-                                <Form.Control
-                                    step={0.01}
-                                    type="number"
-                                    required
+                                <NumberFormat
+                                    customInput={Form.Control}
+                                    decimalScale={2}
+                                    fixedDecimalScale
+                                    decimalSeparator=","
                                     value={rollValue2}
-                                    onChange={(e) =>
-                                        setRollValue2(parseFloat(e.target.value))
-                                    }
+                                    onValueChange={(values: NumberFormatValues) => {
+                                        setRollValue2(values.floatValue || 0.0);
+                                    }}
                                 />
                             </td>
 
                             <td>
-                                <Form.Control
-                                    step={0.01}
-                                    type="number"
-                                    required
+                                <NumberFormat
+                                    customInput={Form.Control}
+                                    decimalScale={2}
+                                    fixedDecimalScale
+                                    decimalSeparator=","
                                     value={rollValue3}
-                                    onChange={(e) =>
-                                        setRollValue3(parseFloat(e.target.value))
-                                    }
+                                    onValueChange={(values: NumberFormatValues) => {
+                                        setRollValue3(values.floatValue || 0.0);
+                                    }}
                                 />
                             </td>
                         </tr>
@@ -268,38 +272,41 @@ const RateEdit: NextPage<{
                             </td>
 
                             <td>
-                                <Form.Control
-                                    step={0.01}
-                                    type="number"
-                                    required
+                                <NumberFormat
+                                    customInput={Form.Control}
+                                    decimalScale={2}
+                                    fixedDecimalScale
+                                    decimalSeparator=","
                                     value={pitchValue1}
-                                    onChange={(e) =>
-                                        setPitchValue1(parseFloat(e.target.value))
-                                    }
+                                    onValueChange={(values: NumberFormatValues) => {
+                                        setPitchValue1(values.floatValue || 0.0);
+                                    }}
                                 />
                             </td>
 
                             <td>
-                                <Form.Control
-                                    step={0.01}
-                                    type="number"
-                                    required
+                                <NumberFormat
+                                    customInput={Form.Control}
+                                    decimalScale={2}
+                                    fixedDecimalScale
+                                    decimalSeparator=","
                                     value={pitchValue2}
-                                    onChange={(e) =>
-                                        setPitchValue2(parseFloat(e.target.value))
-                                    }
+                                    onValueChange={(values: NumberFormatValues) => {
+                                        setPitchValue2(values.floatValue || 0.0);
+                                    }}
                                 />
                             </td>
 
                             <td>
-                                <Form.Control
-                                    step={0.01}
-                                    type="number"
-                                    required
+                                <NumberFormat
+                                    customInput={Form.Control}
+                                    decimalScale={2}
+                                    fixedDecimalScale
+                                    decimalSeparator=","
                                     value={pitchValue3}
-                                    onChange={(e) =>
-                                        setPitchValue3(parseFloat(e.target.value))
-                                    }
+                                    onValueChange={(values: NumberFormatValues) => {
+                                        setPitchValue3(values.floatValue || 0.0);
+                                    }}
                                 />
                             </td>
                         </tr>
@@ -310,38 +317,41 @@ const RateEdit: NextPage<{
                             </td>
 
                             <td>
-                                <Form.Control
-                                    step={0.01}
-                                    type="number"
-                                    required
+                                <NumberFormat
+                                    customInput={Form.Control}
+                                    decimalScale={2}
+                                    fixedDecimalScale
+                                    decimalSeparator=","
                                     value={yawValue1}
-                                    onChange={(e) =>
-                                        setYawValue1(parseFloat(e.target.value))
-                                    }
+                                    onValueChange={(values: NumberFormatValues) => {
+                                        setYawValue1(values.floatValue || 0.0);
+                                    }}
                                 />
                             </td>
 
                             <td>
-                                <Form.Control
-                                    step={0.01}
-                                    type="number"
-                                    required
+                                <NumberFormat
+                                    customInput={Form.Control}
+                                    decimalScale={2}
+                                    fixedDecimalScale
+                                    decimalSeparator=","
                                     value={yawValue2}
-                                    onChange={(e) =>
-                                        setYawValue2(parseFloat(e.target.value))
-                                    }
+                                    onValueChange={(values: NumberFormatValues) => {
+                                        setYawValue2(values.floatValue || 0.0);
+                                    }}
                                 />
                             </td>
 
                             <td>
-                                <Form.Control
-                                    step={0.01}
-                                    type="number"
-                                    required
+                                <NumberFormat
+                                    customInput={Form.Control}
+                                    decimalScale={2}
+                                    fixedDecimalScale
+                                    decimalSeparator=","
                                     value={yawValue3}
-                                    onChange={(e) =>
-                                        setYawValue3(parseFloat(e.target.value))
-                                    }
+                                    onValueChange={(values: NumberFormatValues) => {
+                                        setYawValue3(values.floatValue || 0.0);
+                                    }}
                                 />
                             </td>
                         </tr>
