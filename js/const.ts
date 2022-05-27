@@ -1,6 +1,11 @@
 import { DynamicKeys, Rate, RateType } from './types';
 
-export const RestrictedPages: string[] = ['/batteries', '/builds', '/places'];
+export const RestrictedPages: string[] = [
+    '/batteries',
+    '/builds',
+    '/places',
+    '/rates',
+];
 
 export const RatePropsByType: Record<
     RateType,
