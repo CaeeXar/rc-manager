@@ -82,7 +82,7 @@ export default function PageFooter() {
 
                             <li>
                                 <NavLink
-                                    href="91.114.200.235:3000/"
+                                    href="http://91.114.200.235:3000/"
                                     target="_blank"
                                 >
                                     <span className="icon-spacer">
