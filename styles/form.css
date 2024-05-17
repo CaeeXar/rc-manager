@@ -1,10 +1,10 @@
 .form-control {
-    color: #393e46;
+  color: #393e46;
 }
 
 .form-control:focus {
-    box-shadow: 0 0 0 0.25rem #393e4680;
-    color: #393e46;
+  box-shadow: 0 0 0 0.25rem #393e4680;
+  color: #393e46;
 }
 
 .btn-primary,
@@ -14,9 +14,9 @@
 .btn-primary.active,
 .btn-primary:active,
 .show > .btn-primary.dropdown-toggle {
-    background-color: #00adb5;
-    border-color: #00adb5;
-    color: #eeeeee;
+  background-color: #00adb5;
+  border-color: #00adb5;
+  color: #eeeeee;
 }
 
 .btn-check:focus + .btn-primary,
@@ -26,10 +26,10 @@
 .btn-primary.active:focus,
 .btn-primary:active:focus,
 .show > .btn-primary.dropdown-toggle:focus {
-    background-color: #00adb5;
-    border-color: #00adb5;
-    box-shadow: 0 0 0 0.25rem #00adb580;
-    color: #eeeeee;
+  background-color: #00adb5;
+  border-color: #00adb5;
+  box-shadow: 0 0 0 0.25rem #00adb580;
+  color: #eeeeee;
 }
 
 .btn-secondary,
@@ -39,9 +39,9 @@
 .btn-secondary.active,
 .btn-secondary:active,
 .show > .btn-secondary.dropdown-toggle {
-    background-color: #393e46;
-    border-color: #393e46;
-    color: #eeeeee;
+  background-color: #393e46;
+  border-color: #393e46;
+  color: #eeeeee;
 }
 
 .btn-check:focus + .btn-secondary,
@@ -51,12 +51,12 @@
 .btn-secondary.active:focus,
 .btn-secondary:active:focus,
 .show > .btn-secondary.dropdown-toggle:focus {
-    background-color: #393e46;
-    border-color: #393e46;
-    box-shadow: 0 0 0 0.25rem #393e4680;
-    color: #eeeeee;
+  background-color: #393e46;
+  border-color: #393e46;
+  box-shadow: 0 0 0 0.25rem #393e4680;
+  color: #eeeeee;
 }
 
 .alert .btn-close:focus {
-    box-shadow: 0 0 0 0.25rem #393e4680;
+  box-shadow: 0 0 0 0.25rem #393e4680;
 }

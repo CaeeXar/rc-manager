@@ -1,8 +1,8 @@
 .battery tbody tr:hover {
-    cursor: pointer;
-    color: #00adb5;
+  cursor: pointer;
+  color: #00adb5;
 }
 
 .battery th:hover {
-    cursor: pointer;
+  cursor: pointer;
 }

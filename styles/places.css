@@ -1,27 +1,27 @@
 .places .hero-background {
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    border-radius: calc(0.3rem - 1px);
-    padding-bottom: 10px;
-    background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: calc(0.3rem - 1px);
+  padding-bottom: 10px;
+  background-size: 100% 100%;
 }
 
 .places .hero-text {
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    min-height: 350px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  min-height: 350px;
 }
 
 .places .hero-title {
-    color: #00adb5;
-    /* text-shadow: -1px 0 #eeeeee, 0 1px #eeeeee, 1px 0 #eeeeee, 0 -1px #eeeeee; */
-    padding: 10px 0px;
-    line-height: 1.5;
-    width: 100%;
-    float: left;
-    /* text-align: center; */
+  color: #00adb5;
+  /* text-shadow: -1px 0 #eeeeee, 0 1px #eeeeee, 1px 0 #eeeeee, 0 -1px #eeeeee; */
+  padding: 10px 0px;
+  line-height: 1.5;
+  width: 100%;
+  float: left;
+  /* text-align: center; */
 }

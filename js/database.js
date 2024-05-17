@@ -1,23 +1,23 @@
-const sqlite3 = require('sqlite3');
-const sqlite = require('sqlite');
+const sqlite3 = require("sqlite3");
+const sqlite = require("sqlite");
 
 async function openDb() {
-    return sqlite.open({
-        filename: process.env.DB_PATH,
-        // filename: "/home/remote/production/rc-manager.db",
-        // filename: 'D:\\sqlite\\DB\\rc-manager.db',
-        driver: sqlite3.Database,
-    });
+  return sqlite.open({
+    filename: process.env.DB_PATH,
+    // filename: "/home/remote/production/rc-manager.db",
+    // filename: 'D:\\sqlite\\DB\\rc-manager.db',
+    driver: sqlite3.Database,
+  });
 }
 
 async function migrate() {
-    const db = await openDb();
-    db.migrate({ force: 'last', migrationsPath: './migrations/' });
+  const db = await openDb();
+  db.migrate({ force: "last", migrationsPath: "./migrations/" });
 }
 
 async function getUserLogin(username) {
-    const db = await openDb();
-    return db.get(`
+  const db = await openDb();
+  return db.get(`
         SELECT *
         FROM USERS 
         WHERE LOWER(username) = LOWER('${username}');
@@ -25,8 +25,8 @@ async function getUserLogin(username) {
 }
 
 async function getUserBuilds(username) {
-    const db = await openDb();
-    return db.all(`
+  const db = await openDb();
+  return db.all(`
         SELECT *
         FROM BUILDS 
         WHERE LOWER(username) = LOWER('${username}');
@@ -34,8 +34,8 @@ async function getUserBuilds(username) {
 }
 
 async function getUserBuildById(username, id) {
-    const db = await openDb();
-    return db.get(`
+  const db = await openDb();
+  return db.get(`
         SELECT *
         FROM BUILDS 
         WHERE LOWER(username) = LOWER('${username}')
@@ -44,35 +44,35 @@ async function getUserBuildById(username, id) {
 }
 
 async function addUserBuild(build) {
-    const db = await openDb();
-    const {
-        username,
-        title,
-        description,
-        escName,
-        escLink,
-        fcName,
-        fcLink,
-        motorName,
-        motorLink,
-        frameName,
-        frameLink,
-        vtxName,
-        vtxLink,
-        antennaName,
-        antennaLink,
-        cameraName,
-        cameraLink,
-        receiverName,
-        receiverLink,
-        propellerName,
-        propellerLink,
-        modified,
-    } = build;
+  const db = await openDb();
+  const {
+    username,
+    title,
+    description,
+    escName,
+    escLink,
+    fcName,
+    fcLink,
+    motorName,
+    motorLink,
+    frameName,
+    frameLink,
+    vtxName,
+    vtxLink,
+    antennaName,
+    antennaLink,
+    cameraName,
+    cameraLink,
+    receiverName,
+    receiverLink,
+    propellerName,
+    propellerLink,
+    modified,
+  } = build;
 
-    if (!username) return;
+  if (!username) return;
 
-    return db.run(`
+  return db.run(`
         INSERT INTO BUILDS (
             username,
             title,
@@ -124,44 +124,44 @@ async function addUserBuild(build) {
 }
 
 async function removeUserBuild(id) {
-    const db = await openDb();
-    return db.run(`
+  const db = await openDb();
+  return db.run(`
         DELETE FROM BUILDS 
         WHERE id = '${id}';
     `);
 }
 
 async function updateUserBuild(build) {
-    const db = await openDb();
-    const {
-        id,
-        username,
-        title,
-        description,
-        escName,
-        escLink,
-        fcName,
-        fcLink,
-        motorName,
-        motorLink,
-        frameName,
-        frameLink,
-        vtxName,
-        vtxLink,
-        antennaName,
-        antennaLink,
-        cameraName,
-        cameraLink,
-        receiverName,
-        receiverLink,
-        propellerName,
-        propellerLink,
-        modified,
-    } = build;
+  const db = await openDb();
+  const {
+    id,
+    username,
+    title,
+    description,
+    escName,
+    escLink,
+    fcName,
+    fcLink,
+    motorName,
+    motorLink,
+    frameName,
+    frameLink,
+    vtxName,
+    vtxLink,
+    antennaName,
+    antennaLink,
+    cameraName,
+    cameraLink,
+    receiverName,
+    receiverLink,
+    propellerName,
+    propellerLink,
+    modified,
+  } = build;
 
-    if (!id || !username) return new sqlite.Statement();
+  if (!id || !username) return new sqlite.Statement();
 
-    return db.run(`
+  return db.run(`
         UPDATE BUILDS 
         SET title = '${title}',
             description = ${!!description ? `'${description}'` : `NULL`},
@@ -190,8 +190,8 @@ async function updateUserBuild(build) {
 }
 
 async function getUserBatteries(username) {
-    const db = await openDb();
-    return db.all(`
+  const db = await openDb();
+  return db.all(`
         SELECT *
         FROM BATTERIES 
         WHERE LOWER(username) = LOWER('${username}');
@@ -199,16 +199,16 @@ async function getUserBatteries(username) {
 }
 
 async function removeUserBattery(id) {
-    const db = await openDb();
-    return db.run(`
+  const db = await openDb();
+  return db.run(`
         DELETE FROM BATTERIES 
         WHERE id = '${id}';
     `);
 }
 
 async function getUserBatteryById(username, id) {
-    const db = await openDb();
-    return db.get(`
+  const db = await openDb();
+  return db.get(`
         SELECT *
         FROM BATTERIES 
         WHERE LOWER(username) = LOWER('${username}')
@@ -217,23 +217,23 @@ async function getUserBatteryById(username, id) {
 }
 
 async function updateUserBattery(battery) {
-    const db = await openDb();
-    const {
-        id,
-        username,
-        brand,
-        description,
-        capacity,
-        cells,
-        link,
-        batteryType,
-        created,
-        modified,
-    } = battery;
+  const db = await openDb();
+  const {
+    id,
+    username,
+    brand,
+    description,
+    capacity,
+    cells,
+    link,
+    batteryType,
+    created,
+    modified,
+  } = battery;
 
-    if (!id || !username) return new sqlite.Statement();
+  if (!id || !username) return new sqlite.Statement();
 
-    return db.run(`
+  return db.run(`
         UPDATE BATTERIES 
         SET brand = '${brand}',
             description = ${!!description ? `'${description}'` : `NULL`},
@@ -249,22 +249,22 @@ async function updateUserBattery(battery) {
 }
 
 async function addUserBattery(battery) {
-    const db = await openDb();
-    const {
-        username,
-        brand,
-        description,
-        capacity,
-        cells,
-        link,
-        batteryType,
-        created,
-        modified,
-    } = battery;
+  const db = await openDb();
+  const {
+    username,
+    brand,
+    description,
+    capacity,
+    cells,
+    link,
+    batteryType,
+    created,
+    modified,
+  } = battery;
 
-    if (!username) return;
+  if (!username) return;
 
-    return db.run(`
+  return db.run(`
         INSERT INTO BATTERIES (
             username,
             brand,
@@ -290,8 +290,8 @@ async function addUserBattery(battery) {
 }
 
 async function getUserPlaces(username) {
-    const db = await openDb();
-    return db.all(`
+  const db = await openDb();
+  return db.all(`
         SELECT *
         FROM PLACES 
         WHERE LOWER(username) = LOWER('${username}');
@@ -299,8 +299,8 @@ async function getUserPlaces(username) {
 }
 
 async function getUserPlaceById(username, id) {
-    const db = await openDb();
-    return db.get(`
+  const db = await openDb();
+  return db.get(`
         SELECT *
         FROM PLACES 
         WHERE LOWER(username) = LOWER('${username}')
@@ -309,21 +309,28 @@ async function getUserPlaceById(username, id) {
 }
 
 async function removeUserPlace(id) {
-    const db = await openDb();
-    return db.run(`
+  const db = await openDb();
+  return db.run(`
         DELETE FROM PLACES 
         WHERE id = '${id}';
     `);
 }
 
 async function updateUserPlace(place) {
-    const db = await openDb();
-    const { id, username, title, description, googleMapsLink, imgPath, modified } =
-        place;
+  const db = await openDb();
+  const {
+    id,
+    username,
+    title,
+    description,
+    googleMapsLink,
+    imgPath,
+    modified,
+  } = place;
 
-    if (!username) return;
+  if (!username) return;
 
-    return db.run(`
+  return db.run(`
         UPDATE PLACES 
         SET title = '${title}',
             description = ${!!description ? `'${description}'` : `NULL`},
@@ -336,13 +343,13 @@ async function updateUserPlace(place) {
 }
 
 async function addUserPlace(place) {
-    const db = await openDb();
-    const { username, title, description, googleMapsLink, imgPath, modified } =
-        place;
+  const db = await openDb();
+  const { username, title, description, googleMapsLink, imgPath, modified } =
+    place;
 
-    if (!username) return;
+  if (!username) return;
 
-    return db.run(`
+  return db.run(`
         INSERT INTO PLACES (
             username,
             title,
@@ -362,16 +369,16 @@ async function addUserPlace(place) {
 }
 
 async function getRateTypes() {
-    const db = await openDb();
-    return db.all(`
+  const db = await openDb();
+  return db.all(`
         SELECT *
         FROM RATETYPES;
     `);
 }
 
 async function getUserRates(username) {
-    const db = await openDb();
-    return db.all(`
+  const db = await openDb();
+  return db.all(`
         SELECT *
         FROM RATES 
         WHERE LOWER(username) = LOWER('${username}');
@@ -379,8 +386,8 @@ async function getUserRates(username) {
 }
 
 async function getUserRateById(username, id) {
-    const db = await openDb();
-    return db.get(`
+  const db = await openDb();
+  return db.get(`
         SELECT *
         FROM RATES 
         WHERE LOWER(username) = LOWER('${username}')
@@ -389,47 +396,47 @@ async function getUserRateById(username, id) {
 }
 
 async function removeUserRate(id) {
-    const db = await openDb();
-    return db.run(`
+  const db = await openDb();
+  return db.run(`
         DELETE FROM RATES 
         WHERE id = '${id}';
     `);
 }
 
 async function addUserRate(rate) {
-    const db = await openDb();
-    const {
-        username,
-        title,
-        description,
-        rateType,
-        rollRcRate,
-        rollRate,
-        rollExpo,
-        rollAcroPlus,
-        rollCurve,
-        rollCenterSens,
-        rollMaxRate,
-        pitchRcRate,
-        pitchRate,
-        pitchExpo,
-        pitchAcroPlus,
-        pitchCurve,
-        pitchCenterSens,
-        pitchMaxRate,
-        yawRcRate,
-        yawRate,
-        yawExpo,
-        yawAcroPlus,
-        yawCurve,
-        yawCenterSens,
-        yawMaxRate,
-        modified,
-    } = rate;
+  const db = await openDb();
+  const {
+    username,
+    title,
+    description,
+    rateType,
+    rollRcRate,
+    rollRate,
+    rollExpo,
+    rollAcroPlus,
+    rollCurve,
+    rollCenterSens,
+    rollMaxRate,
+    pitchRcRate,
+    pitchRate,
+    pitchExpo,
+    pitchAcroPlus,
+    pitchCurve,
+    pitchCenterSens,
+    pitchMaxRate,
+    yawRcRate,
+    yawRate,
+    yawExpo,
+    yawAcroPlus,
+    yawCurve,
+    yawCenterSens,
+    yawMaxRate,
+    modified,
+  } = rate;
 
-    if (!username) return;
+  if (!username) return;
 
-    return db.run(`
+  return db.run(`
         INSERT INTO RATES (
             username,
             title,
@@ -497,40 +504,40 @@ async function addUserRate(rate) {
 }
 
 async function updateUserRate(rate) {
-    const db = await openDb();
-    const {
-        id,
-        username,
-        title,
-        description,
-        rateType,
-        rollRcRate,
-        rollRate,
-        rollExpo,
-        rollAcroPlus,
-        rollCurve,
-        rollCenterSens,
-        rollMaxRate,
-        pitchRcRate,
-        pitchRate,
-        pitchExpo,
-        pitchAcroPlus,
-        pitchCurve,
-        pitchCenterSens,
-        pitchMaxRate,
-        yawRcRate,
-        yawRate,
-        yawExpo,
-        yawAcroPlus,
-        yawCurve,
-        yawCenterSens,
-        yawMaxRate,
-        modified,
-    } = rate;
+  const db = await openDb();
+  const {
+    id,
+    username,
+    title,
+    description,
+    rateType,
+    rollRcRate,
+    rollRate,
+    rollExpo,
+    rollAcroPlus,
+    rollCurve,
+    rollCenterSens,
+    rollMaxRate,
+    pitchRcRate,
+    pitchRate,
+    pitchExpo,
+    pitchAcroPlus,
+    pitchCurve,
+    pitchCenterSens,
+    pitchMaxRate,
+    yawRcRate,
+    yawRate,
+    yawExpo,
+    yawAcroPlus,
+    yawCurve,
+    yawCenterSens,
+    yawMaxRate,
+    modified,
+  } = rate;
 
-    if (!username) return;
+  if (!username) return;
 
-    return db.run(`
+  return db.run(`
         UPDATE RATES 
         SET title = '${title}',
             description = ${!!description ? `'${description}'` : `NULL`},
@@ -548,7 +555,9 @@ async function updateUserRate(rate) {
             pitchExpo = ${!!pitchExpo ? `${pitchExpo}` : `NULL`},
             pitchAcroPlus = ${!!pitchAcroPlus ? `${pitchAcroPlus}` : `NULL`},
             pitchCurve = ${!!pitchCurve ? `${pitchCurve}` : `NULL`},
-            pitchCenterSens = ${!!pitchCenterSens ? `${pitchCenterSens}` : `NULL`},
+            pitchCenterSens = ${
+              !!pitchCenterSens ? `${pitchCenterSens}` : `NULL`
+            },
             pitchMaxRate = ${!!pitchMaxRate ? `${pitchMaxRate}` : `NULL`},
             yawRcRate = ${!!yawRcRate ? `${yawRcRate}` : `NULL`},
             yawRate = ${!!yawRate ? `${yawRate}` : `NULL`},
@@ -564,40 +573,40 @@ async function updateUserRate(rate) {
 }
 
 const config = {
-    openDb,
-    migrate,
+  openDb,
+  migrate,
 
-    // auth
-    getUserLogin,
+  // auth
+  getUserLogin,
 
-    // builds
-    getUserBuilds,
-    getUserBuildById,
-    addUserBuild,
-    removeUserBuild,
-    updateUserBuild,
+  // builds
+  getUserBuilds,
+  getUserBuildById,
+  addUserBuild,
+  removeUserBuild,
+  updateUserBuild,
 
-    // batteries
-    getUserBatteries,
-    getUserBatteryById,
-    addUserBattery,
-    removeUserBattery,
-    updateUserBattery,
+  // batteries
+  getUserBatteries,
+  getUserBatteryById,
+  addUserBattery,
+  removeUserBattery,
+  updateUserBattery,
 
-    // places
-    getUserPlaces,
-    getUserPlaceById,
-    addUserPlace,
-    removeUserPlace,
-    updateUserPlace,
+  // places
+  getUserPlaces,
+  getUserPlaceById,
+  addUserPlace,
+  removeUserPlace,
+  updateUserPlace,
 
-    //rates
-    getRateTypes,
-    getUserRates,
-    getUserRateById,
-    addUserRate,
-    removeUserRate,
-    updateUserRate,
+  //rates
+  getRateTypes,
+  getUserRates,
+  getUserRateById,
+  addUserRate,
+  removeUserRate,
+  updateUserRate,
 };
 
 module.exports = config;

@@ -1,58 +1,58 @@
 .simplebar-vertical {
-    right: -11px;
+  right: -11px;
 }
 
 [data-simplebar] {
-    max-height: calc(70vh - 30px);
+  max-height: calc(70vh - 30px);
 }
 
 .simplebar-horizontal {
-    visibility: hidden !important;
+  visibility: hidden !important;
 }
 
 .modal-content {
-    background-color: #393e46;
-    color: #eeeeee;
+  background-color: #393e46;
+  color: #eeeeee;
 }
 
 .modal-content a {
-    color: #eeeeee;
+  color: #eeeeee;
 }
 
 .modal-content a:hover {
-    color: #00adb5;
+  color: #00adb5;
 }
 
 .table {
-    color: #eeeeee;
+  color: #eeeeee;
 }
 
 .build-desc {
-    width: 100%;
-    float: left;
+  width: 100%;
+  float: left;
 }
 
 .build-title {
-    color: #00adb5;
+  color: #00adb5;
 }
 
 .modal-footer {
-    justify-content: space-between;
+  justify-content: space-between;
 }
 
 .toast-container {
-    z-index: 1056;
+  z-index: 1056;
 }
 
 td {
-    line-height: 38px;
+  line-height: 38px;
 }
 
 td a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 .required {
-    color: #dc3545;
-    font-weight: normal;
+  color: #dc3545;
+  font-weight: normal;
 }

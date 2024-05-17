@@ -1,278 +1,270 @@
-import { NextPage } from 'next';
+import { NextPage } from "next";
 import {
-    Button,
-    Col,
-    Container,
-    Form,
-    Row,
-    Table,
-    Toast,
-    ToastContainer,
-} from 'react-bootstrap';
-import { FormEvent, useState } from 'react';
-import { useRouter } from 'next/router';
-import { Battery, BatteryType } from '../js/types';
-import { getBatteryTypeText, getDatetimeISO, getDatetimeLocal } from '../js/util';
+  Button,
+  Col,
+  Container,
+  Form,
+  Row,
+  Table,
+  Toast,
+  ToastContainer,
+} from "react-bootstrap";
+import { FormEvent, useState } from "react";
+import { useRouter } from "next/router";
+import { Battery, BatteryType } from "../js/types";
+import {
+  getBatteryTypeText,
+  getDatetimeISO,
+  getDatetimeLocal,
+} from "../js/util";
 
 const BatteryEdit: NextPage<{
-    battery: Battery;
-    edit: boolean;
+  battery: Battery;
+  edit: boolean;
 }> = ({ battery, edit }) => {
-    const [brand, setBrand] = useState(battery.brand);
-    const [description, setDescription] = useState(battery.description);
-    const [capacity, setCapacity] = useState(battery.capacity);
-    const [cells, setCells] = useState(battery.cells);
-    const [created, setCreated] = useState(battery.created);
-    const [link, setLink] = useState(battery.link);
-    const [batteryType, setBatteryType] = useState(battery.batteryType);
-    const [showError, setShowError] = useState<boolean>(false);
+  const [brand, setBrand] = useState(battery.brand);
+  const [description, setDescription] = useState(battery.description);
+  const [capacity, setCapacity] = useState(battery.capacity);
+  const [cells, setCells] = useState(battery.cells);
+  const [created, setCreated] = useState(battery.created);
+  const [link, setLink] = useState(battery.link);
+  const [batteryType, setBatteryType] = useState(battery.batteryType);
+  const [showError, setShowError] = useState<boolean>(false);
 
-    const router = useRouter();
+  const router = useRouter();
 
-    const onSaveHandler = async (event: FormEvent) => {
-        event.preventDefault();
-        event.stopPropagation();
+  const onSaveHandler = async (event: FormEvent) => {
+    event.preventDefault();
+    event.stopPropagation();
 
-        let modified = getDatetimeISO();
-        let newBattery: Battery = {
-            id: battery.id,
-            username: battery.username,
-            brand,
-            description,
-            capacity,
-            cells,
-            link,
-            batteryType,
-            created: getDatetimeISO(created),
-            modified,
-        };
-
-        let apiUrl = edit ? '/api/batteries/update' : '/api/batteries/add';
-        const res = await fetch(apiUrl, {
-            method: 'POST',
-            body: JSON.stringify(newBattery),
-            headers: { 'Content-Type': 'application/json' },
-        });
-
-        if (res.ok) router.push({ pathname: `/batteries`, query: {} });
-        else setShowError(true);
+    let modified = getDatetimeISO();
+    let newBattery: Battery = {
+      id: battery.id,
+      username: battery.username,
+      brand,
+      description,
+      capacity,
+      cells,
+      link,
+      batteryType,
+      created: getDatetimeISO(created),
+      modified,
     };
 
-    const onCloseHandler = async () => {
-        router.push({ pathname: `/batteries`, query: {} });
-    };
+    let apiUrl = edit ? "/api/batteries/update" : "/api/batteries/add";
+    const res = await fetch(apiUrl, {
+      method: "POST",
+      body: JSON.stringify(newBattery),
+      headers: { "Content-Type": "application/json" },
+    });
 
-    const onDeleteHandler = async () => {
-        if (!battery || !battery.id) {
-            setShowError(true);
-            return;
-        }
+    if (res.ok) router.push({ pathname: `/batteries`, query: {} });
+    else setShowError(true);
+  };
 
-        const res = await fetch('/api/batteries/remove', {
-            method: 'POST',
-            body: JSON.stringify({ id: battery.id }),
-        });
-        if (res.ok) router.push({ pathname: `/batteries`, query: {} });
-        else setShowError(true);
-    };
+  const onCloseHandler = async () => {
+    router.push({ pathname: `/batteries`, query: {} });
+  };
 
-    const formatDatepicker = (dt: string | null) => {
-        let date = !!dt ? new Date(dt) : new Date(),
-            year = '' + date.getFullYear(),
-            month = '' + (date.getMonth() + 1),
-            day = '' + date.getDate();
+  const onDeleteHandler = async () => {
+    if (!battery || !battery.id) {
+      setShowError(true);
+      return;
+    }
 
-        if (parseInt(month) < 10) month = '0' + month;
-        if (parseInt(day) < 10) day = '0' + day;
+    const res = await fetch("/api/batteries/remove", {
+      method: "POST",
+      body: JSON.stringify({ id: battery.id }),
+    });
+    if (res.ok) router.push({ pathname: `/batteries`, query: {} });
+    else setShowError(true);
+  };
 
-        return year + '-' + month + '-' + day;
-    };
+  const formatDatepicker = (dt: string | null) => {
+    let date = !!dt ? new Date(dt) : new Date(),
+      year = "" + date.getFullYear(),
+      month = "" + (date.getMonth() + 1),
+      day = "" + date.getDate();
 
-    return (
-        <Container>
-            {edit ? (
-                <div>
-                    <h1>
-                        <span>Editing: </span>
-                        <b className="build-title">
-                            #{battery.id} {battery.brand}
-                        </b>
-                    </h1>
+    if (parseInt(month) < 10) month = "0" + month;
+    if (parseInt(day) < 10) day = "0" + day;
 
-                    <small className="text-muted">
-                        Last modified: <b>{getDatetimeLocal(battery.modified)}</b>
-                    </small>
+    return year + "-" + month + "-" + day;
+  };
 
-                    <hr className="title" />
-                </div>
-            ) : (
-                <div>
-                    <h1>
-                        <span>New</span>
-                    </h1>
+  return (
+    <Container>
+      {edit ? (
+        <div>
+          <h1>
+            <span>Editing: </span>
+            <b className="build-title">
+              #{battery.id} {battery.brand}
+            </b>
+          </h1>
 
-                    <hr className="title" />
-                </div>
-            )}
+          <small className="text-muted">
+            Last modified: <b>{getDatetimeLocal(battery.modified)}</b>
+          </small>
 
-            <Form onSubmit={(e) => onSaveHandler(e)}>
-                <Form.Group as={Row} className="mb-3">
-                    <Form.Label column sm="2">
-                        Brand <span className="required">(*)</span>
-                    </Form.Label>
+          <hr className="title" />
+        </div>
+      ) : (
+        <div>
+          <h1>
+            <span>New</span>
+          </h1>
 
-                    <Col sm="10">
-                        <Form.Control
-                            type="text"
-                            value={brand}
-                            onChange={(e) => setBrand(e.target.value)}
-                            required
-                        />
-                    </Col>
-                </Form.Group>
+          <hr className="title" />
+        </div>
+      )}
 
-                <Form.Group as={Row} className="mb-3">
-                    <Form.Label column sm="2">
-                        Description
-                    </Form.Label>
+      <Form onSubmit={(e) => onSaveHandler(e)}>
+        <Form.Group as={Row} className="mb-3">
+          <Form.Label column sm="2">
+            Brand <span className="required">(*)</span>
+          </Form.Label>
 
-                    <Col sm="10">
-                        <Form.Control
-                            as="textarea"
-                            rows={2}
-                            value={description || ''}
-                            onChange={(e) => setDescription(e.target.value)}
-                        />
-                    </Col>
-                </Form.Group>
+          <Col sm="10">
+            <Form.Control
+              type="text"
+              value={brand}
+              onChange={(e) => setBrand(e.target.value)}
+              required
+            />
+          </Col>
+        </Form.Group>
 
-                <Form.Group as={Row} className="mb-3">
-                    <Form.Label column sm="2">
-                        Capacity <span className="required">(*)</span>
-                    </Form.Label>
+        <Form.Group as={Row} className="mb-3">
+          <Form.Label column sm="2">
+            Description
+          </Form.Label>
 
-                    <Col sm="10">
-                        <Form.Control
-                            type="number"
-                            value={capacity}
-                            onChange={(e) => setCapacity(parseInt(e.target.value))}
-                            required
-                        />
-                    </Col>
-                </Form.Group>
+          <Col sm="10">
+            <Form.Control
+              as="textarea"
+              rows={2}
+              value={description || ""}
+              onChange={(e) => setDescription(e.target.value)}
+            />
+          </Col>
+        </Form.Group>
 
-                <Form.Group as={Row} className="mb-3">
-                    <Form.Label column sm="2">
-                        Cells <span className="required">(*)</span>
-                    </Form.Label>
+        <Form.Group as={Row} className="mb-3">
+          <Form.Label column sm="2">
+            Capacity <span className="required">(*)</span>
+          </Form.Label>
 
-                    <Col sm="10">
-                        <Form.Control
-                            type="number"
-                            value={cells}
-                            onChange={(e) => setCells(parseInt(e.target.value))}
-                            required
-                        />
-                    </Col>
-                </Form.Group>
+          <Col sm="10">
+            <Form.Control
+              type="number"
+              value={capacity}
+              onChange={(e) => setCapacity(parseInt(e.target.value))}
+              required
+            />
+          </Col>
+        </Form.Group>
 
-                <Form.Group as={Row} className="mb-3">
-                    <Form.Label column sm="2">
-                        Battery-Type <span className="required">(*)</span>
-                    </Form.Label>
+        <Form.Group as={Row} className="mb-3">
+          <Form.Label column sm="2">
+            Cells <span className="required">(*)</span>
+          </Form.Label>
 
-                    <Col sm="10">
-                        <Form.Select
-                            value={batteryType}
-                            onChange={(e) =>
-                                setBatteryType(e.target.value as BatteryType)
-                            }
-                            required
-                        >
-                            <option value={''} disabled hidden>
-                                Choose battery-type
-                            </option>
-                            {Object.values(BatteryType).map((value) => {
-                                return (
-                                    <option value={value} key={value}>
-                                        {getBatteryTypeText(value as BatteryType)}
-                                    </option>
-                                );
-                            })}
-                        </Form.Select>
-                    </Col>
-                </Form.Group>
+          <Col sm="10">
+            <Form.Control
+              type="number"
+              value={cells}
+              onChange={(e) => setCells(parseInt(e.target.value))}
+              required
+            />
+          </Col>
+        </Form.Group>
 
-                <Form.Group as={Row} className="mb-3">
-                    <Form.Label column sm="2">
-                        First bought <span className="required">(*)</span>
-                    </Form.Label>
+        <Form.Group as={Row} className="mb-3">
+          <Form.Label column sm="2">
+            Battery-Type <span className="required">(*)</span>
+          </Form.Label>
 
-                    <Col sm="10">
-                        <Form.Control
-                            type="date"
-                            value={formatDatepicker(created)}
-                            onChange={(e) =>
-                                setCreated(getDatetimeISO(e.target.value))
-                            }
-                        />
-                    </Col>
-                </Form.Group>
+          <Col sm="10">
+            <Form.Select
+              value={batteryType}
+              onChange={(e) => setBatteryType(e.target.value as BatteryType)}
+              required
+            >
+              <option value={""} disabled hidden>
+                Choose battery-type
+              </option>
+              {Object.values(BatteryType).map((value) => {
+                return (
+                  <option value={value} key={value}>
+                    {getBatteryTypeText(value as BatteryType)}
+                  </option>
+                );
+              })}
+            </Form.Select>
+          </Col>
+        </Form.Group>
 
-                <Form.Group as={Row} className="mb-3">
-                    <Form.Label column sm="2">
-                        Where to buy?
-                    </Form.Label>
+        <Form.Group as={Row} className="mb-3">
+          <Form.Label column sm="2">
+            First bought <span className="required">(*)</span>
+          </Form.Label>
 
-                    <Col sm="10">
-                        <Form.Control
-                            type="text"
-                            value={link || ''}
-                            onChange={(e) => setLink(e.target.value)}
-                        />
-                    </Col>
-                </Form.Group>
+          <Col sm="10">
+            <Form.Control
+              type="date"
+              value={formatDatepicker(created)}
+              onChange={(e) => setCreated(getDatetimeISO(e.target.value))}
+            />
+          </Col>
+        </Form.Group>
 
-                <div className="text-end">
-                    <Button variant="success" className="me-2" type="submit">
-                        Save
-                    </Button>
+        <Form.Group as={Row} className="mb-3">
+          <Form.Label column sm="2">
+            Where to buy?
+          </Form.Label>
 
-                    <Button
-                        variant="secondary"
-                        className="me-2"
-                        onClick={onCloseHandler}
-                    >
-                        Cancel
-                    </Button>
+          <Col sm="10">
+            <Form.Control
+              type="text"
+              value={link || ""}
+              onChange={(e) => setLink(e.target.value)}
+            />
+          </Col>
+        </Form.Group>
 
-                    {edit && (
-                        <Button
-                            variant="danger"
-                            className="me-2"
-                            onClick={onDeleteHandler}
-                        >
-                            Delete
-                        </Button>
-                    )}
-                </div>
-            </Form>
+        <div className="text-end">
+          <Button variant="success" className="me-2" type="submit">
+            Save
+          </Button>
 
-            <ToastContainer position="middle-center" className="position-fixed">
-                <Toast
-                    show={!!showError}
-                    onClose={() => setShowError(false)}
-                    bg={'danger'}
-                >
-                    <Toast.Header>
-                        <strong className="me-auto">Error</strong>
-                    </Toast.Header>
+          <Button variant="secondary" className="me-2" onClick={onCloseHandler}>
+            Cancel
+          </Button>
 
-                    <Toast.Body>Something went wrong!</Toast.Body>
-                </Toast>
-            </ToastContainer>
-        </Container>
-    );
+          {edit && (
+            <Button variant="danger" className="me-2" onClick={onDeleteHandler}>
+              Delete
+            </Button>
+          )}
+        </div>
+      </Form>
+
+      <ToastContainer position="middle-center" className="position-fixed">
+        <Toast
+          show={!!showError}
+          onClose={() => setShowError(false)}
+          bg={"danger"}
+        >
+          <Toast.Header>
+            <strong className="me-auto">Error</strong>
+          </Toast.Header>
+
+          <Toast.Body>Something went wrong!</Toast.Body>
+        </Toast>
+      </ToastContainer>
+    </Container>
+  );
 };
 
 export default BatteryEdit;

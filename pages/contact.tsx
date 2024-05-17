@@ -1,25 +1,25 @@
-import { NextPage } from 'next';
-import { Container } from 'react-bootstrap';
+import { NextPage } from "next";
+import { Container } from "react-bootstrap";
 
 const Builds: NextPage = () => {
-    return (
-        <Container className="contact">
-            <p className="h5 text-start">Contact:</p>
+  return (
+    <Container className="contact">
+      <p className="h5 text-start">Contact:</p>
 
-            <ul className="list-unstyled text-start">
-                <li>Samuel Erdö</li>
-                <li>2604 Theresienfeld, Österreich</li>
-            </ul>
+      <ul className="list-unstyled text-start">
+        <li>Samuel Erdö</li>
+        <li>2604 Theresienfeld, Österreich</li>
+      </ul>
 
-            <hr />
+      <hr />
 
-            <p className="h5">
-                Currently the only way to get in touch is trough discord...
-            </p>
+      <p className="h5">
+        Currently the only way to get in touch is trough discord...
+      </p>
 
-            <span>So make sure to join my server! 😃</span>
-        </Container>
-    );
+      <span>So make sure to join my server! 😃</span>
+    </Container>
+  );
 };
 
 export default Builds;

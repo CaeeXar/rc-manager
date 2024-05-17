@@ -1,14 +1,14 @@
-@import url('bootstrap/dist/css/bootstrap.min.css');
-@import url('simplebar/dist/simplebar.min.css');
-@import url('./navigation.css');
-@import url('./builds.css');
-@import url('./form.css');
-@import url('./footer.css');
-@import url('./contact.css');
-@import url('./loader.css');
-@import url('./battery.css');
-@import url('./places.css');
-@import url('./rates.css');
+@import url("bootstrap/dist/css/bootstrap.min.css");
+@import url("simplebar-react/dist/simplebar.min.css");
+@import url("./navigation.css");
+@import url("./builds.css");
+@import url("./form.css");
+@import url("./footer.css");
+@import url("./contact.css");
+@import url("./loader.css");
+@import url("./battery.css");
+@import url("./places.css");
+@import url("./rates.css");
 
 /*
   primary background: #222831
@@ -19,40 +19,41 @@
 */
 
 body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-        sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    background-color: #222831;
-    color: #eeeeee;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #222831;
+  color: #eeeeee;
 }
 
 code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
 }
 
 .card {
-    background-color: #393e46;
-    color: #eeeeee;
+  background-color: #393e46;
+  color: #eeeeee;
 }
 
 .content {
-    text-align: center;
-    margin-top: 25px;
-    margin-bottom: 25px;
-    /* min-height: calc(100vh - 250px - 2 * 25px - 56px); */
+  text-align: center;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  /* min-height: calc(100vh - 250px - 2 * 25px - 56px); */
 }
 
 .title {
-    text-align: center;
-    margin-bottom: 25px;
+  text-align: center;
+  margin-bottom: 25px;
 }
 
 .global-wrapper {
-    position: relative;
-    min-height: 100vh;
-    display: flex !important;
-    flex-direction: column;
+  position: relative;
+  min-height: 100vh;
+  display: flex !important;
+  flex-direction: column;
 }
