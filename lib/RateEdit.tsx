@@ -230,7 +230,7 @@ const RateEdit: NextPage<{
 
               <td>
                 <NumericFormat
-                  customInput={Form.Control}
+                  customInput={Form.Control as any}
                   decimalScale={2}
                   fixedDecimalScale
                   decimalSeparator=","
@@ -243,7 +243,7 @@ const RateEdit: NextPage<{
 
               <td>
                 <NumericFormat
-                  customInput={Form.Control}
+                  customInput={Form.Control as any}
                   decimalScale={2}
                   fixedDecimalScale
                   decimalSeparator=","
@@ -256,7 +256,7 @@ const RateEdit: NextPage<{
 
               <td>
                 <NumericFormat
-                  customInput={Form.Control}
+                  customInput={Form.Control as any}
                   decimalScale={2}
                   fixedDecimalScale
                   decimalSeparator=","
@@ -275,7 +275,7 @@ const RateEdit: NextPage<{
 
               <td>
                 <NumericFormat
-                  customInput={Form.Control}
+                  customInput={Form.Control as any}
                   decimalScale={2}
                   fixedDecimalScale
                   decimalSeparator=","
@@ -288,7 +288,7 @@ const RateEdit: NextPage<{
 
               <td>
                 <NumericFormat
-                  customInput={Form.Control}
+                  customInput={Form.Control as any}
                   decimalScale={2}
                   fixedDecimalScale
                   decimalSeparator=","
@@ -301,7 +301,7 @@ const RateEdit: NextPage<{
 
               <td>
                 <NumericFormat
-                  customInput={Form.Control}
+                  customInput={Form.Control as any}
                   decimalScale={2}
                   fixedDecimalScale
                   decimalSeparator=","
@@ -320,7 +320,7 @@ const RateEdit: NextPage<{
 
               <td>
                 <NumericFormat
-                  customInput={Form.Control}
+                  customInput={Form.Control as any}
                   decimalScale={2}
                   fixedDecimalScale
                   decimalSeparator=","
@@ -333,7 +333,7 @@ const RateEdit: NextPage<{
 
               <td>
                 <NumericFormat
-                  customInput={Form.Control}
+                  customInput={Form.Control as any}
                   decimalScale={2}
                   fixedDecimalScale
                   decimalSeparator=","
@@ -346,7 +346,7 @@ const RateEdit: NextPage<{
 
               <td>
                 <NumericFormat
-                  customInput={Form.Control}
+                  customInput={Form.Control as any}
                   decimalScale={2}
                   fixedDecimalScale
                   decimalSeparator=","

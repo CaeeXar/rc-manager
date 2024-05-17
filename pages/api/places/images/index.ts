@@ -14,7 +14,7 @@ const handler = (req: NextApiRequest, res: NextApiResponse) => {
 
   const form = new formidable.IncomingForm();
   return form.parse(req, async function (err, fields, files) {
-    let file: File | File[] = files.file;
+    let file: File | File[] | undefined = files.file;
 
     if (Array.isArray(file)) file = file[0];
     if (!file || !file.originalFilename)

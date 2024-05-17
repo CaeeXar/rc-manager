@@ -55,7 +55,7 @@ export default NextAuth({
   },
 
   callbacks: {
-    async jwt({ token, user, account, profile, isNewUser }) {
+    async jwt({ token, user, account, profile }) {
       if (user) {
         token.user = { ...user };
       }
@@ -80,7 +80,7 @@ export default NextAuth({
       }
 
       // Send properties to the client, like an access_token from a provider.
-      session.accessToken = token.accessToken;
+      // session.accessToken = token.accessToken;
       return session;
     },
   },
